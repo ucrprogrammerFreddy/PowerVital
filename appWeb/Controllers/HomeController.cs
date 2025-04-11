@@ -17,7 +17,7 @@ namespace appWeb.Controllers
         {
             return View();
         }
-
+       
         public IActionResult Privacy()
         {
             return View();
