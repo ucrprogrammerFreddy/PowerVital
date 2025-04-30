@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Downloads\\APIFREDDY\\PowerVital\\PowerVital.csproj": {}
+    "C:\\Users\\isaac\\OneDrive\\Desktop\\ProyectoInge\\PowerVital\\API\\PowerVital.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Downloads\\APIFREDDY\\PowerVital\\PowerVital.csproj": {
+    "C:\\Users\\isaac\\OneDrive\\Desktop\\ProyectoInge\\PowerVital\\API\\PowerVital.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Downloads\\APIFREDDY\\PowerVital\\PowerVital.csproj",
+        "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Desktop\\ProyectoInge\\PowerVital\\API\\PowerVital.csproj",
         "projectName": "PowerVital",
-        "projectPath": "C:\\Users\\Usuario\\Downloads\\APIFREDDY\\PowerVital\\PowerVital.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Downloads\\APIFREDDY\\PowerVital\\obj\\",
+        "projectPath": "C:\\Users\\isaac\\OneDrive\\Desktop\\ProyectoInge\\PowerVital\\API\\PowerVital.csproj",
+        "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\isaac\\OneDrive\\Desktop\\ProyectoInge\\PowerVital\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,8 +44,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -89,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
