@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #ecf1f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-y: scroll;
+    padding: 20px;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f5f7f8;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  input, select {
+    padding: 8px;
+    margin-top: 5px;
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 4px;
+  }
+  
+  .padecimientos-interactivo {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  
+  .form-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .volver {
+    background-color: #bc6c25;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .aceptar {
+    background-color: #8d6e63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .top-link {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .top-link a {
+    text-decoration: none;
+    color: #06444d;
+    font-weight: bold;
+  }
+  
