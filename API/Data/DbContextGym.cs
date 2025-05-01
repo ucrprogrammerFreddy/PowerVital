@@ -14,7 +14,7 @@ namespace PowerVital.Data
         }
 
                    
-                    public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Administrador> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
