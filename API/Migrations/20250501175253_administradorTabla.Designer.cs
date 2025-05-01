@@ -11,8 +11,8 @@ using PowerVital.Data;
 namespace PowerVital.Migrations
 {
     [DbContext(typeof(DbContextGym))]
-    [Migration("20250430043330_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250501175253_administradorTabla")]
+    partial class administradorTabla
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
