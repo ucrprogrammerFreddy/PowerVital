@@ -2,6 +2,7 @@
 {
     public class EditarCliente
     {
+        public int IdUsuario { get; set; }
         public string Nombre { get; set; }
         public string Clave { get; set; }
         public string Email { get; set; }
