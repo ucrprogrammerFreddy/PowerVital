@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("PowerVital")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("API_BD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17ca0db3c5a122e242119937c28a2e58c44fc008")]
-[assembly: System.Reflection.AssemblyProductAttribute("PowerVital")]
-[assembly: System.Reflection.AssemblyTitleAttribute("PowerVital")]
+[assembly: System.Reflection.AssemblyProductAttribute("API_BD")]
+[assembly: System.Reflection.AssemblyTitleAttribute("API_BD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.

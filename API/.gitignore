@@ -1,0 +1,15 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build
+bin/
+obj/
+
+# Configuración local
+appsettings.Development.json
+
+# Otros temporales
+*.log
+*.dbmdl
