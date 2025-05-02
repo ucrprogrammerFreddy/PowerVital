@@ -1,7 +1,9 @@
-﻿namespace API_BD.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace API_BD.Models
 {
     public class Padecimiento
     {
+        [Key]
         public int IdPadecimiento { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }

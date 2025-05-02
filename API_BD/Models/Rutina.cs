@@ -1,7 +1,9 @@
-﻿namespace API_BD.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace API_BD.Models
 {
     public class Rutina
     {
+        [Key]
         public int IdRutina { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }

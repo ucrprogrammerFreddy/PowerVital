@@ -3,49 +3,61 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\creareditarrutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\asignarpadecimientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\editarpadecimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\crearejercio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\editarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\ejerciciorutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\ejercicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\rutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\padecimientocliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\ejerciciorutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\rutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\padecimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\entrenador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\ejercicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\administrador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\api_bd.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\ejerciciorutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\creareditarrutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\editarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\editarpadecimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\ejerciciorutina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\asignarpadecimientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71E2001B-0C77-4ACB-AD19-4021643095E2}|..\\API_BD\\API_BD.csproj|c:\\users\\user\\source\\repos\\powervital\\api_bd\\models\\dto\\crearejercio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\user\\source\\repos\\powervital\\api\\dto\\administradordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -87,8 +99,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 23,
+          "SelectedChildIndex": 26,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\AppDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T17:24:29.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Program.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Program.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Program.cs",
+              "RelativeToolTip": "..\\API_BD\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T16:54:12.996Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -104,10 +142,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
@@ -162,90 +196,133 @@
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AsignarPadecimientos.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:41:52.38Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "EditarPadecimiento.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:40:48.813Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CrearEjercio.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEjercio.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\CrearEjercio.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEjercio.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\CrearEjercio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "DocumentIndex": 6,
+              "Title": "Administrador.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Administrador.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Administrador.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Administrador.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Administrador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:40:17.185Z",
+              "WhenOpened": "2025-05-01T23:28:20.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\API_BD\\appsettings.json",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\appsettings.json",
+              "RelativeToolTip": "..\\API_BD\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-02T16:47:22.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "EditarCliente.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarCliente.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EditarCliente.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarCliente.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EditarCliente.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAArAAAA",
+              "Title": "Ejercicio.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Ejercicio.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Ejercicio.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Ejercicio.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Ejercicio.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:38:49.072Z",
+              "WhenOpened": "2025-05-01T23:34:07.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Entrenador.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Entrenador.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Entrenador.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Entrenador.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Entrenador.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:30:40.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Padecimiento.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Padecimiento.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Padecimiento.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Padecimiento.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Padecimiento.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:32:27.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PadecimientoCliente.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\Models\\PadecimientoCliente.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\PadecimientoCliente.cs",
+              "ToolTip": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\Models\\PadecimientoCliente.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\PadecimientoCliente.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:32:54.391Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CrearEditarRutina.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Title": "Rutina.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Rutina.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Rutina.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Rutina.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Rutina.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:37:30.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EjercicioRutina.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:38:04.363Z",
+              "WhenOpened": "2025-05-01T23:34:36.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
+              "Title": "API_BD",
+              "DocumentMoniker": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj",
+              "RelativeDocumentMoniker": "..\\API_BD\\API_BD.csproj",
+              "ToolTip": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj",
+              "RelativeToolTip": "..\\API_BD\\API_BD.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-02T17:22:29.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Cliente.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Cliente.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Cliente.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\Cliente.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAA4AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:31:35Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "EjercicioRutina.cs",
               "DocumentMoniker": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\Models\\EjercicioRutina.cs",
               "RelativeDocumentMoniker": "..\\API_BD\\Models\\EjercicioRutina.cs",
@@ -259,84 +336,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Rutina.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Rutina.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Rutina.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Rutina.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Rutina.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:34:36.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Ejercicio.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Ejercicio.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Ejercicio.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Ejercicio.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Ejercicio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:34:07.451Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PadecimientoCliente.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\Models\\PadecimientoCliente.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\PadecimientoCliente.cs",
-              "ToolTip": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\Models\\PadecimientoCliente.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\PadecimientoCliente.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:32:54.391Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Cliente.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Cliente.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Cliente.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Cliente.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Cliente.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAiwA0AAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:31:35Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Padecimiento.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Padecimiento.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Padecimiento.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Padecimiento.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Padecimiento.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:32:27.879Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Entrenador.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Entrenador.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Entrenador.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Entrenador.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Entrenador.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:30:40.542Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "..\\API_BD\\Models\\Usuario.cs",
@@ -349,20 +348,85 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Administrador.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Administrador.cs",
-              "RelativeDocumentMoniker": "..\\API_BD\\Models\\Administrador.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\Administrador.cs",
-              "RelativeToolTip": "..\\API_BD\\Models\\Administrador.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "DocumentIndex": 13,
+              "Title": "CrearEditarRutina.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\CrearEditarRutina.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:28:20.095Z",
+              "WhenOpened": "2025-05-01T23:37:30.665Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
+              "Title": "EjercicioRutina.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EjercicioRutina.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:38:04.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "EditarPadecimiento.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EditarPadecimiento.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:40:48.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "EditarCliente.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarCliente.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\EditarCliente.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\EditarCliente.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\EditarCliente.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:38:49.072Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "AsignarPadecimientos.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\AsignarPadecimientos.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:41:52.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CrearEjercio.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEjercio.cs",
+              "RelativeDocumentMoniker": "..\\API_BD\\Models\\DTO\\CrearEjercio.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\Models\\DTO\\CrearEjercio.cs",
+              "RelativeToolTip": "..\\API_BD\\Models\\DTO\\CrearEjercio.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T23:40:17.185Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "DbContextGym.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Data\\DbContextGym.cs",
               "RelativeDocumentMoniker": "Data\\DbContextGym.cs",
@@ -375,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "AdministradorDto.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\DTO\\AdministradorDto.cs",
               "RelativeDocumentMoniker": "DTO\\AdministradorDto.cs",
@@ -388,75 +452,81 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "AdministradoresController.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdministradoresController.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
               "RelativeToolTip": "Controllers\\AdministradoresController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:56:34.971Z"
+              "WhenOpened": "2025-05-01T17:56:34.971Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:58:15.666Z"
+              "WhenOpened": "2025-05-01T17:58:15.666Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "Administrador.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Models\\Administrador.cs",
               "RelativeDocumentMoniker": "Models\\Administrador.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Models\\Administrador.cs",
               "RelativeToolTip": "Models\\Administrador.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:55:27.017Z"
+              "WhenOpened": "2025-05-01T17:55:27.017Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Models\\Usuario.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Models\\Usuario.cs",
               "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:53:37.673Z"
+              "WhenOpened": "2025-05-01T17:53:37.673Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "20250501175253_administradorTabla.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Migrations\\20250501175253_administradorTabla.cs",
               "RelativeDocumentMoniker": "Migrations\\20250501175253_administradorTabla.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\Migrations\\20250501175253_administradorTabla.cs",
               "RelativeToolTip": "Migrations\\20250501175253_administradorTabla.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:52:53.582Z"
+              "WhenOpened": "2025-05-01T17:52:53.582Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
               "ToolTip": "C:\\Users\\User\\source\\repos\\PowerVital\\API\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-01T17:52:02.505Z"
+              "WhenOpened": "2025-05-01T17:52:02.505Z",
+              "EditorCaption": ""
             }
           ]
         }

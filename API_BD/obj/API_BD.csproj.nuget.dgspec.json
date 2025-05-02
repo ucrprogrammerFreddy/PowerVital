@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj": {}
+    "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\API_BD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj": {
+    "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\API_BD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\API_BD.csproj",
         "projectName": "API_BD",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\API_BD.csproj",
+        "projectPath": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\API_BD.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\PowerVital\\API_BD\\obj\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\PowerVital\\API_BD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,20 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

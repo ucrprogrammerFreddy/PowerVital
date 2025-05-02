@@ -1,6 +1,6 @@
 ﻿namespace API_BD.Models
 {
-    public class Cliente
+    public class Cliente : Usuario
     {
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }

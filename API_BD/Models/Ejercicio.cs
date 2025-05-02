@@ -1,7 +1,10 @@
-﻿namespace API_BD.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API_BD.Models
 {
     public class Ejercicio
     {
+        [Key]
         public int IdEjercicio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }

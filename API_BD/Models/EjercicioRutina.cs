@@ -1,7 +1,9 @@
-﻿namespace API_BD.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace API_BD.Models
 {
     public class EjercicioRutina
     {
+        
         public int IdRutina { get; set; }
         public Rutina Rutina { get; set; }
 

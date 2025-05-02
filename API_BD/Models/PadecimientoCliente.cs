@@ -1,4 +1,5 @@
-﻿namespace API_BD.Models
+﻿
+namespace API_BD.Models
 {
     public class PadecimientoCliente
     {

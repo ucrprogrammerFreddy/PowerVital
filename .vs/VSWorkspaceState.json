@@ -1,15 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\API",
-    "\\API\\Controllers",
-    "\\API\\Data",
-    "\\API\\DTO",
-    "\\API\\Migrations",
-    "\\API\\Models",
-    "\\API\\obj",
-    "\\Proyecto sistemas"
+    ""
   ],
-  "SelectedNode": "\\API\\Models\\Administrador.cs",
+  "SelectedNode": "\\PowerVital.sln",
   "PreviewInSolutionExplorer": false
 }
