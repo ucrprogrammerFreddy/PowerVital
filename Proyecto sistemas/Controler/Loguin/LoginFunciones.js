@@ -1,4 +1,4 @@
-import { LoginModel } from '/PowerVital/Proyecto sistemas/Usuario/Model/LoginModel.js';
+import { LoginModel } from '/PowerVital/Proyecto sistemas/Model/LoginModel.js';
 
 const URL_API = 'https://localhost:7086/api/Login/Login'; // Cambia si es producción
 
