@@ -1,0 +1,43 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .btn-custom {
+    background-color: #a07b5f;
+    color: white;
+    border: none;
+  }
+  
+  .btn-custom:hover {
+    background-color: #8b684f;
+  }
+  
+  table a {
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  
+  footer img {
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s;
+  }
+  
+  footer img:hover {
+    transform: scale(1.1);
+  }
+  
+  #sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #003b46; /* color del sidebar */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  #sidebar.active {
+    transform: translateX(0);
+  }
