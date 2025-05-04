@@ -183,6 +183,9 @@ namespace API_BD.Migrations
                 {
                     b.HasBaseType("API_BD.Models.Usuario");
 
+                    b.Property<string>("Titulacion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasDiscriminator().HasValue("Administrador");
                 });
 

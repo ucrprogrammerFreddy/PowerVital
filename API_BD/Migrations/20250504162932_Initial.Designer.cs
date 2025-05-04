@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_BD.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250502194807_CreacionDeTablas")]
-    partial class CreacionDeTablas
+    [Migration("20250504162932_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,6 +185,9 @@ namespace API_BD.Migrations
             modelBuilder.Entity("API_BD.Models.Administrador", b =>
                 {
                     b.HasBaseType("API_BD.Models.Usuario");
+
+                    b.Property<string>("Titulacion")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Administrador");
                 });

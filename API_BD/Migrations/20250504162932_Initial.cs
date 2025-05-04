@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API_BD.Migrations
 {
     /// <inheritdoc />
-    public partial class CreacionDeTablas : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,6 +53,7 @@ namespace API_BD.Migrations
                     Clave = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rol = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Titulacion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Altura = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
