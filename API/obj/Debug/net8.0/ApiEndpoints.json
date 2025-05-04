@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[PowerVital.Models.Administrador, PowerVital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PowerVital.DTO.AdministradorDto, PowerVital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -28,8 +28,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "administrador",
-        "Type": "PowerVital.Models.Administrador",
+        "Name": "dto",
+        "Type": "PowerVital.DTO.AdministradorDto",
         "IsRequired": true
       }
     ],
@@ -51,7 +51,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "PowerVital.Models.Administrador",
+        "Type": "PowerVital.DTO.AdministradorDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -75,8 +75,8 @@
         "IsRequired": true
       },
       {
-        "Name": "administrador",
-        "Type": "PowerVital.Models.Administrador",
+        "Name": "dto",
+        "Type": "PowerVital.DTO.AdministradorDto",
         "IsRequired": true
       }
     ],
