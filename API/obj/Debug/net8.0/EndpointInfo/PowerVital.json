@@ -260,47 +260,29 @@
     "schemas": {
       "Administrador": {
         "required": [
-          "clave",
-          "correo",
-          "nombre",
-          "rol",
-          "telefono",
           "titulacion"
         ],
         "type": "object",
         "properties": {
-          "id": {
+          "idUsuario": {
             "type": "integer",
             "format": "int32"
           },
           "nombre": {
-            "maxLength": 100,
-            "minLength": 0,
             "type": "string",
-            "format": "string"
-          },
-          "correo": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string",
-            "format": "string"
-          },
-          "telefono": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string",
-            "format": "string"
+            "nullable": true
           },
           "clave": {
-            "maxLength": 100,
-            "minLength": 0,
             "type": "string",
-            "format": "string"
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
           },
           "rol": {
-            "minLength": 1,
             "type": "string",
-            "format": "string"
+            "nullable": true
           },
           "titulacion": {
             "maxLength": 100,

@@ -1,40 +1,7 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\data\\dbcontextgym.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:data\\dbcontextgym.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\controllers\\administradorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:controllers\\administradorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\models\\administrador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:models\\administrador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\dto\\administradordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:dto\\administradordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\powervital\\powervital\\api\\migrations\\20250501175253_administradortabla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:migrations\\20250501175253_administradortabla.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "WorkspaceRootPath": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -42,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -63,102 +30,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:58:15.666Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DbContextGym.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Data\\DbContextGym.cs",
-              "RelativeDocumentMoniker": "Data\\DbContextGym.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Data\\DbContextGym.cs",
-              "RelativeToolTip": "Data\\DbContextGym.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:57:04.825Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdministradoresController.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AdministradoresController.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
-              "RelativeToolTip": "Controllers\\AdministradoresController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:56:34.971Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Administrador.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Models\\Administrador.cs",
-              "RelativeDocumentMoniker": "Models\\Administrador.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Models\\Administrador.cs",
-              "RelativeToolTip": "Models\\Administrador.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:55:27.017Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "Models\\Usuario.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Models\\Usuario.cs",
-              "RelativeToolTip": "Models\\Usuario.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:53:37.673Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "20250501175253_administradorTabla.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Migrations\\20250501175253_administradorTabla.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250501175253_administradorTabla.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\Migrations\\20250501175253_administradorTabla.cs",
-              "RelativeToolTip": "Migrations\\20250501175253_administradorTabla.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:52:53.582Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-01T17:52:02.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdministradorDto.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\DTO\\AdministradorDto.cs",
-              "RelativeDocumentMoniker": "DTO\\AdministradorDto.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\PowerVital\\PowerVital\\API\\DTO\\AdministradorDto.cs",
-              "RelativeToolTip": "DTO\\AdministradorDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T17:51:26.073Z"
             }
           ]
         }

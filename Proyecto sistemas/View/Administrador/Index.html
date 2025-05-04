@@ -1,58 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Administrador</title>
-  <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/indexadmin.css" />
+  <link rel="stylesheet" href="../../Complementos/css/indexadmin.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body>
 
   <!-- Header -->
   <header class="header">
     <div class="header-content">
-      <img src="/Proyecto sistemas/Complementos/img/logoof.png" alt="Logo" class="header-logo" />
+
+      <img src="../../Complementos/img/logoof.png" alt="Logo" class="header-logo" />
       <div class="menu-toggle" id="openMenu">
         <i class="fas fa-bars"></i>
       </div>
     </div>
   </header>
-
   <!-- Sidebar overlay -->
-  <div id="idMenuHambAdmin"> </div><!-- Este es el munu y solo lo invocamos por el id, primero debemos exportar la funcion que esta abajo -->
+  <div id="idMenuHambAdmin"> </div>
+
+  <!-- Este es el munu y solo lo invocamos por el id, primero debemos exportar la funcion que esta abajo -->
 
   <!-- Contenido principal -->
   <main class="contenedor-main" id="mainContent">
     <div class="card-grid">
       <div class="custom-card">
         <div class="icon-section bg-light-brown icon-brown"><i class="fas fa-user-shield"></i></div>
-        <strong> Administradores</strong><p>30</p>
+        <strong> Administradores</strong>
+        <p>30</p>
       </div>
       <div class="custom-card">
         <div class="icon-section bg-light-green icon-green"><i class="fas fa-heartbeat"></i></div>
-        <strong> Padecimientos</strong><p>30</p>
+        <strong> Padecimientos</strong>
+        <p>30</p>
       </div>
       <div class="custom-card">
         <div class="icon-section bg-light-yellow icon-olive"><i class="fas fa-users"></i></div>
-        <strong> Clientes</strong><p>1000</p>
+        <strong> Clientes</strong>
+        <p>1000</p>
       </div>
       <div class="custom-card">
         <div class="icon-section bg-light-pink"><i class="fas fa-dumbbell"></i></div>
-        <strong> Rutinas</strong><p>300</p>
+        <strong> Rutinas</strong>
+        <p>300</p>
       </div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="footer">
-    <img src="/Proyecto sistemas/Complementos/img/facebook.png" alt="Imagen del footer" class="footer-logo" />
-    <img src="/Proyecto sistemas/Complementos/img/instagram.png" alt="Imagen del footer" class="footer-logo" />
+    <img src="../../Complementos/img/facebook.png" alt="Imagen del footer" class="footer-logo" />
+    <img src="../../Complementos/img/instagram.png" alt="Imagen del footer" class="footer-logo" />
   </footer>
 
   <!-- Script -->
   <!-- Aqui mandamos a traer el menu -->
-  <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuAdmin.js"></script>
-  
+  <script type="module" src="../../Complementos/Components/MenuAdmin.js"></script>
+
 </body>
+
 </html>

@@ -1,0 +1,138 @@
+
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  main {
+    flex: 1;
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  .btn-custom {
+    background-color: #a07b5f;
+    color: white;
+    border: none;
+  }
+
+  .btn-custom:hover {
+    background-color: #8b684f;
+  }
+
+  table a {
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  /* Sidebar con animación */
+  #sidebar {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #003b46;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  #sidebar.active {
+    transform: translateX(0);
+  }
+
+  /* Empujar contenido cuando sidebar está abierto */
+  body.sidebar-active main,
+  body.sidebar-active header,
+  body.sidebar-active footer {
+    margin-left: 250px;
+  }
+
+  /* Ocultar botón cuando sidebar está abierto */
+  body.sidebar-active #openSidebar {
+    display: none;
+  }
+
+  /* Footer íconos */
+  footer {
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background-color: #212529;
+    color: white;
+  }
+
+  footer a i {
+    color: white;
+    transition: transform 0.2s;
+  }
+
+  footer a i:hover {
+    transform: scale(1.1);
+  }
+
+  #openSidebar {
+    z-index: 1100;
+  }
+
+  /* Formulario centrado con borde sutil */
+.card {
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Encabezado del formulario */
+.card-header {
+  background-color: #007bff; /* Azul Bootstrap */
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+/* Inputs más suaves */
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* Botones personalizados */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  border-radius: 6px;
+  padding: 8px 16px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Separación entre elementos */
+.mb-3, .mb-4 {
+  margin-bottom: 1.25rem !important;
+}
+
+/* Opcional: efecto hover en inputs */
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}

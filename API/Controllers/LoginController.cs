@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PowerVital.Data;
 using PowerVital.Models;
 using PowerVital.DTO;
-
-using PowerVital.Models;
 using System.Threading.Tasks;
 
 namespace PowerVital.Controllers
@@ -13,9 +11,9 @@ namespace PowerVital.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly DbContextGym _context;
+        private readonly AppDbContext _context;
 
-        public LoginController(DbContextGym context)
+        public LoginController(AppDbContext context)
         {
             _context = context;
         }
@@ -32,7 +30,7 @@ namespace PowerVital.Controllers
             }
 
             var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.correo == loginRequest.Email);
+                .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
 
             if (usuario == null)
             {
@@ -40,18 +38,18 @@ namespace PowerVital.Controllers
                 return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
             }
 
-            if (usuario.clave != loginRequest.Clave)
+            if (usuario.Clave != loginRequest.Clave)
             {
                 Console.WriteLine("❌ Clave incorrecta.");
                 return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
             }
 
-            Console.WriteLine($"✅ Usuario autenticado: {usuario.correo} con Rol: {usuario.rol}");
+            Console.WriteLine($"✅ Usuario autenticado: {usuario.Email} con Rol: {usuario.Rol}");
 
             return new JsonResult(new
             {
                 message = "✅ Login exitoso.",
-                redirectUrl = usuario.rol switch
+                redirectUrl = usuario.Rol switch
                 {
                     "Administrador" => "/Administrador/Index",
                     "Cliente" => "/Clientes/index",
@@ -60,11 +58,11 @@ namespace PowerVital.Controllers
                 },
                 usuario = new
                 {
-                    usuario.id,
-                    usuario.nombre,
-                    usuario.correo,
-                    usuario.rol,
-                    usuario.telefono
+                    usuario.IdUsuario,
+                    usuario.Nombre,
+                    usuario.Email,
+                    usuario.Rol,
+                    
                 }
             })
             {

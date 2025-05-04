@@ -10,9 +10,9 @@ namespace PowerVital.Controllers
     [ApiController]
     public class AdministradoresController : ControllerBase
     {
-        private readonly DbContextGym _context;
+        private readonly AppDbContext _context;
 
-        public AdministradoresController(DbContextGym context)
+        public AdministradoresController(AppDbContext context)
         {
             _context = context;
         }
@@ -69,11 +69,11 @@ namespace PowerVital.Controllers
                 return NotFound(new { message = "❌ Administrador no encontrado." });
             }
 
-            administradorExistente.nombre = administrador.nombre;
-            administradorExistente.correo = administrador.correo;
-            administradorExistente.telefono = administrador.telefono;
-            administradorExistente.clave = administrador.clave;
-            administradorExistente.rol = administrador.rol;
+            administradorExistente.Nombre = administrador.Nombre;
+            administradorExistente.Email = administrador.Email;
+           
+            administradorExistente.Clave = administrador.Clave;
+            administradorExistente.Rol = administrador.Rol;
             administradorExistente.titulacion = administrador.titulacion;
 
             await _context.SaveChangesAsync();
