@@ -2,5 +2,6 @@
 {
     public class Administrador : Usuario
     {
+        public String Titulacion { get; set; }
     }
 }
