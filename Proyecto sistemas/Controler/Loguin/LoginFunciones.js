@@ -1,6 +1,10 @@
-import { LoginModel } from '/PowerVital/Proyecto sistemas/Model/LoginModel.js';
 
-const URL_API = 'https://localhost:7086/api/Login/Login'; // Cambia si es producción
+
+import { LoginModel } from '/Proyecto sistemas/Model/LoginModel.js';
+const URL_API = 'https://localhost:7086/api/Login/Login';
+
+
+ // Cambia si es producción
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('form').addEventListener('submit', (e) => {
@@ -10,8 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function iniciarSesion() {
-  const email = document.querySelector('input[type="email"]').value;
-  const clave = document.querySelector('input[type="password"]').value;
+  const email = document.querySelector('#inputCorreo').value;
+  const clave = document.querySelector('#inputClave').value;
+  
 
   const loginModel = new LoginModel(email, clave);
 
