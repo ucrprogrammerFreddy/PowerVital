@@ -16,20 +16,16 @@ namespace API_BD.Controllers
             _context = context;
         }
 
-        // =========================
-        // GET: api/Entrenador
-        // =========================
+        // ✅ Obtener lista de entrenadores
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Entrenador>>> GetEntrenadores()
+        public async Task<ActionResult<IEnumerable<Entrenador>>> ObtenerTodosLosEntrenadores()
         {
             return await _context.Entrenadores.ToListAsync();
         }
 
-        // =========================
-        // GET: api/Entrenador/5
-        // =========================
+        // ✅ Obtener entrenador por ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Entrenador>> GetEntrenador(int id)
+        public async Task<ActionResult<Entrenador>> ObtenerEntrenadorPorId(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
 
@@ -39,30 +35,26 @@ namespace API_BD.Controllers
             return entrenador;
         }
 
-        // =========================
-        // POST: api/Entrenador
-        // =========================
+        // ✅ Agregar nuevo entrenador
         [HttpPost]
-        public async Task<ActionResult<Entrenador>> CreateEntrenador(Entrenador entrenador)
+        public async Task<ActionResult<Entrenador>> AgregarEntrenador(Entrenador entrenador)
         {
-            entrenador.Rol = "Entrenador"; // Discriminador para herencia TPH
+            entrenador.Rol = "Entrenador";
 
             _context.Entrenadores.Add(entrenador);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetEntrenador), new { id = entrenador.IdUsuario }, entrenador);
+            return CreatedAtAction(nameof(ObtenerEntrenadorPorId), new { id = entrenador.IdUsuario }, entrenador);
         }
 
-        // =========================
-        // PUT: api/Entrenador/5
-        // =========================
+        // ✅ Editar entrenador existente
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEntrenador(int id, Entrenador entrenador)
+        public async Task<IActionResult> EditarEntrenador(int id, Entrenador entrenador)
         {
             if (id != entrenador.IdUsuario)
                 return BadRequest("El ID proporcionado no coincide.");
 
-            entrenador.Rol = "Entrenador"; // Evita cambios de rol no autorizados
+            entrenador.Rol = "Entrenador";
             _context.Entry(entrenador).State = EntityState.Modified;
 
             try
@@ -71,7 +63,7 @@ namespace API_BD.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EntrenadorExists(id))
+                if (!ExisteEntrenador(id))
                     return NotFound();
                 else
                     throw;
@@ -80,11 +72,9 @@ namespace API_BD.Controllers
             return NoContent();
         }
 
-        // =========================
-        // DELETE: api/Entrenador/5
-        // =========================
+        // ✅ Eliminar entrenador
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEntrenador(int id)
+        public async Task<IActionResult> EliminarEntrenador(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
             if (entrenador == null)
@@ -96,9 +86,11 @@ namespace API_BD.Controllers
             return NoContent();
         }
 
-        private bool EntrenadorExists(int id)
+        // ✅ Método auxiliar para verificar existencia
+        private bool ExisteEntrenador(int id)
         {
             return _context.Entrenadores.Any(e => e.IdUsuario == id);
         }
     }
+
 }
