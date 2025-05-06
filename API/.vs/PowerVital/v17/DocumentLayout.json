@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\controllers\\administradorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:controllers\\administradorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\controllers\\asignarpadecimientoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:controllers\\asignarpadecimientoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\models\\padecimientocliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:models\\padecimientocliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\controllers\\editarpadecimientocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:controllers\\editarpadecimientocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\dto\\asignarpadecimientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:dto\\asignarpadecimientos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\models\\padecimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:models\\padecimiento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|c:\\users\\josue\\desktop\\proyecto ingieneria\\powervital\\api\\dto\\editarpadecimientodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D10BAD93-D778-40E8-B32F-CEB8DF629BA2}|PowerVital.csproj|solutionrelative:dto\\editarpadecimientodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,46 +57,82 @@
               "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{ca8cc5c7-0231-406a-95cd-aa5ed6ac0190}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AsignarPadecimientosController.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\AsignarPadecimientosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AsignarPadecimientosController.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\AsignarPadecimientosController.cs",
+              "RelativeToolTip": "Controllers\\AsignarPadecimientosController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T11:55:17.392Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdministradoresController.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AdministradoresController.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\AdministradoresController.cs",
-              "RelativeToolTip": "Controllers\\AdministradoresController.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAiwGkAAAAmAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "AsignarPadecimientos.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\DTO\\AsignarPadecimientos.cs",
+              "RelativeDocumentMoniker": "DTO\\AsignarPadecimientos.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\DTO\\AsignarPadecimientos.cs",
+              "RelativeToolTip": "DTO\\AsignarPadecimientos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T19:40:52.664Z",
+              "WhenOpened": "2025-05-06T11:52:55.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-04T15:07:12.811Z",
+              "Title": "PadecimientoCliente.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Models\\PadecimientoCliente.cs",
+              "RelativeDocumentMoniker": "Models\\PadecimientoCliente.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Models\\PadecimientoCliente.cs",
+              "RelativeToolTip": "Models\\PadecimientoCliente.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T11:52:06.455Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\LoginController.cs",
-              "RelativeToolTip": "Controllers\\LoginController.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Title": "EditarPadecimientoController.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\EditarPadecimientoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EditarPadecimientoController.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Controllers\\EditarPadecimientoController.cs",
+              "RelativeToolTip": "Controllers\\EditarPadecimientoController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T13:12:21.079Z"
+              "WhenOpened": "2025-05-06T11:35:32.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EditarPadecimientoDto.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\DTO\\EditarPadecimientoDto.cs",
+              "RelativeDocumentMoniker": "DTO\\EditarPadecimientoDto.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\DTO\\EditarPadecimientoDto.cs",
+              "RelativeToolTip": "DTO\\EditarPadecimientoDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T11:34:04.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Padecimiento.cs",
+              "DocumentMoniker": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Models\\Padecimiento.cs",
+              "RelativeDocumentMoniker": "Models\\Padecimiento.cs",
+              "ToolTip": "C:\\Users\\Josue\\Desktop\\Proyecto ingieneria\\PowerVital\\API\\Models\\Padecimiento.cs",
+              "RelativeToolTip": "Models\\Padecimiento.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T11:31:57.181Z",
+              "EditorCaption": ""
             }
           ]
         }
