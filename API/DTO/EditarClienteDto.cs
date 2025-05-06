@@ -1,6 +1,6 @@
 ﻿namespace PowerVital.DTO
 {
-    public class EditarCliente
+    public class EditarClienteDto
     {
         public int IdUsuario { get; set; }
         public string Nombre { get; set; }
