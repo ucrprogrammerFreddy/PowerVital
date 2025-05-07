@@ -18,7 +18,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Administrador"
+                    "$ref": "#/components/schemas/AdministradorDto"
                   }
                 }
               },
@@ -26,7 +26,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Administrador"
+                    "$ref": "#/components/schemas/AdministradorDto"
                   }
                 }
               },
@@ -34,7 +34,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Administrador"
+                    "$ref": "#/components/schemas/AdministradorDto"
                   }
                 }
               }
@@ -50,17 +50,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             }
           }
@@ -94,17 +94,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Administrador"
+                  "$ref": "#/components/schemas/AdministradorDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Administrador"
+                  "$ref": "#/components/schemas/AdministradorDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Administrador"
+                  "$ref": "#/components/schemas/AdministradorDto"
                 }
               }
             }
@@ -130,17 +130,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Administrador"
+                "$ref": "#/components/schemas/AdministradorDto"
               }
             }
           }
@@ -154,6 +154,437 @@
       "delete": {
         "tags": [
           "Administradores"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AsignarPadecimientos": {
+      "post": {
+        "tags": [
+          "AsignarPadecimientos"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPadecimientos"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPadecimientos"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarPadecimientos"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AsignarPadecimientos/{idCliente}": {
+      "get": {
+        "tags": [
+          "AsignarPadecimientos"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AsignarPadecimientos"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EditarCliente": {
+      "get": {
+        "tags": [
+          "EditarCliente"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EditarCliente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EditarCliente/{id}": {
+      "get": {
+        "tags": [
+          "EditarCliente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EditarCliente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EditarCliente/editar": {
+      "put": {
+        "tags": [
+          "EditarCliente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarClienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EditarPadecimiento": {
+      "get": {
+        "tags": [
+          "EditarPadecimiento"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EditarPadecimientoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EditarPadecimientoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EditarPadecimientoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EditarPadecimiento"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EditarPadecimiento/{id}": {
+      "get": {
+        "tags": [
+          "EditarPadecimiento"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditarPadecimientoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditarPadecimientoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditarPadecimientoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EditarPadecimiento"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditarPadecimientoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EditarPadecimiento"
         ],
         "parameters": [
           {
@@ -258,18 +689,16 @@
   },
   "components": {
     "schemas": {
-      "Administrador": {
+      "AdministradorDto": {
         "required": [
           "clave",
-          "correo",
+          "email",
           "nombre",
-          "rol",
-          "telefono",
-          "titulacion"
+          "rol"
         ],
         "type": "object",
         "properties": {
-          "id": {
+          "idIdUsuario": {
             "type": "integer",
             "format": "int32"
           },
@@ -279,13 +708,7 @@
             "type": "string",
             "format": "string"
           },
-          "correo": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string",
-            "format": "string"
-          },
-          "telefono": {
+          "email": {
             "maxLength": 100,
             "minLength": 0,
             "type": "string",
@@ -301,12 +724,261 @@
             "minLength": 1,
             "type": "string",
             "format": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsignarPadecimientos": {
+        "required": [
+          "idCliente",
+          "idsPadecimientos"
+        ],
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
           },
-          "titulacion": {
-            "maxLength": 100,
-            "minLength": 0,
+          "idsPadecimientos": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
             "type": "string",
-            "format": "string"
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "rol": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaNacimiento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "genero": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "double"
+          },
+          "peso": {
+            "type": "number",
+            "format": "double"
+          },
+          "estadoPago": {
+            "type": "boolean"
+          },
+          "entrenadorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entrenador": {
+            "$ref": "#/components/schemas/Entrenador"
+          },
+          "rutinas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Rutina"
+            },
+            "nullable": true
+          },
+          "padecimientosClientes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PadecimientoCliente"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditarClienteDto": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaNacimiento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "genero": {
+            "type": "string",
+            "nullable": true
+          },
+          "altura": {
+            "type": "number",
+            "format": "double"
+          },
+          "peso": {
+            "type": "number",
+            "format": "double"
+          },
+          "estadoPago": {
+            "type": "boolean"
+          },
+          "entrenadorId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditarPadecimientoDto": {
+        "type": "object",
+        "properties": {
+          "idPadecimiento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "areaMuscularAfectada": {
+            "type": "string",
+            "nullable": true
+          },
+          "severidad": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Ejercicio": {
+        "type": "object",
+        "properties": {
+          "idEjercicio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "areaMuscular": {
+            "type": "string",
+            "nullable": true
+          },
+          "repeticiones": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ejerciciosRutina": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EjercicioRutina"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EjercicioRutina": {
+        "type": "object",
+        "properties": {
+          "idRutina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rutina": {
+            "$ref": "#/components/schemas/Rutina"
+          },
+          "idEjercicio": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ejercicio": {
+            "$ref": "#/components/schemas/Ejercicio"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Entrenador": {
+        "type": "object",
+        "properties": {
+          "idUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "clave": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "rol": {
+            "type": "string",
+            "nullable": true
+          },
+          "formacionAcademica": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cliente"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -320,6 +992,91 @@
           },
           "clave": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Padecimiento": {
+        "type": "object",
+        "properties": {
+          "idPadecimiento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "areaMuscularAfectada": {
+            "type": "string",
+            "nullable": true
+          },
+          "severidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "padecimientosClientes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PadecimientoCliente"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PadecimientoCliente": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "idPadecimiento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "padecimiento": {
+            "$ref": "#/components/schemas/Padecimiento"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Rutina": {
+        "type": "object",
+        "properties": {
+          "idRutina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "ejerciciosRutina": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EjercicioRutina"
+            },
             "nullable": true
           }
         },
