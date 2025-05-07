@@ -27,9 +27,9 @@ namespace PowerVital.Controllers
                     idIdUsuario = a.IdUsuario,
                     Nombre = a.Nombre,
                     Email = a.Email,
-                    
                     Clave = a.Clave,
-                    Rol = a.Rol
+                    Rol = a.Rol,
+                    FormacionAcademica = a.titulacion // Agregado para recuperar titulacion
                 })
                 .ToListAsync();
 
@@ -52,36 +52,56 @@ namespace PowerVital.Controllers
                 idIdUsuario = administrador.IdUsuario,
                 Nombre = administrador.Nombre,
                 Email = administrador.Email,
-                
                 Clave = administrador.Clave,
-                Rol = administrador.Rol
+                Rol = administrador.Rol,
+                FormacionAcademica = administrador.titulacion // Agregado para incluir titulacion
             };
 
             return Ok(dto);
         }
 
+      
         // POST: api/Administradores
         [HttpPost]
         public async Task<ActionResult> CrearAdministrador([FromBody] AdministradorDto dto)
         {
+            // ✅ 1. Validar el modelo entrante con base en las anotaciones del DTO
             if (!ModelState.IsValid)
             {
+                // ❌ Si el modelo no es válido (campos requeridos, longitud, etc.), retorna error 400
                 return BadRequest(ModelState);
             }
 
+            // ✅ 2. Validar que el correo electrónico no esté registrado
+            var correoExistente = await _context.Administradores
+                .AnyAsync(a => a.Email == dto.Email);
+
+            if (correoExistente)
+            {
+                // ❌ Si ya existe un usuario con ese correo, retorna error 409 (conflicto)
+                return Conflict(new { message = "⚠️ El correo electrónico ya está en uso por otro administrador." });
+            }
+
+            // ✅ 3. Crear objeto del modelo Administrador con los datos del DTO
             var administrador = new Administrador
             {
                 Nombre = dto.Nombre,
                 Email = dto.Email,
-              
-                Clave = dto.Email,
-               Rol = dto.Rol
+                Clave = dto.Clave, // ⚠️ Idealmente deberías encriptar esta clave
+                Rol = dto.Rol,
+                titulacion = dto.FormacionAcademica
             };
 
+            // ✅ 4. Guardar el nuevo administrador en la base de datos
             _context.Administradores.Add(administrador);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "✅ Administrador creado exitosamente.", id = administrador.IdUsuario });
+            // ✅ 5. Retornar mensaje de éxito y el nuevo ID
+            return Ok(new
+            {
+                message = "✅ Administrador creado exitosamente.",
+                id = administrador.IdUsuario
+            });
         }
 
         // PUT: api/Administradores/5
@@ -101,9 +121,9 @@ namespace PowerVital.Controllers
 
             administradorExistente.Nombre = dto.Nombre;
             administradorExistente.Email = dto.Email;
-           
             administradorExistente.Clave = dto.Clave;
             administradorExistente.Rol = dto.Rol;
+            administradorExistente.titulacion = dto.FormacionAcademica; // Actualización del campo titulacion
 
             await _context.SaveChangesAsync();
             return Ok(new { message = "✅ Administrador actualizado correctamente." });

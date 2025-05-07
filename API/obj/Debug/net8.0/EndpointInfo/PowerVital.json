@@ -957,7 +957,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Entrenador"
+                    "$ref": "#/components/schemas/EntrenadorDTO"
                   }
                 }
               },
@@ -965,7 +965,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Entrenador"
+                    "$ref": "#/components/schemas/EntrenadorDTO"
                   }
                 }
               },
@@ -973,7 +973,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Entrenador"
+                    "$ref": "#/components/schemas/EntrenadorDTO"
                   }
                 }
               }
@@ -989,41 +989,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -1050,17 +1033,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
+                  "$ref": "#/components/schemas/EntrenadorDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
+                  "$ref": "#/components/schemas/EntrenadorDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Entrenador"
+                  "$ref": "#/components/schemas/EntrenadorDTO"
                 }
               }
             }
@@ -1086,17 +1069,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Entrenador"
+                "$ref": "#/components/schemas/EntrenadorDTO"
               }
             }
           }
@@ -1172,6 +1155,191 @@
         }
       }
     },
+    "/api/Rutina": {
+      "get": {
+        "tags": [
+          "Rutina"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutinaDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutinaDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RutinaDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rutina"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rutina"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rutina"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rutina"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Rutina/{id}": {
+      "get": {
+        "tags": [
+          "Rutina"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RutinaDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RutinaDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RutinaDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Rutina"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RutinaCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rutina"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -1218,6 +1386,7 @@
         "required": [
           "clave",
           "email",
+          "formacionAcademica",
           "nombre",
           "rol"
         ],
@@ -1247,6 +1416,12 @@
           },
           "rol": {
             "minLength": 1,
+            "type": "string",
+            "format": "string"
+          },
+          "formacionAcademica": {
+            "maxLength": 100,
+            "minLength": 0,
             "type": "string",
             "format": "string"
           }
@@ -1563,6 +1738,52 @@
         },
         "additionalProperties": false
       },
+      "EntrenadorDTO": {
+        "required": [
+          "clave",
+          "email",
+          "formacionAcademica",
+          "nombre",
+          "rol"
+        ],
+        "type": "object",
+        "properties": {
+          "idIdUsuario": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "clave": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          },
+          "rol": {
+            "minLength": 1,
+            "type": "string",
+            "format": "string"
+          },
+          "formacionAcademica": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "format": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequest": {
         "type": "object",
         "properties": {
@@ -1658,6 +1879,46 @@
               "$ref": "#/components/schemas/EjercicioRutina"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RutinaCreateDto": {
+        "type": "object",
+        "properties": {
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RutinaDTO": {
+        "type": "object",
+        "properties": {
+          "idRutina": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

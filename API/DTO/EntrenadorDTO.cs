@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PowerVital.DTO
+namespace PowerVital.DTOs
 {
-    public class AdministradorDto
+    public class EntrenadorDTO
     {
 
 
-       
         public int idIdUsuario { get; set; }
         [Required(ErrorMessage = "El nombre es obligatorio.")] // Valida que el campo no esté vacío.
         [StringLength(100, ErrorMessage = "El nombre no puede exceder los 100 caracteres.")] // Define la longitud máxima.
