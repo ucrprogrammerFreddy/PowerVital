@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "XwwpUbsa/gqID1AR4qBO6ySfmPE458kMqQ/kJFDVZNA=",
+  "Hash": "iaZWKuNBWddRZsg4y9s5tOwnkeBMu/gwbgJ+4+XvFPA=",
   "Source": "PowerVital",
   "BasePath": "_content/PowerVital",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

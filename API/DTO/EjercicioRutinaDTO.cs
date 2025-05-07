@@ -1,21 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PowerVital.Models
+namespace PowerVital.DTOs
 {
-    public class EjercicioRutina
+    public class EjercicioRutinaDTO
     {
         [Required(ErrorMessage = "El campo IdRutina es obligatorio.")]
         public int IdRutina { get; set; }
 
-        public Rutina Rutina { get; set; }
-
         [Required(ErrorMessage = "El campo IdEjercicio es obligatorio.")]
         public int IdEjercicio { get; set; }
 
-        public Ejercicio Ejercicio { get; set; }
-
-        [StringLength(300, ErrorMessage = "El comentario no puede superar los 300 caracteres.")]
+        [StringLength(300, ErrorMessage = "El comentario no puede exceder los 300 caracteres.")]
         public string Comentario { get; set; }
     }
 }
-
