@@ -22,3 +22,10 @@ Migrations/
 
 # Archivos de configuración global de Git
 *.gitconfig
+API/obj/Debug/net8.0/PowerVital.AssemblyInfo.cs
+API/.vs/PowerVital/DesignTimeBuild/.dtbcache.v2
+API/obj/Debug/net8.0/PowerVital.AssemblyInfo.cs
+API/obj/Debug/net8.0/PowerVital.AssemblyInfoInputs.cache
+API/obj/Debug/net8.0/PowerVital.assets.cache
+API/obj/Debug/net8.0/PowerVital.csproj.AssemblyReference.cache
+API/obj/Debug/net8.0/PowerVital.GeneratedMSBuildEditorConfig.editorconfig
