@@ -18,7 +18,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ GET: api/Entrenador
-        [HttpGet]
+        [HttpGet("listaEntrenador")]
         public async Task<ActionResult<IEnumerable<EntrenadorDTO>>> ObtenerTodosLosEntrenadores()
         {
             var entrenadores = await _context.Entrenadores
@@ -36,7 +36,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ GET: api/Entrenador/{id}
-        [HttpGet("{id}")]
+        [HttpGet("obtenerEntrenadorPorId/{id}")]
         public async Task<ActionResult<EntrenadorDTO>> ObtenerEntrenadorPorId(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
@@ -56,7 +56,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ POST: api/Entrenador
-        [HttpPost]
+        [HttpPost("agregarEntrenador")]
         public async Task<ActionResult> AgregarEntrenador([FromBody] EntrenadorDTO dto)
         {
             // Validación automática de DataAnnotations
@@ -86,6 +86,7 @@ namespace PowerVital.Controllers
                 idIdUsuario = nuevoEntrenador.IdUsuario,
                 Nombre = nuevoEntrenador.Nombre,
                 Email = nuevoEntrenador.Email,
+                Clave=nuevoEntrenador.Clave,
                 FormacionAcademica = nuevoEntrenador.FormacionAcademica,
                 Rol = nuevoEntrenador.Rol // Opcionalmente incluir el rol
             };
@@ -94,7 +95,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ PUT: api/Entrenador/{id}
-        [HttpPut("{id}")]
+        [HttpPut("editarEntrenador/{id}")]
         public async Task<IActionResult> EditarEntrenador(int id, [FromBody] EntrenadorDTO dto)
         {
             if (id != dto.idIdUsuario)
@@ -119,7 +120,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ DELETE: api/Entrenador/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarEntrenador/{id}")]
         public async Task<IActionResult> EliminarEntrenador(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
