@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8a212147a3aa99d8ffa9c73d214854e59a72e7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+580dcc6f105f6067edf5b109fb1feb6ca57e1715")]
 [assembly: System.Reflection.AssemblyProductAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
