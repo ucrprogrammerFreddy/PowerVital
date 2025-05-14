@@ -9,7 +9,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header */
+/* -------------------- HEADER -------------------- */
 .header {
   background-color: #ECF0F1;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -30,10 +30,6 @@ body {
 .header-logo {
   height: 60px;
 }
-.header img header-logo {
-
-  height:30px ;
-}
 
 .menu-toggle {
   position: absolute;
@@ -45,7 +41,7 @@ body {
   color: #4f316d;
 }
 
-/* Sidebar */
+/* -------------------- SIDEBAR -------------------- */
 .slide {
   position: fixed;
   top: 0;
@@ -85,7 +81,7 @@ body {
   cursor: pointer;
 }
 
-/* Menú */
+/* -------------------- MENÚ PRINCIPAL -------------------- */
 .slide ul {
   list-style: none;
   padding:1px;
@@ -100,34 +96,25 @@ body {
   padding: 10px 20px;
   text-decoration: none;
   transition: 0.2s ease-out;
-
 }
+
 .slide ul li a i {
-  margin-right: 10px; /* o el valor que prefieras */
+  margin-right: 10px;
 }
 
-
-
-
-/* .slide ul li a:hover {
-  background-color: #07525c;
-} */
-
-/* ✅ HOVER para ítems principales del menú */
 .slide ul li a:hover {
-  background-color: #b66447 !important; /* Terracota (mismo color que el submenu activo) */
-  color: white !important;
+  background-color: #b66447;
+  color: white;
   font-weight: bold;
   border-left: 4px solid white;
 }
-
 
 .caret {
   font-size: 12px;
   margin-left: 5px;
 }
 
-/* Submenu */
+/* -------------------- SUBMENÚ -------------------- */
 .submenu {
   display: none;
   flex-direction: column;
@@ -148,13 +135,13 @@ body {
 
 .submenu li a:hover,
 .submenu li a.active {
-  background-color: #b66447 !important;
+  background-color: #b66447;
   color: white;
   font-weight: bold;
   border-left: 4px solid white;
 }
 
-/* Contenedor principal */
+/* -------------------- CONTENIDO PRINCIPAL -------------------- */
 .contenedor-main {
   transition: margin-left 0.3s ease;
   padding: 90px 20px 90px;
@@ -164,10 +151,12 @@ body {
   margin-left: 220px;
 }
 
-/* Footer */
-
+/* -------------------- FOOTER -------------------- */
 .footer {
+
   background-color: #316163; /* mismo color del menú lateral */
+  background-color: #022227;
+
   color: white;
   padding: 10px 15px;
   text-align: center;
@@ -176,11 +165,12 @@ body {
   bottom: 0;
   z-index: 10;
 }
+
 .footer-logo {
   height: 50px;
 }
 
-/* Tarjetas */
+/* -------------------- TARJETAS -------------------- */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -194,6 +184,8 @@ body {
   box-shadow: 0 0 6px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 
 .custom-card:hover {
@@ -216,6 +208,7 @@ body {
 .icon-green { color: #275d27; }
 .icon-olive { color: #6b6b2d; }
 
+/* -------------------- RESPONSIVE -------------------- */
 @media (max-width: 768px) {
   .slide {
     width: 200px;
