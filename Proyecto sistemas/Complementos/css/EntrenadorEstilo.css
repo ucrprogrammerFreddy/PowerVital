@@ -33,7 +33,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #024950;
+    background-color: #316163;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
@@ -93,7 +93,7 @@ body {
     justify-content: end;
     gap: 1rem;
     padding: 1rem 2rem;
-    background-color: #212529;
+    background-color: #316163;
     color: white;
   }
   footer a i {

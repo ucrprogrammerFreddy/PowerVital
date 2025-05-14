@@ -116,7 +116,7 @@ footer img {
 }
 
 footer {
-  background-color: #2C3E50;
+  background-color: #316163;
   color: #ffffff;
   padding: 1rem 0;
   /*position: absolute;
@@ -216,7 +216,7 @@ header {
   }
 
 footer {
-  background-color: #2C3E50;
+  background-color: #316163;
   color: #ffffff;
   padding: 1rem 0;
 }
@@ -264,7 +264,7 @@ footer img {
   }
 
 footer p {
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 

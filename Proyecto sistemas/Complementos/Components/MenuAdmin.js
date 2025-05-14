@@ -1,5 +1,5 @@
 function MenuHambAdmin() {
-    return `
+  return `
       <aside class="slide" id="sidebar">
         <div class="menu-header">
           <h1>MENU</h1>
@@ -11,8 +11,8 @@ function MenuHambAdmin() {
           <li class="has-submenu">
             <a href="#" id="toggleSubmenu"><i class="fas fa-users"></i> Usuarios <i class="fas fa-chevron-down caret"></i></a>
             <ul class="submenu" id="submenuUsuarios">
-              <li><a href="#"> Administradores</a></li>
-              <li><a href="#"> Entrenadores</a></li>
+               <li><a href="../View/Administrador/FormRegistroAdministrador.html"> Administradores Registro</a></li>
+               <li><a href="#"> Entrenadores</a></li>
               <li><a href="../Clientes/Model/index.html"> Clientes</a></li>
             </ul>
           </li>
@@ -22,41 +22,42 @@ function MenuHambAdmin() {
         </ul>
       </aside>
     `;
-  }
+}
 
-  //Pase la funcion del script que lo acia funcionar para aquí, el window es para que no se cargue primero que el html 
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('idMenuHambAdmin').innerHTML = MenuHambAdmin();
-  
-    const openBtn = document.getElementById('openMenu');
-    const closeBtn = document.getElementById('closeMenu');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-    const submenuToggle = document.getElementById('toggleSubmenu');
-    const submenu = document.getElementById('submenuUsuarios');
-  
-    openBtn.addEventListener('click', () => {
-      sidebar.classList.add('open');
-      openBtn.style.display = 'none';
-      mainContent.classList.add('shifted');
-    });
-  
-    closeBtn.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      openBtn.style.display = 'block';
-      mainContent.classList.remove('shifted');
-    });
-  
-    submenuToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      submenu.classList.toggle('visible');
-    });
-  
-    submenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        submenu.querySelectorAll('a').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      });
+//Pase la funcion del script que lo acia funcionar para aquí, el window es para que no se cargue primero que el html
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("idMenuHambAdmin").innerHTML = MenuHambAdmin();
+
+  const openBtn = document.getElementById("openMenu");
+  const closeBtn = document.getElementById("closeMenu");
+  const sidebar = document.getElementById("sidebar");
+  const mainContent = document.getElementById("mainContent");
+  const submenuToggle = document.getElementById("toggleSubmenu");
+  const submenu = document.getElementById("submenuUsuarios");
+
+  openBtn.addEventListener("click", () => {
+    sidebar.classList.add("open");
+    openBtn.style.display = "none";
+    mainContent.classList.add("shifted");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+    openBtn.style.display = "block";
+    mainContent.classList.remove("shifted");
+  });
+
+  submenuToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    submenu.classList.toggle("visible");
+  });
+
+  submenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      submenu
+        .querySelectorAll("a")
+        .forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
     });
   });
-  
+});

@@ -5,13 +5,13 @@
 }
 
 body {
-  background-color: #f5f7f8;
+  background-color: #ECF0F1;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Header */
 .header {
-  background-color: #ffffff;
+  background-color: #ECF0F1;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 10px 20px;
   position: fixed;
@@ -42,7 +42,7 @@ body {
   transform: translateY(-50%);
   font-size: 24px;
   cursor: pointer;
-  color: #8000ff;
+  color: #4f316d;
 }
 
 /* Sidebar */
@@ -52,7 +52,7 @@ body {
   left: 0;
   height: 100vh;
   width: 220px;
-  background-color: #06444d;
+  background-color: #316163;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 1100;
@@ -68,7 +68,7 @@ body {
   position: absolute;
   top: 0;
   width: 100%;
-  background: #06444d;
+  background: #316163;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,7 +88,7 @@ body {
 /* Menú */
 .slide ul {
   list-style: none;
-  padding:;
+  padding:1px;
   font-size: 20px;
 }
 
@@ -131,12 +131,14 @@ body {
 .submenu {
   display: none;
   flex-direction: column;
-  background-color: #07525c;
+  background-color: #316163;
 }
 
 .submenu.visible {
   display: flex;
 }
+
+
 
 .submenu li a {
   padding: 10px 35px;
@@ -165,9 +167,8 @@ body {
 /* Footer */
 
 .footer {
-  background-color: #022227; /* mismo color del menú lateral */
+  background-color: #316163; /* mismo color del menú lateral */
   color: white;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
   padding: 10px 15px;
   text-align: center;
   position: fixed;
