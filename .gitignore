@@ -1,1 +1,31 @@
 API/obj/Debug/net8.0/PowerVital.AssemblyInfo.cs
+
+# Archivos generados por Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configuración de carpetas temporales
+bin/
+obj/
+*.log
+*.vsidx
+
+# Archivos de configuración de Entity Framework Migrations
+Migrations/
+
+# Configuración de Visual Studio Code
+.vscode/
+.vscode/settings.json
+
+# Archivos de configuración global de Git
+*.gitconfig
+API/obj/Debug/net8.0/PowerVital.AssemblyInfo.cs
+API/.vs/PowerVital/DesignTimeBuild/.dtbcache.v2
+API/obj/Debug/net8.0/PowerVital.AssemblyInfo.cs
+API/obj/Debug/net8.0/PowerVital.AssemblyInfoInputs.cache
+API/obj/Debug/net8.0/PowerVital.assets.cache
+API/obj/Debug/net8.0/PowerVital.csproj.AssemblyReference.cache
+API/obj/Debug/net8.0/PowerVital.GeneratedMSBuildEditorConfig.editorconfig

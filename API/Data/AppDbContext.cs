@@ -41,7 +41,7 @@ namespace PowerVital.Data
                 .HasValue<Entrenador>("Entrenador")
                 .HasValue<Cliente>("Cliente");
 
-            // Relación entre Cliente y Entrenador sin cascada
+            //// Relación entre Cliente y Entrenador sin cascada
             modelBuilder.Entity<Cliente>()
                 .HasOne(c => c.Entrenador)
                 .WithMany(e => e.Clientes)

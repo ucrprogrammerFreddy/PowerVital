@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PowerVital.Models;
 using PowerVital.Data;
+using PowerVital.Models;
+using PowerVital.DTOs;
 
-namespace API_BD.Controllers
+namespace PowerVital.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -16,64 +17,110 @@ namespace API_BD.Controllers
             _context = context;
         }
 
-        // ✅ Obtener lista de entrenadores
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Entrenador>>> ObtenerTodosLosEntrenadores()
+        // ✅ GET: api/Entrenador
+        [HttpGet("listaEntrenador")]
+        public async Task<ActionResult<IEnumerable<EntrenadorDTO>>> ObtenerTodosLosEntrenadores()
         {
-            return await _context.Entrenadores.ToListAsync();
+            var entrenadores = await _context.Entrenadores
+                .Select(e => new EntrenadorDTO
+                {
+                    idIdUsuario = e.IdUsuario,
+                    Nombre = e.Nombre,
+                    Email = e.Email,
+                    FormacionAcademica = e.FormacionAcademica
+                    // Excluyendo Clave y Rol
+                })
+                .ToListAsync();
+
+            return Ok(entrenadores);
         }
 
-        // ✅ Obtener entrenador por ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Entrenador>> ObtenerEntrenadorPorId(int id)
+        // ✅ GET: api/Entrenador/{id}
+        [HttpGet("obtenerEntrenadorPorId/{id}")]
+        public async Task<ActionResult<EntrenadorDTO>> ObtenerEntrenadorPorId(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
 
             if (entrenador == null)
                 return NotFound();
 
-            return entrenador;
+            var dto = new EntrenadorDTO
+            {
+                idIdUsuario = entrenador.IdUsuario,
+                Nombre = entrenador.Nombre,
+                Email = entrenador.Email,
+                FormacionAcademica = entrenador.FormacionAcademica
+            };
+
+            return Ok(dto);
         }
 
-        // ✅ Agregar nuevo entrenador
-        [HttpPost]
-        public async Task<ActionResult<Entrenador>> AgregarEntrenador(Entrenador entrenador)
+        // ✅ POST: api/Entrenador
+        [HttpPost("agregarEntrenador")]
+        public async Task<ActionResult> AgregarEntrenador([FromBody] EntrenadorDTO dto)
         {
-            entrenador.Rol = "Entrenador";
+            // Validación automática de DataAnnotations
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            _context.Entrenadores.Add(entrenador);
+            // Verificar que la clave esté presente en el DTO
+            if (string.IsNullOrWhiteSpace(dto.Clave))
+                return BadRequest("La clave es obligatoria.");
+
+            // Crear un nuevo Entrenador a partir del DTO
+            var nuevoEntrenador = new Entrenador
+            {
+                Nombre = dto.Nombre,
+                Email = dto.Email,
+                Clave = dto.Clave, // ⚠️ En producción, debes hashear la clave
+                Rol = "Entrenador", // Asignación automática del rol
+                FormacionAcademica = dto.FormacionAcademica // Asignamos la formación académica
+            };
+
+            _context.Entrenadores.Add(nuevoEntrenador);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(ObtenerEntrenadorPorId), new { id = entrenador.IdUsuario }, entrenador);
+            // Retornar un DTO sin incluir la clave
+            var dtoResultado = new EntrenadorDTO
+            {
+                idIdUsuario = nuevoEntrenador.IdUsuario,
+                Nombre = nuevoEntrenador.Nombre,
+                Email = nuevoEntrenador.Email,
+                Clave=nuevoEntrenador.Clave,
+                FormacionAcademica = nuevoEntrenador.FormacionAcademica,
+                Rol = nuevoEntrenador.Rol // Opcionalmente incluir el rol
+            };
+
+            return CreatedAtAction(nameof(ObtenerEntrenadorPorId), new { id = dtoResultado.idIdUsuario }, dtoResultado);
         }
 
-        // ✅ Editar entrenador existente
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditarEntrenador(int id, Entrenador entrenador)
+        // ✅ PUT: api/Entrenador/{id}
+        [HttpPut("editarEntrenador/{id}")]
+        public async Task<IActionResult> EditarEntrenador(int id, [FromBody] EntrenadorDTO dto)
         {
-            if (id != entrenador.IdUsuario)
-                return BadRequest("El ID proporcionado no coincide.");
+            if (id != dto.idIdUsuario)
+                return BadRequest("El ID no coincide.");
 
-            entrenador.Rol = "Entrenador";
-            _context.Entry(entrenador).State = EntityState.Modified;
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ExisteEntrenador(id))
-                    return NotFound();
-                else
-                    throw;
-            }
+            var entrenador = await _context.Entrenadores.FindAsync(id);
+            if (entrenador == null)
+                return NotFound();
+
+            // Actualizar los campos permitidos
+            entrenador.Nombre = dto.Nombre;
+            entrenador.Email = dto.Email;
+            entrenador.FormacionAcademica = dto.FormacionAcademica;
+            // La clave no se actualiza desde aquí por seguridad
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        // ✅ Eliminar entrenador
-        [HttpDelete("{id}")]
+        // ✅ DELETE: api/Entrenador/{id}
+        [HttpDelete("eliminarEntrenador/{id}")]
         public async Task<IActionResult> EliminarEntrenador(int id)
         {
             var entrenador = await _context.Entrenadores.FindAsync(id);
@@ -86,11 +133,10 @@ namespace API_BD.Controllers
             return NoContent();
         }
 
-        // ✅ Método auxiliar para verificar existencia
+        // 🔍 Verificar si el Entrenador existe
         private bool ExisteEntrenador(int id)
         {
             return _context.Entrenadores.Any(e => e.IdUsuario == id);
         }
     }
-
 }

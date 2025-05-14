@@ -8,17 +8,17 @@ namespace PowerVital.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EditarClienteController : ControllerBase
+    public class ClienteController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public EditarClienteController(AppDbContext context)
+        public ClienteController(AppDbContext context)
         {
             _context = context;
         }
 
         // ✅ GET: api/cliente
-        [HttpGet]
+        [HttpGet("listaClientes")]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
         {
             var clientes = await _context.Clientes
@@ -29,7 +29,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ GET: api/cliente/5
-        [HttpGet("{id}")]
+        [HttpGet("obtenerClientePorId/{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
         {
             var cliente = await _context.Clientes
@@ -43,7 +43,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ POST: api/cliente
-        [HttpPost]
+        [HttpPost("CrearCliente")]
         public async Task<ActionResult> CrearCliente([FromBody] EditarClienteDto dto)
         {
             if (!ModelState.IsValid)
@@ -84,7 +84,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ PUT: api/cliente/editar
-        [HttpPut("editar")]
+        [HttpPut("editarCliente")]
         public async Task<IActionResult> EditarCliente([FromBody] EditarClienteDto dto)
         {
             if (!ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ DELETE: api/cliente/5
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarCliente/{id}")]
         public async Task<IActionResult> EliminarCliente(int id)
         {
             var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.IdUsuario == id);
