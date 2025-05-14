@@ -23,7 +23,7 @@ namespace PowerVital.Controllers
 
         // GET: api/EjercicioRutina
         // Obtiene todas las relaciones de ejercicio con rutina
-        [HttpGet]
+        [HttpGet("listaEjercicioRutina")]
         public async Task<ActionResult<IEnumerable<EjercicioRutinaDTO>>> GetAll()
         {
             // Selecciona y transforma los datos al DTO
@@ -40,7 +40,7 @@ namespace PowerVital.Controllers
 
         // GET: api/EjercicioRutina/1/2
         // Obtiene una relación específica entre una rutina y un ejercicio
-        [HttpGet("{idRutina:int}/{idEjercicio:int}")]
+        [HttpGet("buscarEjericioRutina/{idRutina:int}/{idEjercicio:int}")]
         public async Task<ActionResult<EjercicioRutinaDTO>> Get(int idRutina, int idEjercicio)
         {
             // Busca la entidad por su clave compuesta
@@ -61,7 +61,7 @@ namespace PowerVital.Controllers
 
         // POST: api/EjercicioRutina
         // Crea una nueva relación entre rutina y ejercicio
-        [HttpPost]
+        [HttpPost("agregarEjercicioRutina")]
         public async Task<ActionResult> Create([FromBody] EjercicioRutinaDTO dto)
         {
             // Verifica si el modelo recibido cumple con las validaciones
@@ -101,7 +101,7 @@ namespace PowerVital.Controllers
 
         // PUT: api/EjercicioRutina/1/2
         // Actualiza el comentario de una relación existente
-        [HttpPut("{idRutina:int}/{idEjercicio:int}")]
+        [HttpPut("editarEjercicioRutina/{idRutina:int}/{idEjercicio:int}")]
         public async Task<ActionResult> Update(int idRutina, int idEjercicio, [FromBody] EjercicioRutinaDTO dto)
         {
             // Verifica si el modelo recibido es válido
@@ -132,7 +132,7 @@ namespace PowerVital.Controllers
 
         // DELETE: api/EjercicioRutina/1/2
         // Elimina una relación específica entre rutina y ejercicio
-        [HttpDelete("{idRutina:int}/{idEjercicio:int}")]
+        [HttpDelete("eliminarEjercicioRutina/{idRutina:int}/{idEjercicio:int}")]
         public async Task<ActionResult> Delete(int idRutina, int idEjercicio)
         {
             // Busca la entidad a eliminar

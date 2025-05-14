@@ -18,7 +18,7 @@ namespace PowerVital.Controllers
         }
 
         // POST: api/padecimientocliente
-        [HttpPost]
+        [HttpPost ("asignarPadecimiento")]
         public async Task<IActionResult> AsignarPadecimientos([FromBody] AsignarPadecimientos dto)
         {
             if (!ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/padecimientocliente/5
-        [HttpGet("{idCliente}")]
+        [HttpGet("obtenerPadecimiento/{idCliente}")]
         public async Task<ActionResult<List<int>>> ObtenerPadecimientosDeCliente(int idCliente)
         {
             var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == idCliente);
@@ -75,7 +75,7 @@ namespace PowerVital.Controllers
         }
 
         // DELETE: api/padecimientocliente/5
-        [HttpDelete("{idCliente}")]
+        [HttpDelete("eliminarPadecimiento/{idCliente}")]
         public async Task<IActionResult> EliminarPadecimientosDeCliente(int idCliente)
         {
             var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == idCliente);

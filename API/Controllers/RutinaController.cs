@@ -18,7 +18,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/Rutina
-        [HttpGet]
+        [HttpGet("listaRutina")]
         public async Task<ActionResult<IEnumerable<RutinaDTO>>> GetRutinas()
         {
             return await _context.Rutinas
@@ -32,7 +32,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/Rutina/5
-        [HttpGet("{id}")]
+        [HttpGet("obtenerRutinaPorId/{id}")]
         public async Task<ActionResult<RutinaDTO>> GetRutina(int id)
         {
             var rutina = await _context.Rutinas.FindAsync(id);
@@ -52,7 +52,7 @@ namespace PowerVital.Controllers
         }
 
         // POST: api/Rutina
-        [HttpPost]
+        [HttpPost("crearRutina")]
         public async Task<ActionResult<Rutina>> PostRutina(RutinaCreateDto dto)
         {
             var rutina = new Rutina
@@ -69,7 +69,7 @@ namespace PowerVital.Controllers
         }
 
         // PUT: api/Rutina/5
-        [HttpPut("{id}")]
+        [HttpPut("editarRutina/{id}")]
         public async Task<IActionResult> PutRutina(int id, RutinaCreateDto dto)
         {
             var rutina = await _context.Rutinas.FindAsync(id);
@@ -88,7 +88,7 @@ namespace PowerVital.Controllers
         }
 
         // DELETE: api/Rutina/5
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarRutina/{id}")]
         public async Task<IActionResult> DeleteRutina(int id)
         {
             var rutina = await _context.Rutinas.FindAsync(id);

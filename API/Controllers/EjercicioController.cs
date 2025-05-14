@@ -19,7 +19,7 @@ namespace PowerVital.Controllers
 
         // GET: api/Ejercicio
         // Devuelve todos los ejercicios en forma de lista
-        [HttpGet]
+        [HttpGet("listaEjercicios")]
         public async Task<ActionResult<IEnumerable<object>>> GetAll()
         {
             var ejercicios = await _context.Ejercicios
@@ -38,7 +38,7 @@ namespace PowerVital.Controllers
 
         // GET: api/Ejercicio/5
         // Devuelve un ejercicio por su ID
-        [HttpGet("{id}")]
+        [HttpGet("obtenerEjercicioPorId/{id}")]
         public async Task<ActionResult<object>> GetById(int id)
         {
             var ejercicio = await _context.Ejercicios.FindAsync(id);
@@ -58,7 +58,7 @@ namespace PowerVital.Controllers
 
         // POST: api/Ejercicio
         // Crea un nuevo ejercicio
-        [HttpPost]
+        [HttpPost("crearEjercicio")]
         public async Task<ActionResult> Create([FromBody] EjercicioDTO dto)
         {
             if (!ModelState.IsValid)
@@ -87,7 +87,7 @@ namespace PowerVital.Controllers
 
         // PUT: api/Ejercicio/5
         // Actualiza un ejercicio existente
-        [HttpPut("{id}")]
+        [HttpPut("editarEjercicio/{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] EjercicioDTO dto)
         {
             if (!ModelState.IsValid)
@@ -116,7 +116,7 @@ namespace PowerVital.Controllers
 
         // DELETE: api/Ejercicio/5
         // Elimina un ejercicio existente
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarEjericicio/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
             var ejercicio = await _context.Ejercicios.FindAsync(id);

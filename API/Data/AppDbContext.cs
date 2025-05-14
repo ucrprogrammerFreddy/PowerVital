@@ -42,11 +42,14 @@ namespace PowerVital.Data
                 .HasValue<Cliente>("Cliente");
 
             //// Relación entre Cliente y Entrenador sin cascada
-            modelBuilder.Entity<Cliente>()
+            ///
+
+            /* modelBuilder.Entity<Cliente>()
                 .HasOne(c => c.Entrenador)
                 .WithMany(e => e.Clientes)
                 .HasForeignKey(c => c.EntrenadorId)
                 .OnDelete(DeleteBehavior.NoAction); // 🛡️ Clave para evitar el error
+            */
 
             // Clave compuesta para EjercicioRutina
             modelBuilder.Entity<EjercicioRutina>()
