@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PowerVital.Models
 {
-    public abstract class Usuario
+    public  class Usuario
     {
         [Key]
         public int IdUsuario { get; set; }

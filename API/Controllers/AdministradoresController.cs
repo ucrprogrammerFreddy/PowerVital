@@ -18,7 +18,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/Administradores
-        [HttpGet]
+        [HttpGet("listaAdministradores")]
         public async Task<ActionResult<IEnumerable<AdministradorDto>>> GetAdministradores()
         {
             var administradores = await _context.Administradores
@@ -37,7 +37,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/Administradores/5
-        [HttpGet("{id}")]
+        [HttpGet("obtenerAdministradorPorId/{id}")]
         public async Task<ActionResult<AdministradorDto>> GetAdministrador(int id)
         {
             var administrador = await _context.Administradores.FindAsync(id);
@@ -62,7 +62,7 @@ namespace PowerVital.Controllers
 
       
         // POST: api/Administradores
-        [HttpPost]
+        [HttpPost("crearAdministrador")]
         public async Task<ActionResult> CrearAdministrador([FromBody] AdministradorDto dto)
         {
             // ✅ 1. Validar el modelo entrante con base en las anotaciones del DTO
@@ -105,7 +105,7 @@ namespace PowerVital.Controllers
         }
 
         // PUT: api/Administradores/5
-        [HttpPut("{id}")]
+        [HttpPut("actualizarAdministrador/{id}")]
         public async Task<ActionResult> ActualizarAdministrador(int id, [FromBody] AdministradorDto dto)
         {
             if (!ModelState.IsValid)
@@ -130,7 +130,7 @@ namespace PowerVital.Controllers
         }
 
         // DELETE: api/Administradores/5
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarAdministrador/{id}")]
         public async Task<ActionResult> EliminarAdministrador(int id)
         {
             var administrador = await _context.Administradores.FindAsync(id);

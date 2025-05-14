@@ -27,7 +27,7 @@ namespace PowerVital.DTOs
         [StringLength(100, ErrorMessage = "la clave no puede exceder los 100 caracteres.")] // Define la longitud máxima.
         [DataType(DataType.Text)] // Especifica que es un texto.
 
-        public string? Clave { get; set; }
+        public string Clave { get; set; }
 
 
         [Required(ErrorMessage = "El rol es obligatorio")] // Valida que el campo no esté vacío.
@@ -35,6 +35,8 @@ namespace PowerVital.DTOs
         [DataType(DataType.Text)] // Especifica que es un texto.
 
         public string Rol { get; set; }
+
+        
 
         [Required(ErrorMessage = "El campo titulacion es obligatorio.")] // Valida que el campo no esté vacío.
         [StringLength(100, ErrorMessage = "La titulacion no puede exceder los 100 caracteres.")] // Define la longitud máxima.

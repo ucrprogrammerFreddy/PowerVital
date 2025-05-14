@@ -27,6 +27,9 @@ namespace PowerVital.Controllers
                     idIdUsuario = e.IdUsuario,
                     Nombre = e.Nombre,
                     Email = e.Email,
+                    Clave = e.Clave,
+                    Rol=e.Rol,
+
                     FormacionAcademica = e.FormacionAcademica
                     // Excluyendo Clave y Rol
                 })
@@ -48,6 +51,8 @@ namespace PowerVital.Controllers
             {
                 idIdUsuario = entrenador.IdUsuario,
                 Nombre = entrenador.Nombre,
+                Clave = entrenador.Rol,
+                Rol=entrenador.Rol,
                 Email = entrenador.Email,
                 FormacionAcademica = entrenador.FormacionAcademica
             };

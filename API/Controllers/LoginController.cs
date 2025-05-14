@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PowerVital.Data;
 using PowerVital.Models;
 using PowerVital.DTO;
+using System;
 using System.Threading.Tasks;
 
 namespace PowerVital.Controllers
@@ -21,64 +22,65 @@ namespace PowerVital.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            Console.WriteLine($"📤 Solicitud de login recibida con Email: {loginRequest.Email}");
-
-            if (string.IsNullOrEmpty(loginRequest.Email) || string.IsNullOrEmpty(loginRequest.Clave))
+            try
             {
-                Console.WriteLine("⚠️ Faltan datos.");
-                return BadRequest(new { message = "⚠️ Email y clave son obligatorios." });
-            }
+                Console.WriteLine($"📤 LoginRequest recibido: {loginRequest.Email}");
 
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
-
-            if (usuario == null)
-            {
-                Console.WriteLine("❌ Usuario no encontrado.");
-                return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
-            }
-
-            if (usuario.Clave != loginRequest.Clave)
-            {
-                Console.WriteLine("❌ Clave incorrecta.");
-                return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
-            }
-
-            Console.WriteLine($"✅ Usuario autenticado: {usuario.Email} con Rol: {usuario.Rol}");
-
-            return new JsonResult(new
-            {
-                message = "✅ Login exitoso.",
-                redirectUrl = usuario.Rol switch
+                if (string.IsNullOrWhiteSpace(loginRequest.Email) || string.IsNullOrWhiteSpace(loginRequest.Clave))
                 {
-                    "Administrador" => "/Administrador/Index",
-                    "Cliente" => "/Clientes/index",
-                    "Entrenador" => "/Entrenadores/index",
-                    _ => "/Usuario/Login"
-                },
-                usuario = new
-                {
-                    usuario.IdUsuario,
-                    usuario.Nombre,
-                    usuario.Email,
-                    usuario.Rol,
-                    
+                    return BadRequest(new { message = "⚠️ Email y clave son obligatorios." });
                 }
-            })
+
+                var usuario = await _context.Usuarios
+                    .FirstOrDefaultAsync(u => u.Email.ToLower() == loginRequest.Email.ToLower());
+
+                if (usuario == null)
+                {
+                    Console.WriteLine("❌ Usuario no encontrado en la base de datos.");
+                    return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
+                }
+
+                Console.WriteLine($"🔍 Usuario encontrado: {usuario.Email}, clave en BD: {usuario.Clave}");
+
+                if (usuario.Clave != loginRequest.Clave)
+                {
+                    Console.WriteLine($"❌ Clave incorrecta. Esperada: {usuario.Clave}, Recibida: {loginRequest.Clave}");
+                    return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
+                }
+
+                Console.WriteLine($"✅ Usuario autenticado: {usuario.Email} con Rol: {usuario.Rol}");
+
+                return Ok(new
+                {
+                    message = "✅ Login exitoso.",
+                    redirectUrl = usuario.Rol switch
+                    {
+                        "Admin" => "/Administrador/Index",
+                        "Cliente" => "/Clientes/index",
+                        "Entrenador" => "/Entrenadores/index",
+                        _ => "/Usuario/Login"
+                    },
+                    usuario = new
+                    {
+                        usuario.IdUsuario,
+                        usuario.Nombre,
+                        usuario.Email,
+                        usuario.Rol
+                    }
+                });
+            }
+            catch (Exception ex)
             {
-                StatusCode = 200,
-                ContentType = "application/json"
-            };
+                Console.WriteLine($"❌ EXCEPCIÓN DETECTADA: {ex.Message}");
+                return StatusCode(500, new { message = "❌ Error interno del servidor", error = ex.Message });
+            }
         }
 
+
         [HttpPost("Logout")]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            // Aquí puedes limpiar la sesión si es necesario
             return Ok(new { message = "✅ Logout exitoso." });
         }
     }
-
-   
 }
-

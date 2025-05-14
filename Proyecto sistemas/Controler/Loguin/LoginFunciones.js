@@ -1,8 +1,7 @@
-import { LoginModel } from "./Model/LoginModel.js"; // Ruta corregida
+import { LoginModel } from "../../Model/LoginModel.js";
 
-const URL_API = "https://localhost:7086/api/login"; // Asegúrate de que esta URL es correcta
+const URL_API = "https://localhost:7086/api/Login/Login";
 
-// Cambia si es producción
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -16,7 +15,6 @@ function iniciarSesion() {
 
   const loginModel = new LoginModel(email, clave);
 
-  // Llamada a la API para autenticar al usuario
   fetch(URL_API, {
     method: "POST",
     headers: {
@@ -27,29 +25,38 @@ function iniciarSesion() {
     .then((response) => {
       if (!response.ok) {
         throw new Error("❌ Credenciales inválidas");
+        
       }
       return response.json();
     })
     .then((data) => {
-      // Imprime el resultado del login en consola
-      console.log("Respuesta de la API:", data); // Imprime la respuesta completa
+      const usuario = data.usuario;
+      const rol = usuario.rol;
+    
+      // ✅ Guardar sesión del usuario
+      sessionStorage.setItem("usuario", JSON.stringify(usuario));
+      console.log("Usuario guardado en sesión:", usuario);
 
-      // Verifica si el usuario tiene rol de Administrador
-      const rol = data.usuario.rol;
-      console.log("Rol del usuario:", rol); // Imprime el rol del usuario
+      // Redirección según rol
+      switch (rol) {
+        
+    case "Admin":
+        window.location.href = "../../View/Administrador/Index.html";
+        break;
+      case "Cliente":
+        window.location.href = "../../View/Cliente/Index.html";
+        break;
+      case "Entrenador":
+        window.location.href = "../../View/Entrenador/Index.html";
+        break;
+      default:
+        alert("⚠️ Rol no reconocido. Contacte al administrador.");
 
-      if (rol === "Administrador") {
-        console.log("Redirigiendo a la página de Administrador..."); // Depuración: Verifica la redirección
-        // Puedes comentar la siguiente línea mientras estás depurando
-        window.location.href =
-          "/Proyecto_Sistemas/View/Administrador/index.html"; // Redirige a la página del Administrador
-      } else {
-        console.log("El usuario no tiene permisos de administrador.");
-        alert("⚠️ No tiene permiso para ingresar como Administrador");
+
       }
     })
     .catch((error) => {
-      console.error("Error al iniciar sesión:", error); // Imprime el error completo
-      alert("Error al iniciar sesión: " + error.message); // Mensaje más claro de error
+      console.error("Error al iniciar sesión:", error);
+      alert("Error al iniciar sesión: " + error.message);
     });
 }

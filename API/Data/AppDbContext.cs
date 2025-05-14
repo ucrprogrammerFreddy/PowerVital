@@ -37,7 +37,7 @@ namespace PowerVital.Data
             // Herencia TPH para Usuario
             modelBuilder.Entity<Usuario>()
                 .HasDiscriminator<string>("Rol")
-                .HasValue<Administrador>("Administrador")
+                .HasValue<Administrador>("Admin")
                 .HasValue<Entrenador>("Entrenador")
                 .HasValue<Cliente>("Cliente");
 

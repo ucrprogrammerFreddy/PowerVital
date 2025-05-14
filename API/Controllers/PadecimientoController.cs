@@ -8,17 +8,17 @@ namespace PowerVital.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class EditarPadecimientoController : ControllerBase
+    public class PadecimientoController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public EditarPadecimientoController(AppDbContext context)
+        public PadecimientoController(AppDbContext context)
         {
             _context = context;
         }
 
         // GET: api/padecimientos
-        [HttpGet]
+        [HttpGet("listaPadecimientos")]
         public async Task<ActionResult<IEnumerable<EditarPadecimientoDto>>> GetPadecimientos()
         {
             var padecimientos = await _context.Padecimientos
@@ -36,7 +36,7 @@ namespace PowerVital.Controllers
         }
 
         // GET: api/padecimientos/5
-        [HttpGet("{id}")]
+        [HttpGet("obtenerPadecimientoPorId/{id}")]
         public async Task<ActionResult<EditarPadecimientoDto>> GetPadecimiento(int id)
         {
             var padecimiento = await _context.Padecimientos.FindAsync(id);
@@ -57,7 +57,7 @@ namespace PowerVital.Controllers
         }
 
         // POST: api/padecimientos
-        [HttpPost]
+        [HttpPost("crearPadecimiento")]
         public async Task<ActionResult> CrearPadecimiento([FromBody] EditarPadecimientoDto dto)
         {
             if (!ModelState.IsValid)
@@ -80,7 +80,7 @@ namespace PowerVital.Controllers
         }
 
         // PUT: api/padecimientos/5
-        [HttpPut("{id}")]
+        [HttpPut("editarPadecimiento/{id}")]
         public async Task<IActionResult> EditarPadecimiento(int id, [FromBody] EditarPadecimientoDto dto)
         {
             if (id != dto.IdPadecimiento)
@@ -105,7 +105,7 @@ namespace PowerVital.Controllers
         }
 
         // DELETE: api/padecimientos/5
-        [HttpDelete("{id}")]
+        [HttpDelete("eliminarPadecimiento/{id}")]
         public async Task<IActionResult> EliminarPadecimiento(int id)
         {
             var padecimiento = await _context.Padecimientos.FindAsync(id);
