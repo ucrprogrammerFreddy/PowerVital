@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b4826f4eb004deff0c04db4829ad86e23428fb4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34b4052f326ff521ef4c8b9f6f58b7f1fb7cf553")]
 [assembly: System.Reflection.AssemblyProductAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PowerVital")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
