@@ -38,6 +38,14 @@ namespace PowerVital.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Dificultad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GuiaEjercicio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -60,7 +68,8 @@ namespace PowerVital.Migrations
 
                     b.Property<string>("Comentario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("EjercicioIdEjercicio")
                         .HasColumnType("int");
@@ -173,13 +182,15 @@ namespace PowerVital.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rol")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("int");
 
                     b.HasKey("IdUsuario");
 
@@ -199,7 +210,7 @@ namespace PowerVital.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasDiscriminator().HasValue("Administrador");
+                    b.HasDiscriminator().HasValue("Admin");
                 });
 
             modelBuilder.Entity("PowerVital.Models.Cliente", b =>
@@ -235,7 +246,6 @@ namespace PowerVital.Migrations
                     b.HasBaseType("PowerVital.Models.Usuario");
 
                     b.Property<string>("FormacionAcademica")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Entrenador");

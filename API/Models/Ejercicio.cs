@@ -11,7 +11,11 @@ namespace PowerVital.Models
         public string AreaMuscular { get; set; }
         public int Repeticiones { get; set; }
 
-        //public ICollection<EjercicioRutina> EjerciciosRutina { get; set; }
+        public ICollection<EjercicioRutina> EjerciciosRutina { get; set; }
+
+        public String GuiaEjercicio { get; set; }
+
+        public String Dificultad { get; set; }
 
     }
 }
