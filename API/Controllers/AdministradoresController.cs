@@ -35,6 +35,9 @@ namespace PowerVital.Controllers
                 .ToListAsync();
 
             return Ok(administradores);
+
+           
+
         }
 
         // GET: api/Administradores/5
