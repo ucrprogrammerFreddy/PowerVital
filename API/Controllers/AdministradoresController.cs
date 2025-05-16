@@ -29,6 +29,7 @@ namespace PowerVital.Controllers
                     Email = a.Email,
                     Clave = a.Clave,
                     Rol = a.Rol,
+                    Telefono = a.Telefono,
                     FormacionAcademica = a.titulacion // Agregado para recuperar titulacion
                 })
                 .ToListAsync();
@@ -54,6 +55,7 @@ namespace PowerVital.Controllers
                 Email = administrador.Email,
                 Clave = administrador.Clave,
                 Rol = administrador.Rol,
+                Telefono = administrador.Telefono,
                 FormacionAcademica = administrador.titulacion // Agregado para incluir titulacion
             };
 
@@ -89,6 +91,7 @@ namespace PowerVital.Controllers
                 Email = dto.Email,
                 Clave = dto.Clave, // ⚠️ Idealmente deberías encriptar esta clave
                 Rol = dto.Rol,
+                Telefono = dto.Telefono,
                 titulacion = dto.FormacionAcademica
             };
 
@@ -123,6 +126,7 @@ namespace PowerVital.Controllers
             administradorExistente.Email = dto.Email;
             administradorExistente.Clave = dto.Clave;
             administradorExistente.Rol = dto.Rol;
+            administradorExistente.Telefono = dto.Telefono;
             administradorExistente.titulacion = dto.FormacionAcademica; // Actualización del campo titulacion
 
             await _context.SaveChangesAsync();

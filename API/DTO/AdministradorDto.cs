@@ -40,6 +40,10 @@ namespace PowerVital.DTO
         [Required(ErrorMessage = "El campo titulacion es obligatorio.")] // Valida que el campo no esté vacío.
         [StringLength(100, ErrorMessage = "La titulacion no puede exceder los 100 caracteres.")] // Define la longitud máxima.
         [DataType(DataType.Text)] // Especifica que es un texto.
+
+       
+        public int Telefono { get; set; }
+
         public string? FormacionAcademica { get; set; }
 
 
