@@ -69,6 +69,7 @@ namespace PowerVital.Controllers
                 Clave = dto.Clave,
                 Email = dto.Email,
                 FechaNacimiento = dto.FechaNacimiento,
+                Telefono = dto.Telefono,
                 Genero = dto.Genero,
                 Altura = dto.Altura,
                 Peso = dto.Peso,
@@ -108,6 +109,7 @@ namespace PowerVital.Controllers
             cliente.Clave = dto.Clave;
             cliente.Email = dto.Email;
             cliente.FechaNacimiento = dto.FechaNacimiento;
+            cliente.Telefono = dto.Telefono;
             cliente.Genero = dto.Genero;
             cliente.Altura = dto.Altura;
             cliente.Peso = dto.Peso;

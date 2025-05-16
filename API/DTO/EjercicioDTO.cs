@@ -18,5 +18,9 @@ namespace PowerVital.DTOs
 
         [Range(1, 100, ErrorMessage = "Las repeticiones deben estar entre 1 y 100.")]
         public int Repeticiones { get; set; }
+
+        public String GuiaEjercicio { get; set; }
+
+        public String Dificultad { get; set; }
     }
 }

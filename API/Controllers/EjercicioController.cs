@@ -29,7 +29,9 @@ namespace PowerVital.Controllers
                     e.Nombre,
                     e.Descripcion,
                     e.AreaMuscular,
-                    e.Repeticiones
+                    e.Repeticiones,
+                    e.Dificultad,
+                    e.GuiaEjercicio
                 })
                 .ToListAsync();
 
@@ -52,6 +54,8 @@ namespace PowerVital.Controllers
                 ejercicio.Nombre,
                 ejercicio.Descripcion,
                 ejercicio.AreaMuscular,
+                ejercicio.GuiaEjercicio,
+                ejercicio.Dificultad,
                 ejercicio.Repeticiones
             });
         }
@@ -69,6 +73,8 @@ namespace PowerVital.Controllers
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
                 AreaMuscular = dto.AreaMuscular,
+                GuiaEjercicio = dto.GuiaEjercicio,
+                Dificultad = dto.Dificultad,
                 Repeticiones = dto.Repeticiones
             };
 
@@ -102,6 +108,9 @@ namespace PowerVital.Controllers
             ejercicio.Descripcion = dto.Descripcion;
             ejercicio.AreaMuscular = dto.AreaMuscular;
             ejercicio.Repeticiones = dto.Repeticiones;
+            ejercicio.GuiaEjercicio = dto.GuiaEjercicio;
+            ejercicio.Dificultad = dto.Dificultad;
+
 
             try
             {

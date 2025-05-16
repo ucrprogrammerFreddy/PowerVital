@@ -28,7 +28,7 @@ namespace PowerVital.DTOs
         [DataType(DataType.Text)] // Especifica que es un texto.
 
         public string Clave { get; set; }
-
+        public int Telefono { get; set; }
 
         [Required(ErrorMessage = "El rol es obligatorio")] // Valida que el campo no esté vacío.
 

@@ -28,7 +28,8 @@ namespace PowerVital.Controllers
                     Nombre = e.Nombre,
                     Email = e.Email,
                     Clave = e.Clave,
-                    Rol=e.Rol,
+                    Telefono = e.Telefono,
+                    Rol =e.Rol,
 
                     FormacionAcademica = e.FormacionAcademica
                     // Excluyendo Clave y Rol
@@ -52,7 +53,8 @@ namespace PowerVital.Controllers
                 idIdUsuario = entrenador.IdUsuario,
                 Nombre = entrenador.Nombre,
                 Clave = entrenador.Rol,
-                Rol=entrenador.Rol,
+                Telefono = entrenador.Telefono,
+                Rol =entrenador.Rol,
                 Email = entrenador.Email,
                 FormacionAcademica = entrenador.FormacionAcademica
             };
@@ -78,6 +80,7 @@ namespace PowerVital.Controllers
                 Nombre = dto.Nombre,
                 Email = dto.Email,
                 Clave = dto.Clave, // ⚠️ En producción, debes hashear la clave
+                Telefono = dto.Telefono,
                 Rol = "Entrenador", // Asignación automática del rol
                 FormacionAcademica = dto.FormacionAcademica // Asignamos la formación académica
             };
@@ -92,6 +95,7 @@ namespace PowerVital.Controllers
                 Nombre = nuevoEntrenador.Nombre,
                 Email = nuevoEntrenador.Email,
                 Clave=nuevoEntrenador.Clave,
+                Telefono = nuevoEntrenador.Telefono,
                 FormacionAcademica = nuevoEntrenador.FormacionAcademica,
                 Rol = nuevoEntrenador.Rol // Opcionalmente incluir el rol
             };
@@ -116,6 +120,8 @@ namespace PowerVital.Controllers
             // Actualizar los campos permitidos
             entrenador.Nombre = dto.Nombre;
             entrenador.Email = dto.Email;
+            entrenador.Telefono = dto.Telefono;
+            entrenador.Clave = dto.Clave; // ⚠️ En producción, debes hashear la clave
             entrenador.FormacionAcademica = dto.FormacionAcademica;
             // La clave no se actualiza desde aquí por seguridad
 
