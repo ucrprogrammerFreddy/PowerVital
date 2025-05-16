@@ -280,3 +280,38 @@ main.container-fluid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
+ 
+    body.sidebar-active #openSidebar {
+      display: none;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .custom-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .custom-card:hover {
+      transform: translateY(-5px);
+    }
+    .icon-section {
+      font-size: 1.8rem;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .bg-light-red { background-color: #f5b5b5; }
+    .icon-red { color: #8b2c2c; }
+    .bg-light-yellow { background-color: #f7e99d; }
+    .icon-olive { color: #6b6b2d; }
+    .bg-light-brown { background-color: #d3a87c; }
+    .icon-brown { color: #5a3e2b; }
+  
