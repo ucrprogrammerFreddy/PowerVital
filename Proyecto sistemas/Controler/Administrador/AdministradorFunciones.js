@@ -92,21 +92,31 @@ function obtenerAdministradores() {
   });
 }
 
-
-
 function cargarTabla(lista) {
+  console.log("📦 Datos recibidos para tabla:", lista);
+
   const $tabla = $(".table-group-divider");
   $tabla.empty();
+
+  if (!Array.isArray(lista)) {
+    console.error("❌ Lista no es un arreglo:", lista);
+    return;
+  }
+
+  if (lista.length === 0) {
+    $tabla.append(`<tr><td colspan="6" class="text-center">No hay administradores registrados.</td></tr>`);
+    return;
+  }
 
   lista.forEach((a) => {
     const fila = `
       <tr class="table-primary">
-        <td>${a.nombre}</td>
-        <td>${a.email}</td>
-        <td>${a.clave}</td>
-        <td>${a.rol}</td>
-        <td>${a.formacionAcademica}</td>
-        <td>${a.telefono}</td>
+        <td>${a.Nombre}</td>
+        <td>${a.Email}</td>
+        <td>${a.Clave}</td>
+        <td>${a.Rol}</td>
+        <td>${a.Telefono}</td>
+        <td>${a.FormacionAcademica}</td>
         <td>
           <button class="btn btn-warning btn-sm" title="Modificar"
             onclick='editarAdministrador(${JSON.stringify(a).replace(/"/g, "&quot;")})'>
@@ -121,6 +131,35 @@ function cargarTabla(lista) {
     $tabla.append(fila);
   });
 }
+
+
+// function cargarTabla(lista) {
+//   const $tabla = $(".table-group-divider");
+//   $tabla.empty();
+
+//   lista.forEach((a) => {
+//     const fila = `
+//       <tr class="table-primary">
+//         <td>${a.nombre}</td>
+//         <td>${a.email}</td>
+//         <td>${a.clave}</td>
+//         <td>${a.rol}</td>
+//         <td>${a.formacionAcademica}</td>
+//         <td>${a.telefono}</td>
+//         <td>
+//           <button class="btn btn-warning btn-sm" title="Modificar"
+//             onclick='editarAdministrador(${JSON.stringify(a).replace(/"/g, "&quot;")})'>
+//             <i class="bi bi-pencil-fill"></i>
+//           </button>
+//           <button class="btn btn-danger btn-sm" title="Eliminar"
+//             onclick="eliminarAdministrador(${a.idIdUsuario})">
+//             <i class="bi bi-trash-fill"></i>
+//           </button>
+//         </td>
+//       </tr>`;
+//     $tabla.append(fila);
+//   });
+// }
 
 function crearAdministrador() {
   const nuevo = construirDesdeFormulario();
