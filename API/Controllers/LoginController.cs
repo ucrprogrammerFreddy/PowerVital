@@ -31,25 +31,50 @@ namespace PowerVital.Controllers
                     return BadRequest(new { message = "⚠️ Email y clave son obligatorios." });
                 }
 
+                // 1. Buscar en tabla base Usuarios
                 var usuario = await _context.Usuarios
                     .FirstOrDefaultAsync(u => u.Email.ToLower() == loginRequest.Email.ToLower());
 
                 if (usuario == null)
                 {
-                    Console.WriteLine("❌ Usuario no encontrado en la base de datos.");
+                    Console.WriteLine("❌ Usuario no encontrado.");
                     return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
                 }
 
-                Console.WriteLine($"🔍 Usuario encontrado: {usuario.Email}, clave en BD: {usuario.Clave}");
-
+                // 2. Verificar contraseña
                 if (usuario.Clave != loginRequest.Clave)
                 {
                     Console.WriteLine($"❌ Clave incorrecta. Esperada: {usuario.Clave}, Recibida: {loginRequest.Clave}");
                     return Unauthorized(new { message = "❌ Usuario o clave incorrectos." });
                 }
 
-                Console.WriteLine($"✅ Usuario autenticado: {usuario.Email} con Rol: {usuario.Rol}");
+                Console.WriteLine($"✅ Usuario base autenticado. Rol detectado: {usuario.Rol}");
 
+                // 3. Obtener datos del usuario específico según rol
+                object datosRol = null;
+
+                switch (usuario.Rol)
+                {
+                    case "Admin":
+                        datosRol = await _context.Administradores.FirstOrDefaultAsync(a => a.IdUsuario == usuario.IdUsuario);
+                        break;
+                    case "Cliente":
+                        datosRol = await _context.Clientes.FirstOrDefaultAsync(c => c.IdUsuario == usuario.IdUsuario);
+                        break;
+                    case "Entrenador":
+                        datosRol = await _context.Entrenadores.FirstOrDefaultAsync(e => e.IdUsuario == usuario.IdUsuario);
+                        break;
+                    default:
+                        return BadRequest(new { message = "❌ Rol no válido." });
+                }
+
+                if (datosRol == null)
+                {
+                    Console.WriteLine("❌ No se encontraron datos adicionales para el rol.");
+                    return NotFound(new { message = "❌ Datos de rol no encontrados." });
+                }
+
+                // 4. Retornar login exitoso con los datos base y del rol
                 return Ok(new
                 {
                     message = "✅ Login exitoso.",
@@ -58,20 +83,21 @@ namespace PowerVital.Controllers
                         "Admin" => "/Administrador/Index",
                         "Cliente" => "/Clientes/index",
                         "Entrenador" => "/Entrenadores/index",
-                        _ => "/Usuario/Login"
+                        _ => "/Login"
                     },
                     usuario = new
                     {
                         usuario.IdUsuario,
                         usuario.Nombre,
                         usuario.Email,
-                        usuario.Rol
+                        Rol = usuario.Rol.ToLower()
                     }
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ EXCEPCIÓN DETECTADA: {ex.Message}");
+                Console.WriteLine($"❌ Error interno: {ex.Message}");
+
                 return StatusCode(500, new { message = "❌ Error interno del servidor", error = ex.Message });
             }
         }

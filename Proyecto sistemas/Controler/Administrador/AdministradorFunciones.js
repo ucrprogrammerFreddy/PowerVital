@@ -36,6 +36,7 @@ if (ruta.includes("Empleados.html")) {
     });
   });
 }
+//REGISTRAR UN ADMINISTRADOR
 
 if (ruta.includes("RegistroAdministrador.html")) {
   $(document).ready(function () {
@@ -63,6 +64,8 @@ if (ruta.includes("RegistroAdministrador.html")) {
     });
   });
 }
+
+//LISTADO DE ADMINISTRADORES
 
 function obtenerAdministradores() {
   $.ajax({
@@ -92,6 +95,8 @@ function obtenerAdministradores() {
   });
 }
 
+
+//DATOS RECIBIDOS PARA LA TABLA 
 function cargarTabla(lista) {
   console.log("📦 Datos recibidos para tabla:", lista);
 
@@ -180,24 +185,89 @@ function crearAdministrador() {
   });
 }
 
+// function actualizarAdministrador() {
+//   const admin = construirDesdeFormulario();
+
+//   $.ajax({
+//     type: "PUT",
+//     url: `${URL_API}/actualizarAdministrador/${admin.idIdUsuario}`,
+//     data: JSON.stringify(admin),
+//     contentType: "application/json",
+//     success: function () {
+//       alert("✅ Administrador actualizado");
+//       localStorage.removeItem("adminEditar");
+//       window.location.href = "Empleados.html";
+//     },
+//     error: function (xhr) {
+//       alert("❌ Error al actualizar: " + xhr.responseText);
+//     },
+//   });
+// }
+
+   //EDITAR ADMINISTRADOR
+
+
+if (ruta.includes("EditarAdministrador.html")) {
+  $(document).ready(function () {
+    const adminEditar = JSON.parse(localStorage.getItem("adminEditar"));
+    if (adminEditar) {
+      // Mostrar en consola para confirmar qué trae
+      console.log("🟢 Objeto cargado desde localStorage:", adminEditar);
+
+      // Adapta a ambas estructuras posibles
+      $("#idadmin").val(adminEditar.idIdUsuario || adminEditar.id || "");
+      $("#nombre").val(adminEditar.Nombre || adminEditar.nombre || "");
+      $("#email").val(adminEditar.Email || adminEditar.email || "");
+      $("#clave").val(adminEditar.Clave || adminEditar.clave || "");
+      $("#telefono").val(adminEditar.Telefono || adminEditar.telefono || "");
+      $("#formacionAcademica").val(adminEditar.FormacionAcademica || adminEditar.formacionAcademica || "");
+    }
+
+    $("#formEditarAdministrador").submit(function (e) {
+      e.preventDefault();
+      actualizarAdministrador();
+    });
+
+    $("#btnVolver").click(function () {
+      localStorage.removeItem("adminEditar");
+      window.location.href = "Empleados.html";
+    });
+  });
+}
+
+
 function actualizarAdministrador() {
-  const admin = construirDesdeFormulario();
+  const id = $("#idadmin").val();
+
+  const actualizado = {
+    idIdUsuario: parseInt(id),
+    Nombre: $("#nombre").val(),
+    Email: $("#email").val(),
+    Clave: $("#clave").val(),
+    Telefono: parseInt($("#telefono").val()),
+    Rol: "Admin",
+    FormacionAcademica: $("#formacionAcademica").val()
+  };
 
   $.ajax({
     type: "PUT",
-    url: `${URL_API}/actualizarAdministrador/${admin.idIdUsuario}`,
-    data: JSON.stringify(admin),
+    url: `${URL_API}/actualizarAdministrador/${id}`,
+    data: JSON.stringify(actualizado),
     contentType: "application/json",
     success: function () {
-      alert("✅ Administrador actualizado");
+      alert("✅ Administrador actualizado correctamente");
       localStorage.removeItem("adminEditar");
       window.location.href = "Empleados.html";
     },
     error: function (xhr) {
       alert("❌ Error al actualizar: " + xhr.responseText);
-    },
+    }
   });
 }
+
+
+
+
 
 window.eliminarAdministrador = function (id) {
   if (!confirm("¿Deseas eliminar este administrador?")) return;
@@ -217,7 +287,7 @@ window.eliminarAdministrador = function (id) {
 
 window.editarAdministrador = function (admin) {
   localStorage.setItem("adminEditar", JSON.stringify(admin));
-  window.location.href = "RegistroAdministrador.html";
+  window.location.href = "EditarAdministrador.html";
 };
 
 function construirDesdeFormulario() {
