@@ -13,7 +13,7 @@ function MenuHambAdmin() {
             <ul class="submenu" id="submenuUsuarios">
                <li><a href="../View/Administrador/FormRegistroAdministrador.html"> Administradores Registro</a></li>
                <li><a href="#"> Entrenadores</a></li>
-              <li><a href="../Clientes/Model/index.html"> Clientes</a></li>
+              <li><a href="../Client-es/Model/index.html"> Clientes</a></li>
             </ul>
           </li>
           <li><a href="#"><i class="fas fa-dumbbell"></i> Ejercicios</a></li>
