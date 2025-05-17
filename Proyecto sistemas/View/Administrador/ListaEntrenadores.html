@@ -126,44 +126,7 @@
   <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuAdmin.js"></script>
   <script type="module" src="/Proyecto sistemas/Controler/Administrador/AdminEntrenador.js"></script>
     <!-- Script funcional para el menú hamburguesa -->
-  <script type="module">
-    import { MenuHambAdmin } from '/Proyecto sistemas/Complementos/Components/MenuAdmin.js';
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("idMenuHambAdmin").innerHTML = MenuHambAdmin();
-
-      const openBtn = document.getElementById("openMenu");
-      const closeBtn = document.getElementById("closeMenu");
-      const sidebar = document.getElementById("sidebar");
-      const mainContent = document.getElementById("mainContent");
-      const submenuToggle = document.getElementById("toggleSubmenu");
-      const submenu = document.getElementById("submenuUsuarios");
-
-      openBtn.addEventListener("click", () => {
-        sidebar.classList.add("open");
-        openBtn.style.display = "none";
-        mainContent.classList.add("shifted");
-      });
-
-      closeBtn.addEventListener("click", () => {
-        sidebar.classList.remove("open");
-        openBtn.style.display = "block";
-        mainContent.classList.remove("shifted");
-      });
-
-      submenuToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        submenu.classList.toggle("visible");
-      });
-
-      submenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          submenu.querySelectorAll("a").forEach((l) => l.classList.remove("active"));
-          link.classList.add("active");
-        });
-      });
-    });
-  </script>
+  
 </body>
 
 </html>
