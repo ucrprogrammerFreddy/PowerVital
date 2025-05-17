@@ -267,15 +267,15 @@ document.addEventListener("DOMContentLoaded", function () {
           "beforeend",
           `
           <tr>
-            <td>${ej.nombre}</td>
-            <td>${ej.descripcion}</td>
-            <td>${ej.repeticiones}</td>
-            <td><a href="${ej.guiaEjercicio}" target="_blank">Ver video</a></td>
-            <td>${ej.areaMuscular}</td>
-            <td>${ej.dificultad}</td>
+            <td>${ej.Nombre}</td>
+            <td>${ej.Descripcion}</td>
+            <td>${ej.Repeticiones}</td>
+            <td><a href="${ej.GuiaEjercicio}" target="_blank">Ver video</a></td>
+            <td>${ej.AreaMuscular}</td>
+            <td>${ej.Dificultad}</td>
             <td>
-              <button class="btn btn-sm btn-primary btn-editar" data-id="${ej.idEjercicio}"><i class="fas fa-edit"></i> Editar</button>
-              <button class="btn btn-sm btn-danger btn-borrar" data-id="${ej.idEjercicio}"><i class="fas fa-trash-alt"></i> Borrar</button>
+              <button class="btn btn-sm btn-primary btn-editar" data-id="${ej.IdEjercicio}"><i class="fas fa-edit"></i> Editar</button>
+              <button class="btn btn-sm btn-danger btn-borrar" data-id="${ej.IdEjercicio}"><i class="fas fa-trash-alt"></i> Borrar</button>
             </td>
           </tr>
         `
@@ -296,18 +296,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const ejercicio = await resp.json();
       // Precarga datos en el modal
       document.getElementById("edit-idEjercicio").value =
-        ejercicio.idEjercicio ?? "";
-      document.getElementById("edit-nombre").value = ejercicio.nombre ?? "";
+        ejercicio.IdEjercicio ?? "";
+      document.getElementById("edit-nombre").value = ejercicio.Nombre ?? "";
       document.getElementById("edit-descripcion").value =
-        ejercicio.descripcion ?? "";
+        ejercicio.Descripcion ?? "";
       document.getElementById("edit-areaMuscular").value =
-        ejercicio.areaMuscular ?? "";
+        ejercicio.AreaMuscular ?? "";
       document.getElementById("edit-repeticiones").value =
-        ejercicio.repeticiones ?? "";
+        ejercicio.Repeticiones ?? "";
       document.getElementById("edit-guiaEjercicio").value =
-        ejercicio.guiaEjercicio ?? "";
+        ejercicio.GuiaEjercicio ?? "";
       document.getElementById("edit-dificultad").value =
-        ejercicio.dificultad ?? "";
+        ejercicio.Dificultad ?? "";
       // Abre el modal
       const modal = new bootstrap.Modal(
         document.getElementById("modalEditarEjercicio")
@@ -351,14 +351,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function precargarFormulario(ejercicio) {
-    document.getElementById("nombre").value = ejercicio.nombre ?? "";
-    document.getElementById("descripcion").value = ejercicio.descripcion ?? "";
+    document.getElementById("nombre").value = ejercicio.Nombre ?? "";
+    document.getElementById("descripcion").value = ejercicio.Descripcion ?? "";
     document.getElementById("areaMuscular").value =
-      ejercicio.areaMuscular ?? "";
+      ejercicio.AreaMuscular ?? "";
     document.getElementById("repeticiones").value =
-      ejercicio.repeticiones ?? "";
+      ejercicio.Repeticiones ?? "";
     document.getElementById("guiaEjercicio").value =
-      ejercicio.guiaEjercicio ?? "";
-    document.getElementById("dificultad").value = ejercicio.dificultad ?? "";
+      ejercicio.GuiaEjercicio ?? "";
+    document.getElementById("dificultad").value = ejercicio.Dificultad ?? "";
   }
 });
