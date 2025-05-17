@@ -12,11 +12,11 @@ function MenuHambAdmin() {
             <a href="#" id="toggleSubmenu"><i class="fas fa-users"></i> Usuarios <i class="fas fa-chevron-down caret"></i></a>
             <ul class="submenu" id="submenuUsuarios">
                <li><a href="../View/Administrador/FormRegistroAdministrador.html"> Administradores Registro</a></li>
-               <li><a href="#"> Entrenadores</a></li>
+               <li><a href="/Proyecto sistemas/View/Administrador/ListaEntrenadores.html"> Entrenadores</a></li>
               <li><a href="../Client-es/Model/index.html"> Clientes</a></li>
             </ul>
           </li>
-          <li><a href="#"><i class="fas fa-dumbbell"></i> Ejercicios</a></li>
+          <li><a href=""><i class="fas fa-dumbbell"></i> Ejercicios</a></li>
           <li><a href="#"><i class="fas fa-heartbeat"></i> Padecimientos</a></li>
           <li><a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
         </ul>

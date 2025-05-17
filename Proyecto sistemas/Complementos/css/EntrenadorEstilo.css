@@ -29,11 +29,14 @@ body.sidebar-active main {
 }
 
 /* ---------- TOGGLE (BOTÓN HAMBURGUESA) ---------- */
-#openSidebar {
-  z-index: 1100;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+.menu-toggle {
+  position: fixed;
+  top: 18px;
+  left: 20px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  z-index: 1200;
 }
 
 body.sidebar-active #openSidebar {
@@ -41,6 +44,7 @@ body.sidebar-active #openSidebar {
 }
 
 /* ---------- SIDEBAR ---------- */
+
 #sidebar {
   width: 250px;
   height: 100%;
@@ -53,7 +57,8 @@ body.sidebar-active #openSidebar {
   z-index: 1000;
 }
 
-#sidebar.active {
+#sidebar.active,
+.slide.open {
   transform: translateX(0);
 }
 
@@ -96,7 +101,8 @@ body.sidebar-active #openSidebar {
   font-size: 14px;
 }
 
-#toggleUsuarios.active + #submenuUsuarios {
+#toggleUsuarios.active + #submenuUsuarios,
+.submenu.visible {
   display: block;
 }
 
@@ -279,4 +285,151 @@ main.container-fluid {
   .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
+}
+
+/* ---------- FORMULARIO ENTRENADOR ---------- */
+.form-wrapper {
+  max-width: 650px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-wrapper h2 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-wrapper label {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.form-wrapper input[type="text"],
+.form-wrapper input[type="email"],
+.form-wrapper input[type="password"],
+.form-wrapper input[type="tel"] {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.form-wrapper .btn-volver,
+.form-wrapper .btn-aceptar {
+  width: 120px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.form-wrapper .btn-volver:hover {
+  background-color: #944d34;
+}
+
+.form-wrapper .btn-aceptar:hover {
+  background-color: #8c684d;
+}
+
+@media (max-width: 576px) {
+  .form-wrapper {
+    padding: 1.5rem;
+  }
+}
+
+/* ---------- NAVBAR ---------- */
+.header {
+  background-color: #f1f4f6;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.header-logo {
+  height: 50px;
+}
+
+.contenedor-main {
+  margin-top: 90px;
+}
+
+.contenedor-main.shifted {
+  margin-left: 220px;
+}
+/* Asegura que el menú hamburguesa siempre esté sobre todo */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  z-index: 1300; /* Más alto que el sidebar */
+}
+
+/* Sidebar básico con posición fija */
+.slide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #316163;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1200;
+}
+
+.slide.open {
+  transform: translateX(0);
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #316163;
+  padding: 1rem;
+  color: white;
+}
+
+.menu-header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Submenú y transición */
+.submenu {
+  display: none;
+  flex-direction: column;
+}
+
+.submenu.visible {
+  display: flex;
+}
+
+.submenu a {
+  padding-left: 2rem;
+  font-size: 0.9rem;
 }

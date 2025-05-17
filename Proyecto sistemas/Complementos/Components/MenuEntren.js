@@ -8,40 +8,27 @@ export function MenuEntrenador() {
 
       <ul class="list-unstyled">
         <li class="mb-2">
-          <a href="#" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
+          <a href="/Proyecto sistemas/View/Entrenador/Index.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
             <div class="inner">
                  <i class="fas fa-home me-2"></i>Inicio
             </div>
           </a>
         </li>
+
         <li class="mb-2">
-          <a href="#" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
-            <i class="fas fa-dollar-sign me-2"></i>Pagos
+          <a href="/Proyecto sistemas/View/Entrenador/VerCliente.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
+            <div class="inner">
+                 <i class="fas fa-users me-2"></i>Clientes
+            </div>
           </a>
         </li>
         <li class="mb-2">
-          <button class="btn w-100 text-start text-white d-flex justify-content-between align-items-center bg-transparent border-0 px-3 py-2" id="toggleUsuarios">
-            <span><i class="fas fa-users me-2"></i>Usuarios</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
-          <ul id="submenuUsuarios" class="list-unstyled ms-4 mt-2" style="display: none;">
-            <li><a href="#" class="text-white text-decoration-none d-block py-1">Administradores</a></li>
-            <li><a href="#" class="text-white text-decoration-none d-block py-1">Entrenadores</a></li>
-            <li><a href="#" class="text-white text-decoration-none d-block py-1">Clientes</a></li>
-          </ul>
-        </li>
-        <li class="mb-2">
-          <a href="#" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
+          <a href="/Proyecto sistemas/View/Entrenador/VerEjercicios.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
             <i class="fas fa-dumbbell me-2"></i>Ejercicios
           </a>
         </li>
         <li class="mb-2">
-          <a href="#" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
-            <i class="fas fa-heartbeat me-2"></i>Padecimientos
-          </a>
-        </li>
-        <li class="mb-2">
-          <a href="#" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
+          <a href="/Proyecto sistemas/View/Entrenador/Index.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
             <i class="fas fa-sign-out-alt me-2"></i>Salir
           </a>
         </li>
