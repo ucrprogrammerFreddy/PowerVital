@@ -13,9 +13,7 @@ export class EjercicioModel {
     this.descripcion = descripcion;
     this.areaMuscular = areaMuscular;
     this.repeticiones = repeticiones;
-    this.guiaEjercicio = guiaEjercicio; // dirección/URL esperada por la API
+    this.guiaEjercicio = guiaEjercicio;
     this.dificultad = dificultad;
-    // Si necesitas asociar rutinas, puedes agregarlo después
-    // this.ejerciciosRutina = ejerciciosRutina;
   }
 }

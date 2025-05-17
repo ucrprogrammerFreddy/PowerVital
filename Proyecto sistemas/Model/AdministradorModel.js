@@ -1,11 +1,11 @@
 export class AdministradorModel {
-  constructor(id, nombre, email, clave, formacionAcademica) {
-    this.id = id;
+  constructor(idIdUsuario, nombre, email, clave, rol, telefono, formacionAcademica) {
+    this.idIdUsuario = idIdUsuario;
     this.nombre = nombre;
-    this.email = email;         // nombre esperado por la API
+    this.email = email;
     this.clave = clave;
-    this.rol = "Admin";
+    this.rol = rol;
+    this.telefono = telefono;
     this.formacionAcademica = formacionAcademica;
-    
   }
 }

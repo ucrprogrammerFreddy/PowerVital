@@ -24,34 +24,40 @@
         <input type="text" id="nombre" name="nombre" placeholder="Nombre del padecimiento" />
       </div>
 
+      <!--Descripcion-->
+      <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <input type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del padecimiento" />
+      </div>
+
 
       <!-- Ubicación / Parte del cuerpo -->
       <div class="form-group-group">
-        <label>Ubicación</label>
+        <label>Area Muscular Afectada</label>
         <div class="form-options">
-          <label><input type="radio" name="ubicacion" value="cabeza" /> Cabeza</label>
-          <label><input type="radio" name="ubicacion" value="rodillas" /> Rodillas</label>
-          <label><input type="radio" name="ubicacion" value="corazon" /> Corazón</label>
-          <label><input type="radio" name="ubicacion" value="intestino" /> Intestino</label>
-          <label><input type="radio" name="ubicacion" value="tobillo" /> Tobillo</label>
-          <label><input type="radio" name="ubicacion" value="pulmones" /> Pulmones</label>
-          <label><input type="radio" name="ubicacion" value="fuerza" /> Fuerza</label>
-          <label><input type="radio" name="ubicacion" value="pecho" /> Pecho</label>
-          <label><input type="radio" name="ubicacion" value="cadera" /> Cadera</label>
-          <label><input type="radio" name="ubicacion" value="abdomen" /> Abdomen</label>
-          <label><input type="radio" name="ubicacion" value="musculos" /> Músculos</label>
-          <label><input type="radio" name="ubicacion" value="columna" /> Columna</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="cabeza" /> Cabeza</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="rodillas" /> Rodillas</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="corazon" /> Corazón</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="intestino" /> Intestino</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="tobillo" /> Tobillo</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="pulmones" /> Pulmones</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="fuerza" /> Fuerza</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="pecho" /> Pecho</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="cadera" /> Cadera</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="abdomen" /> Abdomen</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="musculos" /> Músculos</label>
+          <label><input type="checkbox" name="AreaMuscularAfectada" value="columna" /> Columna</label>
         </div>
       </div>
 
     
       <!-- Intensidad -->
       <div class="form-group-group">
-        <label>Intensidad</label>
+        <label>Severidad</label>
         <div class="form-options">
-          <label><input type="radio" name="intensidad" value="leve" /> Leve</label>
-          <label><input type="radio" name="intensidad" value="moderada" checked /> Moderada</label>
-          <label><input type="radio" name="intensidad" value="alta" /> Alta</label>
+          <label><input type="radio" name="Severidad" value="leve" /> Leve</label>
+          <label><input type="radio" name="Severidad" value="moderada"/> Moderada</label>
+          <label><input type="radio" name="Severidad" value="alta" /> Alta</label>
         </div>
       </div>
 
@@ -62,6 +68,11 @@
       </div>
     </form>
   </div>
+
+  <body data-accion="agregar">
+<script src="../../Controler/Administrador/controladorPadecimientos.js"></script>
+</body>
+
 </body>
 
 </html>

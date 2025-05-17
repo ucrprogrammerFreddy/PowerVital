@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function iniciarSesion() {
-  const email = document.querySelector("#inputCorreo").value;
-  const clave = document.querySelector("#inputClave").value;
+  const email = document.querySelector("#inputCorreo").value.trim();
+  const clave = document.querySelector("#inputClave").value.trim();
 
   const loginModel = new LoginModel(email, clave);
 
@@ -20,43 +20,38 @@ function iniciarSesion() {
     headers: {
       "Content-Type": "application/json",
     },
+
     body: JSON.stringify(loginModel),
   })
     .then((response) => {
       if (!response.ok) {
+         console.log("ROL:", usuario.rol, "| Tipo:", typeof usuario.rol);
+
         throw new Error("❌ Credenciales inválidas");
-        
       }
       return response.json();
     })
     .then((data) => {
-      const usuario = data.usuario;
-      const rol = usuario.rol;
-    
-      // ✅ Guardar sesión del usuario
-      sessionStorage.setItem("usuario", JSON.stringify(usuario));
-      console.log("Usuario guardado en sesión:", usuario);
+  const usuario = data.usuario;
+  sessionStorage.setItem("usuario", JSON.stringify(usuario));
+  console.log("🟢 Usuario guardado en sesión:", usuario);
 
-      // Redirección según rol
-      switch (rol) {
-        
-    case "Admin":
-        window.location.href = "../../View/Administrador/Index.html";
-        break;
-      case "Cliente":
-        window.location.href = "../../View/Cliente/Index.html";
-        break;
-      case "Entrenador":
-        window.location.href = "../../View/Entrenador/Index.html";
-        break;
-      default:
-        alert("⚠️ Rol no reconocido. Contacte al administrador.");
+  // ✅ Definir rol correctamente
+  const rol = usuario.Rol ? usuario.Rol.trim().toLowerCase() : "";
 
+  switch (rol) {
+    case "admin":
+      window.location.href = "../../View/Administrador/Index.html";
+      break;
+    case "cliente":
+      window.location.href = "../../View/Cliente/Index.html";
+      break;
+    case "entrenador":
+      window.location.href = "../../View/Entrenador/Index.html";
+      break;
+    default:
+      alert("⚠️ Rol no reconocido. Contacte al administrador.");
+  }
+})
 
-      }
-    })
-    .catch((error) => {
-      console.error("Error al iniciar sesión:", error);
-      alert("Error al iniciar sesión: " + error.message);
-    });
 }
