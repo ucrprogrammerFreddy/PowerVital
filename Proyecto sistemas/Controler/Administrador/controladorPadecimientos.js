@@ -38,38 +38,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-// 🟢 LISTAR
 function listarPadecimientos() {
-  const tbody = document.querySelector("tbody.table-group-divider");
-
   fetch(`${API_URL}/listaPadecimientos`)
-    .then(res => res.text())
-    .then(text => {
-      const data = JSON.parse(text);
-      const lista = data.$values;
+    .then(res => res.json())
+    .then(lista => {
+      console.log("📦 Lista recibida:", lista);
 
       if (!Array.isArray(lista)) throw new Error("La respuesta no es un array válido");
 
+      const tbody = document.querySelector("tbody.table-group-divider");
       tbody.innerHTML = "";
+
       lista.forEach(p => {
         const fila = document.createElement("tr");
         fila.classList.add("table-primary");
         fila.innerHTML = `
-          <td>${p.idPadecimiento}</td>
-          <td>${p.nombre}</td>
-          <td>${p.descripcion}</td>
-          <td>${p.areaMuscularAfectada}</td>
-          <td>${p.severidad}</td>
-         <td>
-            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
-                <i class="bi bi-pencil-fill"></i>
+          <td>${p.IdPadecimiento}</td>
+          <td>${p.Nombre}</td>
+          <td>${p.Descripcion}</td>
+          <td>${p.AreaMuscularAfectada}</td>
+          <td>${p.Severidad}</td>
+          <td>
+            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
+              <i class="bi bi-pencil-fill"></i>
             </button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.idPadecimiento})">
-                <i class="bi bi-trash-fill"></i>
+            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
+              <i class="bi bi-trash-fill"></i>
             </button>
-        </td>
-
+          </td>
         `;
         tbody.appendChild(fila);
       });
@@ -79,6 +75,10 @@ function listarPadecimientos() {
     });
 }
 
+
+// 🟢 LISTAR
+
+
 document.addEventListener("click", function (e) {
   if (e.target.closest(".btn-editar")) {
     const btn = e.target.closest(".btn-editar");
@@ -87,28 +87,31 @@ document.addEventListener("click", function (e) {
   }
 });
 
+
+
 function activarEdicionEnFila(id) {
   fetch(`${API_URL}/obtenerPadecimientoPorId/${id}`)
     .then(res => res.json())
     .then(p => {
       const fila = document.querySelector(`button[data-id="${id}"]`).closest("tr");
+      const realId = p.IdPadecimiento; // ✅ obtener el ID correcto del objeto recibido
+
       fila.innerHTML = `
-        <td>${p.idPadecimiento}</td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.nombre}" id="edit-nombre-${id}"></td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.descripcion}" id="edit-descripcion-${id}"></td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.areaMuscularAfectada}" id="edit-area-${id}"></td>
+        <td>${realId}</td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.Nombre}" id="edit-nombre-${realId}"></td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.Descripcion}" id="edit-descripcion-${realId}"></td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.AreaMuscularAfectada}" id="edit-area-${realId}"></td>
         <td>
-          <select class="form-select form-select-sm" id="edit-severidad-${id}">
-            <option value="leve" ${p.severidad === "leve" ? "selected" : ""}>Leve</option>
-            <option value="moderada" ${p.severidad === "moderada" ? "selected" : ""}>Moderada</option>
-            <option value="alta" ${p.severidad === "alta" ? "selected" : ""}>Alta</option>
+          <select class="form-select form-select-sm" id="edit-severidad-${realId}">
+            <option value="leve" ${p.Severidad === "leve" ? "selected" : ""}>Leve</option>
+            <option value="moderada" ${p.Severidad === "moderada" ? "selected" : ""}>Moderada</option>
+            <option value="alta" ${p.Severidad === "alta" ? "selected" : ""}>Alta</option>
           </select>
         </td>
         <td>
-          <button class="btn btn-success btn-sm" onclick="guardarEdicion(${id})">
-                <i class="bi bi-check-circle-fill"></i>
-            </button>
-
+          <button class="btn btn-success btn-sm" onclick="guardarEdicion(${realId})">
+            <i class="bi bi-check-circle-fill"></i>
+          </button>
           <button class="btn btn-secondary btn-sm" onclick="listarPadecimientos()">
             <i class="bi bi-x-circle-fill"></i>
           </button>
@@ -116,6 +119,38 @@ function activarEdicionEnFila(id) {
       `;
     });
 }
+
+
+
+// function activarEdicionEnFila(id) {
+//   fetch(`${API_URL}/obtenerPadecimientoPorId/${id}`)
+//     .then(res => res.json())
+//     .then(p => {
+//       const fila = document.querySelector(`button[data-id="${id}"]`).closest("tr");
+//       fila.innerHTML = `
+//         <td>${p.IdPadecimiento}</td>
+//         <td><input class="form-control form-control-sm" type="text" value="${p.Nombre}" id="edit-nombre-${id}"></td>
+//         <td><input class="form-control form-control-sm" type="text" value="${p.Descripcion}" id="edit-descripcion-${id}"></td>
+//         <td><input class="form-control form-control-sm" type="text" value="${p.AreaMuscularAfectada}" id="edit-area-${id}"></td>
+//         <td>
+//           <select class="form-select form-select-sm" id="edit-severidad-${id}">
+//             <option value="leve" ${p.Severidad === "leve" ? "selected" : ""}>Leve</option>
+//             <option value="moderada" ${p.Severidad === "moderada" ? "selected" : ""}>Moderada</option>
+//             <option value="alta" ${p.Severidad === "alta" ? "selected" : ""}>Alta</option>
+//           </select>
+//         </td>
+//         <td>
+//        <button class="btn btn-success btn-sm" onclick="guardarEdicion(${p.IdPadecimiento})">
+//                 <i class="bi bi-check-circle-fill"></i>
+//             </button>
+
+//           <button class="btn btn-secondary btn-sm" onclick="listarPadecimientos()">
+//             <i class="bi bi-x-circle-fill"></i>
+//           </button>
+//         </td>
+//       `;
+//     });
+// }
 
 
 function guardarEdicion(id) {
@@ -164,16 +199,16 @@ function actualizarFilaVisual(id) {
       if (!fila) return;
 
       fila.innerHTML = `
-        <td>${p.idPadecimiento}</td>
-        <td>${p.nombre}</td>
-        <td>${p.descripcion}</td>
-        <td>${p.areaMuscularAfectada}</td>
-        <td>${p.severidad}</td>
+        <td>${p.IdPadecimiento}</td>
+        <td>${p.Nombre}</td>
+        <td>${p.Descripcion}</td>
+        <td>${p.AreaMuscularAfectada}</td>
+        <td>${p.Severidad}</td>
         <td>
-          <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
+          <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
             <i class="bi bi-pencil-fill"></i>
           </button>
-          <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.idPadecimiento})">
+          <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
             <i class="bi bi-trash-fill"></i>
           </button>
         </td>
@@ -323,11 +358,11 @@ function buscarPorId() {
         fila.classList.add("table-primary");
 
         fila.innerHTML = `
-          <td>${p.idPadecimiento}</td>
-          <td>${p.nombre}</td>
-          <td>${p.descripcion}</td>
-          <td>${p.areaMuscularAfectada}</td>
-          <td>${p.severidad}</td>
+          <td>${p.IdPadecimiento}</td>
+          <td>${p.Nombre}</td>
+          <td>${p.Descripcion}</td>
+          <td>${p.AreaMuscularAfectada}</td>
+          <td>${p.Severidad}</td>
           <td>
             <button class="btn btn-warning btn-sm" onclick="editarPadecimiento(${p.idPadecimiento})">
               <i class="bi bi-pencil-fill"></i>
