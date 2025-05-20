@@ -13,12 +13,12 @@ function MenuHambEjer() {
             <ul class="submenu" id="submenuUsuarios">
                <li><a href="../../View/Administrador/Index.html"> Administradores</a></li>
                <li><a href="../../View/Entrenador/Index.html""> Entrenadores</a></li>
-              <li><a href="../Client-es/Model/index.html"> Clientes</a></li>
+              <li><a href="../Cliente/Index.html"> Clientes</a></li>
             </ul>
           </li>
           <li><a href="editarEjercicio.html"><i class="fas fa-dumbbell"></i>Ejercicios</a></li>
           <li><a href="indexEjercicio.html"><i class="fas fa-dumbbell"></i>Crear Ejercicios</a></li>
-          <li><a href="#"><i class="fas fa-heartbeat"></i> Padecimientos</a></li>
+          <li><a href="../Entrenador/Index.html"><i class="fas fa-heartbeat"></i>Entrenador</a></li>
           <li><a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
         </ul>
       </aside>

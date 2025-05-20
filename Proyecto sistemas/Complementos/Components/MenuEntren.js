@@ -23,7 +23,7 @@ export function MenuEntrenador() {
           </a>
         </li>
         <li class="mb-2">
-          <a href="/Proyecto sistemas/View/Entrenador/VerEjercicios.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
+          <a href="../Ejercicio/editarEjercicio.html" class="text-white text-decoration-none d-flex align-items-center px-3 py-2 w-100">
             <i class="fas fa-dumbbell me-2"></i>Ejercicios
           </a>
         </li>
@@ -37,26 +37,26 @@ export function MenuEntrenador() {
   `;
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  document.body.insertAdjacentHTML('afterbegin', MenuEntrenador());
+window.addEventListener("DOMContentLoaded", () => {
+  document.body.insertAdjacentHTML("afterbegin", MenuEntrenador());
 
-  const openSidebar = document.getElementById('openSidebar');
-  const closeSidebar = document.getElementById('closeSidebar');
-  const sidebar = document.getElementById('sidebar');
+  const openSidebar = document.getElementById("openSidebar");
+  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById("sidebar");
   const toggleUsuarios = document.getElementById("toggleUsuarios");
   const submenuUsuarios = document.getElementById("submenuUsuarios");
 
   if (openSidebar && sidebar) {
-    openSidebar.addEventListener('click', () => {
-      sidebar.classList.add('active');
-      document.body.classList.add('sidebar-active');
+    openSidebar.addEventListener("click", () => {
+      sidebar.classList.add("active");
+      document.body.classList.add("sidebar-active");
     });
   }
 
   if (closeSidebar && sidebar) {
-    closeSidebar.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      document.body.classList.remove('sidebar-active');
+    closeSidebar.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+      document.body.classList.remove("sidebar-active");
     });
   }
 
