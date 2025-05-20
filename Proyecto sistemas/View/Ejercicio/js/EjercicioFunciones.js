@@ -1,37 +1,46 @@
+// Importa el modelo EjercicioModel desde la carpeta Modelo
 import { EjercicioModel } from "../Modelo/EjercicioModel.js"; // Asegúrate que el archivo y nombre coincidan exactamente
 
+// URL base de la API de ejercicios
 const URL_API = "https://localhost:7086/api/Ejercicio";
 
+// Espera a que todo el DOM esté cargado antes de ejecutar el código
 document.addEventListener("DOMContentLoaded", function () {
   // --- TABLA DE EJERCICIOS ---
+  // Solo ejecuta la lógica si existe la tabla de ejercicios en el DOM
   if (document.getElementById("tablaEjercicios")) {
-    cargarEjercicios();
+    cargarEjercicios(); // Carga ejercicios en la tabla al iniciar
 
+    // Delegación de eventos para los botones Editar y Borrar
     document
       .getElementById("tablaEjercicios")
       .addEventListener("click", async function (e) {
-        // Botón EDITAR: Abre el modal y precarga datos
+        // Si se hace clic en el botón editar
         if (e.target.classList.contains("btn-editar")) {
           const id = e.target.dataset.id;
-          await mostrarModalEditar(id);
+          await mostrarModalEditar(id); // Abre el modal y precarga datos
         }
-        // Botón BORRAR
+        // Si se hace clic en el botón borrar
         if (e.target.classList.contains("btn-borrar")) {
           const id = e.target.dataset.id;
+          // Confirmación antes de eliminar
           if (confirm("¿Seguro que deseas borrar este ejercicio?")) {
-            await borrarEjercicio(id);
-            await cargarEjercicios();
+            await borrarEjercicio(id); // Elimina el ejercicio
+            await cargarEjercicios(); // Recarga la tabla
           }
         }
       });
   }
 
-  // --- SUBMIT MODAL EDITAR ---
+  // -----------------------------------
+  // --- SUBMIT MODAL Para EDITAR los ejercicios---
+  // -----------------------------------
   const formModal = document.getElementById("formEditarEjercicio");
   if (formModal) {
     formModal.addEventListener("submit", async function (e) {
-      e.preventDefault();
+      e.preventDefault(); // Previene el envío por defecto del formulario
 
+      // Obtiene y limpia los valores del formulario
       const idEditar = document.getElementById("edit-idEjercicio").value;
       const nombre = document.getElementById("edit-nombre").value.trim();
       const descripcion = document
@@ -47,12 +56,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .value.trim();
       const dificultad = document.getElementById("edit-dificultad").value;
 
-      // Validación básica
+      // --- VALIDACIONES ---
+      // Asegúrate que ningún campo esté vacío o inválido
       if (
         !nombre ||
         !descripcion ||
         !areaMuscular ||
-        !repeticiones ||
         !guiaEjercicio ||
         !dificultad
       ) {
@@ -62,7 +71,25 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         return;
       }
+      // Validar repeticiones: debe ser un número entero positivo
+      if (isNaN(repeticiones) || repeticiones <= 0) {
+        mostrarMensaje(
+          "Las repeticiones deben ser un número positivo.",
+          "danger"
+        );
+        return;
+      }
+      // Validar URL del video
+      if (!/^https?:\/\/.+\..+/.test(guiaEjercicio)) {
+        mostrarMensaje(
+          "Ingrese una URL válida para la guía del ejercicio.",
+          "danger"
+        );
+        return;
+      }
+      // Puedes agregar más validaciones según tus reglas de negocio
 
+      // Crea el objeto DTO para enviar a la API
       const ejercicioDTO = {
         nombre,
         descripcion,
@@ -73,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       try {
+        // Envía la petición PUT a la API para editar el ejercicio
         const response = await fetch(`${URL_API}/editarEjercicio/${idEditar}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -80,12 +108,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         if (response.ok) {
           mostrarMensaje("¡Ejercicio editado exitosamente!", "success");
-          // Cerrar el modal
+          // Cierra el modal
           const modal = bootstrap.Modal.getOrCreateInstance(
             document.getElementById("modalEditarEjercicio")
           );
           modal.hide();
-          await cargarEjercicios();
+          await cargarEjercicios(); // Recarga la tabla
         } else {
           let errorMsg = "Error al editar el ejercicio.";
           try {
@@ -106,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // --- AGREGAR/EDITAR DESDE FORMULARIO SEPARADO ---
   const form = document.querySelector("form:not(#formEditarEjercicio)");
   if (form) {
-    // Si hay parámetro id, precarga para editar
+    // Si hay parámetro id en la URL, precarga datos para editar
     const params = new URLSearchParams(window.location.search);
     const idEditar = params.get("id");
     if (idEditar) {
@@ -124,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      // Recolectar datos del formulario
+      // Recolectar y limpiar los datos del formulario
       const nombre = document.getElementById("nombre").value.trim();
       const descripcion = document.getElementById("descripcion").value.trim();
       const areaMuscular = document.getElementById("areaMuscular").value;
@@ -137,12 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .value.trim();
       const dificultad = document.getElementById("dificultad").value;
 
-      // Validación básica
+      // --- VALIDACIONES ---
       if (
         !nombre ||
         !descripcion ||
         !areaMuscular ||
-        !repeticiones ||
         !guiaEjercicio ||
         !dificultad
       ) {
@@ -152,8 +179,22 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         return;
       }
+      if (isNaN(repeticiones) || repeticiones <= 0) {
+        mostrarMensaje(
+          "Las repeticiones deben ser un número positivo.",
+          "danger"
+        );
+        return;
+      }
+      if (!/^https?:\/\/.+\..+/.test(guiaEjercicio)) {
+        mostrarMensaje(
+          "Ingrese una URL válida para la guía del ejercicio.",
+          "danger"
+        );
+        return;
+      }
 
-      // Usar el modelo EjercicioModel para construir el objeto
+      // Construye el objeto usando el modelo
       const ejercicio = new EjercicioModel(
         idEditar ? parseInt(idEditar) : null,
         nombre,
@@ -164,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dificultad
       );
 
-      // El DTO enviado a la API
+      // Crea el DTO para la API
       const ejercicioDTO = {
         nombre: ejercicio.nombre,
         descripcion: ejercicio.descripcion,
@@ -177,14 +218,14 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         let response;
         if (idEditar) {
-          // Editar
+          // Editar ejercicio existente
           response = await fetch(`${URL_API}/editarEjercicio/${idEditar}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(ejercicioDTO),
           });
         } else {
-          // Crear
+          // Crear ejercicio nuevo
           response = await fetch(`${URL_API}/crearEjercicio`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -200,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "success"
           );
           form.reset();
+          // Si se editó, redirige a la lista después de 1 segundo
           if (idEditar)
             setTimeout(
               () => (window.location.href = "indexEjercicio.html"),
@@ -221,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Botón Salir
+    // Botón Salir: regresa a la página anterior
     const btnSalir = document.querySelector(".btn-custom[type='button']");
     if (btnSalir) {
       btnSalir.addEventListener("click", () => {
@@ -232,6 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- FUNCIONES AUXILIARES ---
 
+  // Carga la lista de ejercicios en la tabla
   async function cargarEjercicios() {
     const table = document.getElementById("tablaEjercicios");
     if (!table) return;
@@ -242,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const resp = await fetch(`${URL_API}/listaEjercicios`);
       if (!resp.ok) throw new Error("No se pudo obtener la lista");
       const ejercicios = await resp.json();
-      // Soporte para colecciones en $values (caso .NET)
+      // Soporta diferentes formatos de respuesta (por compatibilidad con .NET)
       let lista = [];
       if (Array.isArray(ejercicios)) {
         lista = ejercicios;
@@ -289,12 +332,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Muestra el modal de edición y precarga los datos del ejercicio
   async function mostrarModalEditar(id) {
     try {
       const resp = await fetch(`${URL_API}/obtenerEjercicioPorId/${id}`);
       if (!resp.ok) throw new Error("No se pudo obtener el ejercicio");
       const ejercicio = await resp.json();
-      // Precarga datos en el modal
+      // Precarga los valores en el formulario del modal
       document.getElementById("edit-idEjercicio").value =
         ejercicio.IdEjercicio ?? "";
       document.getElementById("edit-nombre").value = ejercicio.Nombre ?? "";
@@ -321,18 +365,34 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Elimina un ejercicio según su id
   async function borrarEjercicio(id) {
     try {
-      const resp = await fetch(`${URL_API}/eliminarEjercicio/${id}`, {
+      // Validación: id debe estar definido y ser numérico
+      if (!id || isNaN(id)) {
+        mostrarMensaje("ID de ejercicio inválido.", "danger");
+        return;
+      }
+      // Llama al endpoint DELETE de la API ( eliminarEjericicio!)
+      const resp = await fetch(`${URL_API}/eliminarEjericicio/${id}`, {
         method: "DELETE",
       });
-      if (!resp.ok) throw new Error("No se pudo borrar el ejercicio");
+      if (!resp.ok) {
+        // Intenta obtener el mensaje de error si lo hay
+        let mensaje = "No se pudo borrar el ejercicio";
+        try {
+          const data = await resp.json();
+          if (data && data.mensaje) mensaje = data.mensaje;
+        } catch (_) {}
+        throw new Error(mensaje);
+      }
       mostrarMensaje("Ejercicio eliminado correctamente.", "success");
     } catch (err) {
       mostrarMensaje("Error al borrar ejercicio: " + err.message, "danger");
     }
   }
 
+  // Muestra mensajes de alerta en el DOM
   function mostrarMensaje(msg, tipo = "info") {
     let alertPlaceholder = document.getElementById("alertPlaceholder");
     if (!alertPlaceholder) {
@@ -350,6 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
+  // Precarga los valores de un ejercicio en el formulario para editar/crear
   function precargarFormulario(ejercicio) {
     document.getElementById("nombre").value = ejercicio.Nombre ?? "";
     document.getElementById("descripcion").value = ejercicio.Descripcion ?? "";
@@ -362,3 +423,5 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("dificultad").value = ejercicio.Dificultad ?? "";
   }
 });
+// Fin del script
+// Fin del DOMContentLoaded

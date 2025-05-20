@@ -16,7 +16,7 @@ function MenuHambAdmin() {
               <li><a href="../Client-es/Model/index.html"> Clientes</a></li>
             </ul>
           </li>
-          <li><a href=""><i class="fas fa-dumbbell"></i> Ejercicios</a></li>
+          <li><a href="/Ejercicio/editarEjercicio.html"><i class="fas fa-dumbbell"></i> Ejercicios</a></li>
           <li><a href="#"><i class="fas fa-heartbeat"></i> Padecimientos</a></li>
           <li><a href="#"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
         </ul>

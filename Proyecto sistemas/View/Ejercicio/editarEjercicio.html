@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <header>
+  <header class="container-fluid">
     <div class="header-content">
       <img src="img/logoof.png" alt="Logo" class="header-logo" />
       <div class="menu-toggle" id="openMenu">
@@ -21,97 +21,110 @@
     </div>
   </header>
 
-  <div id="idMenuHambAdmin"></div>
-
-  <main class="container mt-5">
-    <h2 class="mb-4">Ejercicios registrados</h2>
-    <div id="alertPlaceholder"></div>
-    <div class="table-responsive">
-      <table class="table table-striped align-middle" id="tablaEjercicios">
-        <thead class="table-dark">
-          <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Repeticiones</th>
-            <th>Guía</th>
-            <th>Área Muscular</th>
-            <th>Dificultad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Aquí se insertarán los ejercicios -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Modal para editar ejercicio -->
-    <div class="modal fade" id="modalEditarEjercicio" tabindex="-1" aria-labelledby="modalEditarEjercicioLabel"
-      aria-hidden="true">
-      <div class="modal-dialog">
-        <form class="modal-content" id="formEditarEjercicio">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalEditarEjercicioLabel">Editar Ejercicio</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="edit-idEjercicio" name="idEjercicio">
-            <div class="mb-3">
-              <label for="edit-nombre" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="edit-nombre" name="nombre" required>
-            </div>
-            <div class="mb-3">
-              <label for="edit-descripcion" class="form-label">Descripción</label>
-              <textarea class="form-control" id="edit-descripcion" name="descripcion" required></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="edit-repeticiones" class="form-label">Repeticiones</label>
-              <input type="number" class="form-control" id="edit-repeticiones" name="repeticiones" required>
-            </div>
-            <div class="mb-3">
-              <label for="edit-guiaEjercicio" class="form-label">Guía (URL Video)</label>
-              <input type="url" class="form-control" id="edit-guiaEjercicio" name="guiaEjercicio" required>
-            </div>
-            <div class="mb-3">
-              <label for="edit-areaMuscular" class="form-label">Área Muscular</label>
-              <select class="form-select" id="edit-areaMuscular" name="areaMuscular" required>
-                <option value="">Seleccione</option>
-                <option value="Abdomen">Abdomen</option>
-                <option value="Espalda">Espalda</option>
-                <option value="Pecho">Pecho</option>
-                <option value="Brazos">Brazos</option>
-                <option value="Piernas">Piernas</option>
-                <option value="Glúteos">Glúteos</option>
-                <option value="Hombros">Hombros</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="edit-dificultad" class="form-label">Dificultad</label>
-              <select class="form-select" id="edit-dificultad" name="dificultad" required>
-                <option value="">Seleccione</option>
-                <option value="Baja">Baja</option>
-                <option value="Media">Media</option>
-                <option value="Alta">Alta</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-          </div>
-        </form>
+  <div id="idMenuHambEjercicio"></div>
+  <div class="  container-fluid">
+    <main class="container mt-5">
+      <h2 class="mb-4">Ejercicios registrados</h2>
+      <div id="alertPlaceholder"></div>
+      <div class="table-responsive mb-2">
+        <table class="table table-striped align-middle" id="tablaEjercicios">
+          <thead class="table-primary">
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Repeticiones</th>
+              <th>Guía</th>
+              <th>Área Muscular</th>
+              <th>Dificultad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se insertarán los ejercicios -->
+          </tbody>
+        </table>
       </div>
-    </div>
-    <!-- Fin Modal -->
-  </main>
 
-  <footer class="footer">
-    <img src="img/facebook.png" alt="Facebook" class="footer-logo" />
-    <img src="img/instagram.png" alt="Instagram" class="footer-logo" />
+      <!-- Modal para editar ejercicio -->
+      <div class="modal fade" id="modalEditarEjercicio" tabindex="-1" aria-labelledby="modalEditarEjercicioLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <form class="modal-content" id="formEditarEjercicio">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalEditarEjercicioLabel">Editar Ejercicio</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="edit-idEjercicio" name="idEjercicio">
+              <div class="mb-3">
+                <label for="edit-nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="edit-nombre" name="nombre" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="edit-descripcion" name="descripcion" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="edit-repeticiones" class="form-label">Repeticiones</label>
+                <input type="number" class="form-control" id="edit-repeticiones" name="repeticiones" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-guiaEjercicio" class="form-label">Guía (URL Video)</label>
+                <input type="url" class="form-control" id="edit-guiaEjercicio" name="guiaEjercicio" required>
+              </div>
+              <div class="mb-3">
+                <label for="edit-areaMuscular" class="form-label">Área Muscular</label>
+                <select class="form-select" id="edit-areaMuscular" name="areaMuscular" required>
+                  <option value="">Seleccione</option>
+                  <option value="Abdomen">Abdomen</option>
+                  <option value="Espalda">Espalda</option>
+                  <option value="Pecho">Pecho</option>
+                  <option value="Brazos">Brazos</option>
+                  <option value="Piernas">Piernas</option>
+                  <option value="Glúteos">Glúteos</option>
+                  <option value="Hombros">Hombros</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="edit-dificultad" class="form-label">Dificultad</label>
+                <select class="form-select" id="edit-dificultad" name="dificultad" required>
+                  <option value="">Seleccione</option>
+                  <option value="Baja">Baja</option>
+                  <option value="Media">Media</option>
+                  <option value="Alta">Alta</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Fin Modal -->
+    </main>
+
+  </div>
+  <footer class="mb-3 container-fluid">
+    <div class="footer-content container-fluid">
+      <div class="row justify-content-center align-items-center g-20 text-center text-md-start">
+        <div class="col">
+          <p>PowerVital Todos los derechos reservados &copy; 2025</p>
+
+        </div>
+
+        <div class="col">
+          <img src="img/facebook.png" alt="Facebook" class="footer-logo" />
+          <img src="img/instagram.png" alt="Instagram" class="footer-logo" />
+        </div>
+
+      </div>
+
+
   </footer>
-
   <!-- Scripts -->
-  <script type="module" src="./js/MenuAdmin.js"></script>
+  <script type="module" src="./js/MenuEjercicio.js"></script>
   <script type="module" src="./js/EjercicioFunciones.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>

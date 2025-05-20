@@ -152,24 +152,40 @@ body {
 }
 
 /* -------------------- FOOTER -------------------- */
-.footer {
-
-  background-color: #316163; /* mismo color del menú lateral */
-  background-color: #022227;
-
-  color: white;
-  padding: 10px 15px;
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  z-index: 10;
+  footer img {
+    width: 30px; /* tamaño opcional */
+    height: auto;
+    justify-content: center;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+    margin: 0 10px;
+    
 }
 
-.footer-logo {
-  height: 50px;
+footer {
+    background-color: #316163;
+    color: #ffffff;
+    padding: 1rem 0;
+    text-align: center;
+   margin-right: 10px;
+    /*position: absolute;
+    bottom: 0;
+    width: 100%;*/
+    border-radius: 5px;
 }
 
+footer img {
+    width: 50px;
+    margin: 0 10px;
+}
+
+
+footer img:hover {
+    filter: grayscale(0%);
+}
+footer p{
+   color: rgb(255, 255, 255);
+}
 /* -------------------- TARJETAS -------------------- */
 .card-grid {
   display: grid;

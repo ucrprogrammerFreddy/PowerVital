@@ -1,4 +1,4 @@
-function MenuHambAdmin() {
+function MenuHambEjer() {
   return `
       <aside class="slide" id="sidebar">
         <div class="menu-header">
@@ -11,8 +11,8 @@ function MenuHambAdmin() {
           <li class="has-submenu">
             <a href="#" id="toggleSubmenu"><i class="fas fa-users"></i> Usuarios <i class="fas fa-chevron-down caret"></i></a>
             <ul class="submenu" id="submenuUsuarios">
-               <li><a href="../View/Administrador/FormRegistroAdministrador.html"> Administradores Registro</a></li>
-               <li><a href="#"> Entrenadores</a></li>
+               <li><a href="../../View/Administrador/Index.html"> Administradores</a></li>
+               <li><a href="../../View/Entrenador/Index.html""> Entrenadores</a></li>
               <li><a href="../Client-es/Model/index.html"> Clientes</a></li>
             </ul>
           </li>
@@ -27,7 +27,7 @@ function MenuHambAdmin() {
 
 //Pase la funcion del script que lo acia funcionar para aquí, el window es para que no se cargue primero que el html
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("idMenuHambAdmin").innerHTML = MenuHambAdmin();
+  document.getElementById("idMenuHambEjercicio").innerHTML = MenuHambEjer();
 
   const openBtn = document.getElementById("openMenu");
   const closeBtn = document.getElementById("closeMenu");
