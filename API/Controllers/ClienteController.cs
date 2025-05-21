@@ -23,10 +23,13 @@ namespace PowerVital.Controllers
         {
             var clientes = await _context.Clientes
                 .Include(c => c.Entrenador)
+                .Include(c => c.PadecimientosClientes)
+                             .ThenInclude(pc => pc.Padecimiento)
                 .ToListAsync();
 
             return Ok(clientes);
         }
+        
 
         // ✅ GET: api/cliente/5
         [HttpGet("obtenerClientePorId/{id}")]

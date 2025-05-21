@@ -21,41 +21,103 @@ namespace PowerVital.Controllers
         [HttpPost ("asignarPadecimiento")]
         public async Task<IActionResult> AsignarPadecimientos([FromBody] AsignarPadecimientos dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            /* if (!ModelState.IsValid)
+                 return BadRequest(ModelState);
 
-            var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == dto.IdCliente);
-            if (!clienteExiste)
-                return NotFound(new { mensaje = "Cliente no encontrado" });
+             var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == dto.IdCliente);
+             if (!clienteExiste)
+                 return NotFound(new { mensaje = "Cliente no encontrado" });
 
-            // Validar existencia de cada Padecimiento
-            var padecimientosValidos = await _context.Padecimientos
-                .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
-                .Select(p => p.IdPadecimiento)
-                .ToListAsync();
+             // Validar existencia de cada Padecimiento
+             var padecimientosValidos = await _context.Padecimientos
+                 .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
+                 .Select(p => p.IdPadecimiento)
+                 .ToListAsync();
 
-            var padecimientosInvalidos = dto.IdsPadecimientos.Except(padecimientosValidos).ToList();
-            if (padecimientosInvalidos.Any())
-                return BadRequest(new { mensaje = $"Los siguientes IDs de padecimientos no existen: {string.Join(", ", padecimientosInvalidos)}" });
+             var padecimientosInvalidos = dto.IdsPadecimientos.Except(padecimientosValidos).ToList();
+             if (padecimientosInvalidos.Any())
+                 return BadRequest(new { mensaje = $"Los siguientes IDs de padecimientos no existen: {string.Join(", ", padecimientosInvalidos)}" });
 
-            // Eliminar asignaciones anteriores
-            var existentes = await _context.PadecimientoCliente
-                .Where(pc => pc.IdCliente == dto.IdCliente)
-                .ToListAsync();
+             // Eliminar asignaciones anteriores
+             var existentes = await _context.PadecimientoCliente
+                 .Where(pc => pc.IdCliente == dto.IdCliente)
+                 .ToListAsync();
 
-            _context.PadecimientoCliente.RemoveRange(existentes);
+             _context.PadecimientoCliente.RemoveRange(existentes);
 
-            // Agregar nuevas asignaciones
-            var nuevasAsignaciones = dto.IdsPadecimientos.Select(idP => new PadecimientoCliente
+             // Agregar nuevas asignaciones
+             var nuevasAsignaciones = dto.IdsPadecimientos.Select(idP => new PadecimientoCliente
+             {
+                 IdCliente = dto.IdCliente,
+                 IdPadecimiento = idP
+             });
+
+             await _context.PadecimientoCliente.AddRangeAsync(nuevasAsignaciones);
+             await _context.SaveChangesAsync();
+
+             return Ok(new { mensaje = "Padecimientos asignados correctamente" });*/
+
+
+            try
             {
-                IdCliente = dto.IdCliente,
-                IdPadecimiento = idP
-            });
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-            await _context.PadecimientoCliente.AddRangeAsync(nuevasAsignaciones);
-            await _context.SaveChangesAsync();
+                var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == dto.IdCliente);
+                if (!clienteExiste)
+                    return NotFound(new { mensaje = "Cliente no encontrado" });
 
-            return Ok(new { mensaje = "Padecimientos asignados correctamente" });
+                dto.IdsPadecimientos ??= new List<int>();
+
+                // Validar existencia de IDs solo si hay elementos
+                if (dto.IdsPadecimientos.Any())
+                {
+                    var padecimientosValidos = await _context.Padecimientos
+                     .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
+                     .Select(p => p.IdPadecimiento)
+                     .ToListAsync();
+
+                    var padecimientosInvalidos = dto.IdsPadecimientos.Except(padecimientosValidos).ToList();
+
+                    if (padecimientosInvalidos.Any())
+                    {
+                        return BadRequest(new
+                        {
+                            mensaje = $"Los siguientes IDs de padecimientos no existen: {string.Join(", ", padecimientosInvalidos)}"
+                        });
+                    }
+
+                }
+
+                // Eliminar anteriores
+                var existentes = await _context.PadecimientoCliente
+                    .Where(pc => pc.IdCliente == dto.IdCliente)
+                    .ToListAsync();
+                _context.PadecimientoCliente.RemoveRange(existentes);
+
+                // Agregar nuevos solo si hay
+                if (dto.IdsPadecimientos.Any())
+                {
+                    var nuevasAsignaciones = dto.IdsPadecimientos.Select(idP => new PadecimientoCliente
+                    {
+                        IdCliente = dto.IdCliente,
+                        IdPadecimiento = idP
+                    });
+
+                    await _context.PadecimientoCliente.AddRangeAsync(nuevasAsignaciones);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new { mensaje = "Padecimientos actualizados correctamente" });
+            }
+            catch (Exception ex)
+            {
+                // ⚠️ Aquí el error interno real
+                return StatusCode(500, new { mensaje = "Error interno", detalle = ex.Message });
+            }
+
+
         }
 
         // GET: api/padecimientocliente/5
