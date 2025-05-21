@@ -84,8 +84,10 @@ namespace PowerVital.Controllers
             _context.Clientes.Add(nuevoCliente);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCliente), new { id = nuevoCliente.IdUsuario }, nuevoCliente);
+            // ✅ Retornar solo el ID para que JavaScript lo capture fácilmente
+            return Ok(new { IdUsuario = nuevoCliente.IdUsuario });
         }
+
 
         // ✅ PUT: api/cliente/editar
         [HttpPut("editarCliente")]

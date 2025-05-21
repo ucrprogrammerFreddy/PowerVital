@@ -6,27 +6,6 @@ const API_BASE = "https://localhost:7086/api";
 
 
 
-// export function cargarEntrenadores(callback = null) {
-//   const $select = $("#entrenador");
-
-//   $.get("https://localhost:7086/api/Entrenador/listaEntrenador", function (data) {
-//     $select.empty().append(`<option value="">Seleccione un entrenador</option>`);
-
-//     data.forEach(ent => {
-//       data.forEach(ent => {
-//   console.log("🔍 Entrenador recibido:", ent); // Debug
-//   $select.append(`<option value="${ent.idIdUsuario}">${ent.Nombre}</option>`);
-// });
-
-//     $select.append(`<option value="${ent.idIdUsuario}">${ent.Nombre}</option>`);
-
-//     });
-
-//     if (callback) callback();
-//   });
-// }
-
-
 export function cargarEntrenadores(callback = null) {
   const $select = $("#entrenador");
 
@@ -46,10 +25,6 @@ export function cargarEntrenadores(callback = null) {
     if (callback) callback();
   });
 }
-
-
-
-
 
 
 export function cargarPadecimientos(padecimientosSeleccionados = []) {
@@ -73,27 +48,10 @@ const checkbox = `
   });
 }
 
-// export function registrarCliente() {
-//   const cliente = obtenerClienteDesdeFormulario("Crear");
-
-//   $.ajax({
-//     url: `${API_BASE}/Cliente/CrearCliente`,
-//     method: "POST",
-//     contentType: "application/json",
-//     data: JSON.stringify(cliente),
-//     success: (res) => {
-//       asignarPadecimientos(res.IdUsuario || res.IdUsuario, cliente.Padecimientos);
-//       alert("Cliente registrado correctamente");
-//       location.href = "ListaClientes.html";
-//     },
-//     error: (err) => alert("Error al registrar cliente")
-//   });
-// }
-
 
 export function registrarCliente() {
   const cliente = obtenerClienteDesdeFormulario("Crear");
-console.log("🧾 Cliente que se enviará:", cliente);
+  console.log("🧾 Cliente que se enviará:", cliente);
 
   $.ajax({
     url: `${API_BASE}/Cliente/CrearCliente`,
@@ -101,41 +59,51 @@ console.log("🧾 Cliente que se enviará:", cliente);
     contentType: "application/json",
     data: JSON.stringify(cliente),
     success: (res) => {
-      const clienteId = res.IdUsuario || res.IdUsuario;
-      const ids = cliente.Padecimientos;
+      const clienteId = res.IdUsuario;
+
+      if (!clienteId || clienteId === 0) {
+        alert("❌ No se obtuvo un ID válido del cliente.");
+        return;
+      }
+
+      const ids = cliente.Padecimientos || [];
 
       if (ids.length > 0) {
         const payload = {
-  IdCliente: clienteId,
-  IdsPadecimientos: ids
-};
+          IdCliente: clienteId,
+          IdsPadecimientos: ids
+        };
 
+        console.log("📦 Payload asignación:", payload);
 
-console.log("🧾 Cliente a enviar:", cliente);
-
-          $.ajax({
-      url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(payload),
-      success: () => {
-        alert("✅ Cliente y padecimientos registrados correctamente");
-        location.href = "ListaClientes.html";
-      },
-      error: () => alert("❌ Error al asignar padecimientos")
-    });
+        $.ajax({
+          url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+          success: () => {
+            alert("✅ Cliente y padecimientos registrados correctamente");
+            location.href = "ListaClientes.html";
+          },
+          error: (xhr) => {
+            console.error("❌ Error al asignar padecimientos:", xhr.responseText);
+            alert("❌ Error al asignar padecimientos:\n" + xhr.responseText);
+          }
+        });
       } else {
         alert("✅ Cliente registrado sin padecimientos");
         location.href = "ListaClientes.html";
       }
     },
     error: (xhr) => {
-  console.error("❌ Error al registrar cliente:", xhr.responseText);
-  alert("❌ Error al registrar cliente: " + xhr.responseText);
-}
-
+      console.error("❌ Error al registrar cliente:", xhr.responseText);
+      alert("❌ Error al registrar cliente: " + xhr.responseText);
+    }
   });
 }
+
+
+
 
 
 

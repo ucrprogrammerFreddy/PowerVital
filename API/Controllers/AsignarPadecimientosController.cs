@@ -21,42 +21,7 @@ namespace PowerVital.Controllers
         [HttpPost ("asignarPadecimiento")]
         public async Task<IActionResult> AsignarPadecimientos([FromBody] AsignarPadecimientos dto)
         {
-            /* if (!ModelState.IsValid)
-                 return BadRequest(ModelState);
-
-             var clienteExiste = await _context.Clientes.AnyAsync(c => c.IdUsuario == dto.IdCliente);
-             if (!clienteExiste)
-                 return NotFound(new { mensaje = "Cliente no encontrado" });
-
-             // Validar existencia de cada Padecimiento
-             var padecimientosValidos = await _context.Padecimientos
-                 .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
-                 .Select(p => p.IdPadecimiento)
-                 .ToListAsync();
-
-             var padecimientosInvalidos = dto.IdsPadecimientos.Except(padecimientosValidos).ToList();
-             if (padecimientosInvalidos.Any())
-                 return BadRequest(new { mensaje = $"Los siguientes IDs de padecimientos no existen: {string.Join(", ", padecimientosInvalidos)}" });
-
-             // Eliminar asignaciones anteriores
-             var existentes = await _context.PadecimientoCliente
-                 .Where(pc => pc.IdCliente == dto.IdCliente)
-                 .ToListAsync();
-
-             _context.PadecimientoCliente.RemoveRange(existentes);
-
-             // Agregar nuevas asignaciones
-             var nuevasAsignaciones = dto.IdsPadecimientos.Select(idP => new PadecimientoCliente
-             {
-                 IdCliente = dto.IdCliente,
-                 IdPadecimiento = idP
-             });
-
-             await _context.PadecimientoCliente.AddRangeAsync(nuevasAsignaciones);
-             await _context.SaveChangesAsync();
-
-             return Ok(new { mensaje = "Padecimientos asignados correctamente" });*/
-
+            
 
             try
             {
