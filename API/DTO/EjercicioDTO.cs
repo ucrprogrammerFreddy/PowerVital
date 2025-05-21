@@ -15,6 +15,7 @@ namespace PowerVital.DTOs
         [Required(ErrorMessage = "El área muscular es obligatoria.")]
         [StringLength(100, ErrorMessage = "El área muscular no puede tener más de 100 caracteres.")]
         public string AreaMuscular { get; set; }
+        public string AreaMuscularAfectada { get; set; }
 
         [Range(1, 100, ErrorMessage = "Las repeticiones deben estar entre 1 y 100.")]
         public int Repeticiones { get; set; }
