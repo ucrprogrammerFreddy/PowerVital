@@ -123,17 +123,9 @@ namespace PowerVital.Migrations
                     b.Property<int>("IdPadecimiento")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClienteIdUsuario")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PadecimientoIdPadecimiento")
-                        .HasColumnType("int");
-
                     b.HasKey("IdCliente", "IdPadecimiento");
 
-                    b.HasIndex("ClienteIdUsuario");
-
-                    b.HasIndex("PadecimientoIdPadecimiento");
+                    b.HasIndex("IdPadecimiento");
 
                     b.ToTable("PadecimientoCliente");
                 });
@@ -274,13 +266,13 @@ namespace PowerVital.Migrations
                 {
                     b.HasOne("PowerVital.Models.Cliente", "Cliente")
                         .WithMany("PadecimientosClientes")
-                        .HasForeignKey("ClienteIdUsuario")
+                        .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PowerVital.Models.Padecimiento", "Padecimiento")
                         .WithMany("PadecimientosClientes")
-                        .HasForeignKey("PadecimientoIdPadecimiento")
+                        .HasForeignKey("IdPadecimiento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
