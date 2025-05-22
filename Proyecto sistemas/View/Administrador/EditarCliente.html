@@ -1,10 +1,6 @@
-
-
-
-<!-- EDITAR CLIENTES -->
-
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +20,7 @@
 
   <!-- Scripts del sistema -->
 
-<!-- <script type="module">
+  <!-- <script type="module">
   import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
   import { cargarClienteEditar } from "../../Controler/Administrador/AdminClientes.js";
 
@@ -36,6 +32,7 @@
 </script> -->
 
 </head>
+
 <body>
   <main class="contenedor-main" id="mainContent">
     <div class="text-center mb-4">
@@ -95,40 +92,40 @@
           <div id="padecimientosList" class="form-check"></div>
         </div>
         <div class="d-flex justify-content-center gap-3">
-          <button type="button" class="btn btn-volver" onclick="window.location.href='ListaClientes.html'">Volver</button>
+          <button type="button" class="btn btn-volver"
+            onclick="window.location.href='ListaClientes.html'">Volver</button>
           <button type="submit" class="btn btn-aceptar">Guardar</button>
         </div>
       </form>
     </div>
   </main>
 
-   
+
   <script type="module">
-  import {
-    cargarClienteEditar,
-    cargarPadecimientos
-  } from "../../Controler/Administrador/AdminClientes.js";
+    import {
+      cargarClienteEditar,
+      cargarEntrenadores,
+      cargarPadecimientos
+    } from "../../Controler/Administrador/AdminClientes.js";
 
-  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
-  renderAdminLayout();
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
 
-  $(document).ready(() => {
-    cargarClienteEditar();
+    $(document).ready(() => {
+      cargarEntrenadores(); // ← ¡Agrega esta línea!
+      cargarClienteEditar();
 
-    // ✅ Mostrar/Ocultar padecimientos manualmente si el usuario cambia el checkbox
-    $("#padecimiento").on("change", function () {
-      if (this.checked) {
-        $("#contenedorPadecimientos").show();
-        cargarPadecimientos(); // Si no hay cargados aún
-      } else {
-        $("#contenedorPadecimientos").hide().find("input[type='checkbox']").prop("checked", false);
-      }
+      $("#padecimiento").on("change", function () {
+        if (this.checked) {
+          $("#contenedorPadecimientos").show();
+          cargarPadecimientos();
+        } else {
+          $("#contenedorPadecimientos").hide().find("input[type='checkbox']").prop("checked", false);
+        }
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
-
-
 
 </html>
