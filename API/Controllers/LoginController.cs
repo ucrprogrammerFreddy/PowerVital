@@ -81,7 +81,7 @@ namespace PowerVital.Controllers
                     redirectUrl = usuario.Rol switch
                     {
                         "Admin" => "/Administrador/Index",
-                        "Cliente" => "/Clientes/index",
+                        "Cliente" => "/Clientes/Inicio",
                         "Entrenador" => "/Entrenadores/index",
                         _ => "/Login"
                     },

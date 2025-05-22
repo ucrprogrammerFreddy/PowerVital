@@ -1,95 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Clientes</title>
-  <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/clientes.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard PowerVital</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/ClienteEstilos.css" />
 </head>
 <body>
-  <div class="container" id="top">
-    <h1>Gestión de Clientes</h1>
-    <form id="clienteForm">
-      <section>
-        <h2>Datos Personales</h2>
-        <label>Nombre Completo:</label>
-        <input type="text" name="nombre">
 
-        <label>Correo Electrónico:</label>
-        <input type="email" name="correo">
+  <!-- Logo fijo -->
+  <header class="encabezado">
+    <img src="/Proyecto sistemas/Complementos/img/logoof.png" alt="Logo" class="logo">
+  </header>
 
-        <label>Contraseña:</label>
-        <input type="password" name="password">
-
-        <label>Fecha de Nacimiento:</label>
-        <input type="date" name="fechaNacimiento">
-
-        <label>Teléfono:</label>
-        <input type="tel" name="telefono">
-
-        <label>Género:</label>
-        <select name="genero">
-          <option value="">Seleccione</option>
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-          <option value="otro">Otro</option>
-        </select>
-
-        <label>Entrenador:</label>
-        <select name="entrenador">
-          <option value="">Seleccione un entrenador</option>
-          <option value="Juan Perez">Juan Pérez</option>
-          <option value="Ana Torres">Ana Torres</option>
-          <option value="Carlos Rivas">Carlos Rivas</option>
-        </select>
-
-        <label>Peso (kg):</label>
-        <input type="number" name="peso">
-
-        <label>Altura (cm):</label>
-        <input type="number" name="altura">
-      </section>
-
-      <section>
-        <h2>Padecimientos Médicos</h2>
-        <p>Por favor, marque los padecimientos médicos que pueden afectar su capacidad para realizar ejercicios.</p>
-        <label>
-          <input type="checkbox" id="togglePadecimientos"> Tengo padecimientos
-        </label>
-
-        <div id="padecimientosList" style="display:none;">
-          <div class="padecimientos-interactivo">
-            <label><input type="checkbox"> Hipertensión</label>
-            <label><input type="checkbox"> Asma</label>
-            <label><input type="checkbox"> Diabetes</label>
-            <label><input type="checkbox"> Problemas de espalda</label>
-            <label><input type="checkbox"> Lesiones articulares</label>
-          </div>
-        </div>
-
-        <div class="form-buttons">
-          <button type="button" class="volver" onclick="scrollToTop()">Volver</button>
-          <button type="submit" class="aceptar">Aceptar</button>
-        </div>
-      </section>
-
-      <div class="top-link">
-        <a href="#top">Ir al inicio del formulario</a>
-      </div>
-    </form>
+  <!-- Botón hamburguesa fijo -->
+  <div id="openSidebar" class="menu-toggle">
+    <i id="iconHamburguesa" class="fas fa-bars"></i>
   </div>
 
-  <script>
-    document.getElementById("togglePadecimientos").addEventListener("change", function() {
-      const list = document.getElementById("padecimientosList");
-      list.style.display = this.checked ? "block" : "none";
-    });
+  <!-- Contenedor general -->
+  <div class="layout" id="layout">
 
-    function scrollToTop() {
-      document.getElementById("top").scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
- <script type="module" src="../../Controler/Loguin/LoginFunciones.js"></script>
+    <!-- Contenido principal desplazable -->
+    <div class="main-wrapper" id="mainWrapper">
+      <main class="contenido">
+        <div class="container tarjetas-container mt-4">
+          <div class="row justify-content-center g-4">
+
+
+            <div class="col-md-3">
+              <div class="card tarjeta-rutinas text-center p-2" onclick="window.location.href='/Proyecto sistemas/View/Cliente/RutinaCliente.html'">
+                <i class="fas fa-dumbbell fa-2x mb-3"></i>
+                <h6 class="fw-bold mb-1">Rutinas</h6>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="card tarjeta-admin text-center p-2" onclick="window.location.href='/Proyecto sistemas/View/Cliente/SaludCliente.html'" >
+                <i class="fas fa-heartbeat fa-2x mb-3"></i>
+                <h6 class="fw-bold mb-1">Historial médico</h6>
+              </div>
+            </div>  
+
+
+            <div class="col-md-3">
+              <div class="card tarjeta-clientes text-center p-2" onclick="window.location.href=''">
+                <i class="fas fa-circle-question fa-2x mb-3"></i>
+                <h6 class="fw-bold mb-1">Ayuda</h6>
+              </div>
+            </div>
+
+  
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts para menú y footer -->
+  <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuCliente.js"></script>
+  <script type="module" src="/Proyecto sistemas/Complementos/Components/FooterCliente.js"></script>
 
 </body>
 </html>
