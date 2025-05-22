@@ -263,3 +263,13 @@ main.contenido {
   flex: 1 0 auto;
   padding-bottom: 80px; /* espacio para el footer */
 }
+    .pdf-viewer {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .action-buttons {
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
