@@ -9,59 +9,53 @@ const API_BASE = "https://localhost:7086/api";
  */
 export function cargarEntrenadores(callback = null) {
   const $select = $("#entrenador");
-  console.log("¿Existe #entrenador select?:", $select.length);
 
-  $.get(
-    "https://localhost:7086/api/Entrenador/listaEntrenador",
-    function (data) {
-      console.log("Datos recibidos de entrenadores:", data);
+  $.get(`${API_BASE}/Entrenador/listaEntrenador`, function (data) {
+    $select
+      .empty()
+      .append(`<option value="">Seleccione un entrenador</option>`);
+    const idsAgregados = new Set();
 
-      $select
-        .empty()
-        .append(`<option value="">Seleccione un entrenador</option>`);
-      const idsAgregados = new Set();
+    data.forEach((ent) => {
+      if (!idsAgregados.has(ent.idIdUsuario)) {
+        $select.append(
+          `<option value="${ent.idIdUsuario}">${ent.Nombre}</option>`
+        );
+        idsAgregados.add(ent.idIdUsuario);
+      }
+    });
 
-      data.forEach((ent) => {
-        // Usa el nombre del campo tal como viene del backend (idIdUsuario)
-        if (!idsAgregados.has(ent.idIdUsuario)) {
-          $select.append(
-            `<option value="${ent.idIdUsuario}">${ent.Nombre}</option>`
-          );
-          idsAgregados.add(ent.idIdUsuario);
-        }
-      });
-
-      if (callback) callback();
-    }
-  ).fail(function (jqXHR, textStatus, errorThrown) {
+    if (callback) callback();
+  }).fail(function (jqXHR, textStatus, errorThrown) {
     console.error("Error AJAX:", textStatus, errorThrown, jqXHR.responseText);
+    alert("Error al cargar entrenadores.");
   });
 }
+
 /**
  * Carga y muestra los padecimientos disponibles en forma de checkboxes.
  * @param {Array} padecimientosSeleccionados - IDs de padecimientos que deben aparecer seleccionados.
  */
 export function cargarPadecimientos(padecimientosSeleccionados = []) {
   $.get(`${API_BASE}/Padecimiento/listaPadecimientos`, function (data) {
-    console.log("✔️ Padecimientos disponibles:", data);
-
     const $container = $("#padecimientosList");
     $container.empty();
 
-    // Por cada padecimiento recibido, crea un checkbox
     data.forEach((p) => {
       const checked = padecimientosSeleccionados.includes(p.IdPadecimiento)
         ? "checked"
         : "";
 
       const checkbox = `
-                <div class="form-check">
-                    <input class="form-check-input padecimiento-item" type="checkbox" value="${p.IdPadecimiento}" id="pad-${p.IdPadecimiento}" ${checked}>
-                    <label class="form-check-label" for="pad-${p.IdPadecimiento}">${p.Nombre}</label>
-                </div>`;
+        <div class="form-check">
+            <input class="form-check-input padecimiento-item" type="checkbox" value="${p.IdPadecimiento}" id="pad-${p.IdPadecimiento}" ${checked}>
+            <label class="form-check-label" for="pad-${p.IdPadecimiento}">${p.Nombre}</label>
+        </div>`;
 
       $container.append(checkbox);
     });
+  }).fail(function () {
+    alert("Error al cargar padecimientos.");
   });
 }
 
@@ -69,8 +63,13 @@ export function cargarPadecimientos(padecimientosSeleccionados = []) {
  * Registra un nuevo cliente. Si tiene padecimientos los asigna.
  */
 export function registrarCliente() {
-  const cliente = obtenerClienteDesdeFormulario("Crear");
-  console.log("🧾 Cliente que se enviará:", cliente);
+  let cliente;
+  try {
+    cliente = obtenerClienteDesdeFormulario("Crear");
+  } catch (err) {
+    console.error(err);
+    return; // Ya se alertó el error
+  }
 
   // Envia el cliente a la API para crearlo
   $.ajax({
@@ -94,8 +93,6 @@ export function registrarCliente() {
           IdCliente: clienteId,
           IdsPadecimientos: ids,
         };
-
-        console.log("📦 Payload asignación:", payload);
 
         $.ajax({
           url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
@@ -158,9 +155,9 @@ export function cargarClienteEditar() {
   if (cliente.PadecimientosClientes?.length > 0) {
     $("#padecimiento").prop("checked", true);
     $("#contenedorPadecimientos").show();
-    const ids = cliente.padecimientosClientes.map(
+    const ids = cliente.PadecimientosClientes.map(
       (p) =>
-        p.padecimientoId || p.idPadecimiento || p.padecimiento?.idPadecimiento
+        p.PadecimientoId || p.IdPadecimiento || p.Padecimiento?.IdPadecimiento
     );
 
     cargarPadecimientos(ids);
@@ -171,7 +168,7 @@ export function cargarClienteEditar() {
     .off("submit")
     .submit(function (e) {
       e.preventDefault();
-      actualizarCliente(cliente.idUsuario);
+      actualizarCliente(cliente.IdUsuario);
     });
 }
 
@@ -241,10 +238,7 @@ function obtenerClienteDesdeFormulario(tipo) {
 
   // Obtiene y valida el valor del entrenador seleccionado
   const entrenadorValorCrudo = entrenadorSelect.val();
-  console.log("Valor crudo de entrenador:", entrenadorValorCrudo);
-
   const entrenadorId = parseInt(entrenadorValorCrudo);
-  console.log("Convertido a entero:", entrenadorId);
 
   if (isNaN(entrenadorId) || entrenadorId <= 0) {
     alert("❌ Debes seleccionar un entrenador válido.");
@@ -289,12 +283,7 @@ export function listarClientes() {
     const tbody = $("#cliente-tbody");
     tbody.empty();
 
-    console.log("✅ Datos recibidos del API:", data);
-
     data.forEach((c) => {
-      console.log("👀 Cliente:", c);
-      console.log("🧾 Padecimientos:", c.PadecimientosClientes);
-
       // Convierte los padecimientos a una cadena separada por comas
       const padecimientos =
         c.PadecimientosClientes?.map((p) => p.Padecimiento?.Nombre).join(
@@ -303,24 +292,24 @@ export function listarClientes() {
 
       // Construye la fila para la tabla
       const fila = `
-                <tr>
-                    <td>${c.Nombre}</td>
-                    <td>${c.Email}</td>
-                    <td>${c.Telefono}</td>
-                    <td>${c.Altura}</td>
-                    <td>${c.Peso}</td>
-                    <td>${c.Entrenador?.Nombre || "-"}</td>
-                    <td>${c.EstadoPago}</td>
-                    <td>${padecimientos}</td>
-                    <td>
-                        <button class='btn btn-sm btn-primary' onclick='editarCliente(${JSON.stringify(
-                          c
-                        ).replace(/"/g, "&quot;")})'>Editar</button>
-                        <button class='btn btn-sm btn-danger' onclick='eliminarCliente(${
-                          c.IdUsuario
-                        })'>Eliminar</button>
-                    </td>
-                </tr>`;
+        <tr>
+            <td>${c.Nombre}</td>
+            <td>${c.Email}</td>
+            <td>${c.Telefono}</td>
+            <td>${c.Altura}</td>
+            <td>${c.Peso}</td>
+            <td>${c.Entrenador?.Nombre || "-"}</td>
+            <td>${c.EstadoPago}</td>
+            <td>${padecimientos}</td>
+            <td>
+                <button class='btn btn-sm btn-primary' onclick='editarCliente(${JSON.stringify(
+                  c
+                ).replace(/"/g, "&quot;")})'>Editar</button>
+                <button class='btn btn-sm btn-danger' onclick='eliminarCliente(${
+                  c.IdUsuario
+                })'>Eliminar</button>
+            </td>
+        </tr>`;
       tbody.append(fila);
     });
   });
