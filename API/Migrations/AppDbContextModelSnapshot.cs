@@ -22,6 +22,31 @@ namespace PowerVital.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Padecimiento", b =>
+                {
+                    b.Property<int>("IdPadecimiento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPadecimiento"));
+
+                    b.Property<string>("AreaMuscularAfectada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdPadecimiento");
+
+                    b.ToTable("Padecimientos");
+                });
+
             modelBuilder.Entity("PowerVital.Models.Ejercicio", b =>
                 {
                     b.Property<int>("IdEjercicio")
@@ -90,33 +115,36 @@ namespace PowerVital.Migrations
                     b.ToTable("EjercicioRutina");
                 });
 
-            modelBuilder.Entity("PowerVital.Models.Padecimiento", b =>
+            modelBuilder.Entity("PowerVital.Models.HistorialSalud", b =>
                 {
-                    b.Property<int>("IdPadecimiento")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPadecimiento"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AreaMuscularAfectada")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EntrenadorId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("Severidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("IndiceGrasaCorporal")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("IdPadecimiento");
+                    b.Property<decimal>("Peso")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.ToTable("Padecimientos");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EntrenadorId");
+
+                    b.ToTable("HistorialesSalud");
                 });
 
             modelBuilder.Entity("PowerVital.Models.PadecimientoCliente", b =>
@@ -132,6 +160,33 @@ namespace PowerVital.Migrations
                     b.HasIndex("IdPadecimiento");
 
                     b.ToTable("PadecimientoCliente");
+                });
+
+            modelBuilder.Entity("PowerVital.Models.PadecimientoHistorial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("HistorialSaludId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PadecimientoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Severidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HistorialSaludId");
+
+                    b.HasIndex("PadecimientoId");
+
+                    b.ToTable("PadecimientosHistorial");
                 });
 
             modelBuilder.Entity("PowerVital.Models.Rutina", b =>
@@ -266,6 +321,25 @@ namespace PowerVital.Migrations
                     b.Navigation("Rutina");
                 });
 
+            modelBuilder.Entity("PowerVital.Models.HistorialSalud", b =>
+                {
+                    b.HasOne("PowerVital.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PowerVital.Models.Entrenador", "Entrenador")
+                        .WithMany()
+                        .HasForeignKey("EntrenadorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Entrenador");
+                });
+
             modelBuilder.Entity("PowerVital.Models.PadecimientoCliente", b =>
                 {
                     b.HasOne("PowerVital.Models.Cliente", "Cliente")
@@ -274,13 +348,32 @@ namespace PowerVital.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PowerVital.Models.Padecimiento", "Padecimiento")
+                    b.HasOne("Padecimiento", "Padecimiento")
                         .WithMany("PadecimientosClientes")
                         .HasForeignKey("IdPadecimiento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Padecimiento");
+                });
+
+            modelBuilder.Entity("PowerVital.Models.PadecimientoHistorial", b =>
+                {
+                    b.HasOne("PowerVital.Models.HistorialSalud", "HistorialSalud")
+                        .WithMany("PadecimientosHistorial")
+                        .HasForeignKey("HistorialSaludId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Padecimiento", "Padecimiento")
+                        .WithMany("PadecimientosHistorial")
+                        .HasForeignKey("PadecimientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HistorialSalud");
 
                     b.Navigation("Padecimiento");
                 });
@@ -307,14 +400,21 @@ namespace PowerVital.Migrations
                     b.Navigation("Entrenador");
                 });
 
+            modelBuilder.Entity("Padecimiento", b =>
+                {
+                    b.Navigation("PadecimientosClientes");
+
+                    b.Navigation("PadecimientosHistorial");
+                });
+
             modelBuilder.Entity("PowerVital.Models.Ejercicio", b =>
                 {
                     b.Navigation("EjerciciosRutina");
                 });
 
-            modelBuilder.Entity("PowerVital.Models.Padecimiento", b =>
+            modelBuilder.Entity("PowerVital.Models.HistorialSalud", b =>
                 {
-                    b.Navigation("PadecimientosClientes");
+                    b.Navigation("PadecimientosHistorial");
                 });
 
             modelBuilder.Entity("PowerVital.Models.Rutina", b =>

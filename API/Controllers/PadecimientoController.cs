@@ -28,7 +28,7 @@ namespace PowerVital.Controllers
                     Nombre = p.Nombre,
                     Descripcion = p.Descripcion,
                     AreaMuscularAfectada = p.AreaMuscularAfectada,
-                    Severidad = p.Severidad
+
                 })
                 .ToListAsync();
 
@@ -50,7 +50,6 @@ namespace PowerVital.Controllers
                 Nombre = padecimiento.Nombre,
                 Descripcion = padecimiento.Descripcion,
                 AreaMuscularAfectada = padecimiento.AreaMuscularAfectada,
-                Severidad = padecimiento.Severidad
             };
 
             return Ok(dto);
@@ -68,7 +67,6 @@ namespace PowerVital.Controllers
                 Nombre = dto.Nombre,
                 Descripcion = dto.Descripcion,
                 AreaMuscularAfectada = dto.AreaMuscularAfectada,
-                Severidad = dto.Severidad
             };
 
             _context.Padecimientos.Add(nuevoPadecimiento);
@@ -96,7 +94,6 @@ namespace PowerVital.Controllers
             padecimiento.Nombre = dto.Nombre;
             padecimiento.Descripcion = dto.Descripcion;
             padecimiento.AreaMuscularAfectada = dto.AreaMuscularAfectada;
-            padecimiento.Severidad = dto.Severidad;
 
             _context.Entry(padecimiento).State = EntityState.Modified;
             await _context.SaveChangesAsync();
