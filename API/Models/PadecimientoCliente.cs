@@ -8,6 +8,7 @@ namespace PowerVital.Models
 
         public int IdPadecimiento { get; set; }
         public Padecimiento Padecimiento { get; set; }
+        public string Severidad { get; set; } // Ejemplo: Leve, Moderado, Grave
 
     }
 }

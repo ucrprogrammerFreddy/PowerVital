@@ -155,6 +155,10 @@ namespace PowerVital.Migrations
                     b.Property<int>("IdPadecimiento")
                         .HasColumnType("int");
 
+                    b.Property<string>("Severidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("IdCliente", "IdPadecimiento");
 
                     b.HasIndex("IdPadecimiento");
