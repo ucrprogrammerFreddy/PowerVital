@@ -17,12 +17,10 @@ namespace PowerVital.Controllers
             _context = context;
         }
 
-        // POST: api/padecimientocliente
-        [HttpPost ("asignarPadecimiento")]
+        // POST: api/asignarPadecimiento
+        [HttpPost("asignarPadecimiento")]
         public async Task<IActionResult> AsignarPadecimientos([FromBody] AsignarPadecimientos dto)
         {
-            
-
             try
             {
                 if (!ModelState.IsValid)
@@ -34,13 +32,12 @@ namespace PowerVital.Controllers
 
                 dto.IdsPadecimientos ??= new List<int>();
 
-                // Validar existencia de IDs solo si hay elementos
                 if (dto.IdsPadecimientos.Any())
                 {
                     var padecimientosValidos = await _context.Padecimientos
-                     .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
-                     .Select(p => p.IdPadecimiento)
-                     .ToListAsync();
+                        .Where(p => dto.IdsPadecimientos.Contains(p.IdPadecimiento))
+                        .Select(p => p.IdPadecimiento)
+                        .ToListAsync();
 
                     var padecimientosInvalidos = dto.IdsPadecimientos.Except(padecimientosValidos).ToList();
 
@@ -51,7 +48,6 @@ namespace PowerVital.Controllers
                             mensaje = $"Los siguientes IDs de padecimientos no existen: {string.Join(", ", padecimientosInvalidos)}"
                         });
                     }
-
                 }
 
                 // Eliminar anteriores
@@ -60,13 +56,14 @@ namespace PowerVital.Controllers
                     .ToListAsync();
                 _context.PadecimientoCliente.RemoveRange(existentes);
 
-                // Agregar nuevos solo si hay
+                // Agregar nuevos
                 if (dto.IdsPadecimientos.Any())
                 {
                     var nuevasAsignaciones = dto.IdsPadecimientos.Select(idP => new PadecimientoCliente
                     {
                         IdCliente = dto.IdCliente,
-                        IdPadecimiento = idP
+                        IdPadecimiento = idP,
+                        Severidad = dto.Severidad // ✅ Guardamos la severidad aquí
                     });
 
                     await _context.PadecimientoCliente.AddRangeAsync(nuevasAsignaciones);
@@ -78,14 +75,11 @@ namespace PowerVital.Controllers
             }
             catch (Exception ex)
             {
-                // ⚠️ Aquí el error interno real
                 return StatusCode(500, new { mensaje = "Error interno", detalle = ex.Message });
             }
-
-
         }
 
-        // GET: api/padecimientocliente/5
+        // GET: api/asignarPadecimiento/obtenerPadecimiento/5
         [HttpGet("obtenerPadecimiento/{idCliente}")]
         public async Task<ActionResult<List<int>>> ObtenerPadecimientosDeCliente(int idCliente)
         {
@@ -101,7 +95,7 @@ namespace PowerVital.Controllers
             return Ok(ids);
         }
 
-        // DELETE: api/padecimientocliente/5
+        // DELETE: api/asignarPadecimiento/eliminarPadecimiento/5
         [HttpDelete("eliminarPadecimiento/{idCliente}")]
         public async Task<IActionResult> EliminarPadecimientosDeCliente(int idCliente)
         {
