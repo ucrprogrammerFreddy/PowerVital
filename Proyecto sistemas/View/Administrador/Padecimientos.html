@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,32 +7,22 @@
   <link rel="stylesheet" href="../../Complementos/css/padecimientos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-
-<body>
+<body data-accion="agregar">
   <div class="formulario-container">
-    <!-- Logo central -->
     <div class="formulario-logo">
       <img src="../../Complementos/img/logoof.png" alt="Logo" />
     </div>
-
-    <!-- Formulario -->
     <form class="formulario">
-      <!-- Nombre -->
       <div class="form-group">
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" placeholder="Nombre del padecimiento" />
       </div>
-
-      <!--Descripcion-->
       <div class="form-group">
-        <label for="nombre">Descripcion</label>
-        <input type="text" id="Descripcion" name="Descripcion" placeholder="Descripcion del padecimiento" />
+        <label for="Descripcion">Descripción</label>
+        <input type="text" id="Descripcion" name="Descripcion" placeholder="Descripción del padecimiento" />
       </div>
-
-
-      <!-- Ubicación / Parte del cuerpo -->
       <div class="form-group-group">
-        <label>Area Muscular Afectada</label>
+        <label>Área Muscular Afectada</label>
         <div class="form-options">
           <label><input type="checkbox" name="AreaMuscularAfectada" value="cabeza" /> Cabeza</label>
           <label><input type="checkbox" name="AreaMuscularAfectada" value="rodillas" /> Rodillas</label>
@@ -49,30 +38,12 @@
           <label><input type="checkbox" name="AreaMuscularAfectada" value="columna" /> Columna</label>
         </div>
       </div>
-
-    
-      <!-- Intensidad -->
-      <div class="form-group-group">
-        <label>Severidad</label>
-        <div class="form-options">
-          <label><input type="radio" name="Severidad" value="leve" /> Leve</label>
-          <label><input type="radio" name="Severidad" value="moderada"/> Moderada</label>
-          <label><input type="radio" name="Severidad" value="alta" /> Alta</label>
-        </div>
-      </div>
-
-      <!-- Botones -->
       <div class="form-buttons">
         <a href="Index.html" class="btn-cancelar">Cancelar</a>
         <button type="submit" class="btn-agregar">Agregar Padecimiento</button>
       </div>
     </form>
   </div>
-
-  <body data-accion="agregar">
-<script src="../../Controler/Administrador/controladorPadecimientos.js"></script>
+  <script src="../../Controler/Administrador/controladorPadecimientos.js"></script>
 </body>
-
-</body>
-
 </html>
