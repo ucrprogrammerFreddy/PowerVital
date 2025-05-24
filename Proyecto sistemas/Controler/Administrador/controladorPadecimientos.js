@@ -47,10 +47,11 @@ function listarPadecimientos() {
         const fila = document.createElement("tr");
         fila.classList.add("table-primary");
         fila.innerHTML = `
-          <td>${p.idPadecimiento}</td>
-          <td>${p.nombre}</td>
-          <td>${p.descripcion}</td>
-          <td>${p.areaMuscularAfectada}</td>
+          <td>${p.dIPadecimiento}</td>
+          <td>${p.Nombre}</td>
+          <td>${p.Descripcion}</td>
+          <td>${p.AreaMuscularAfectada}</td>
+          <td>${p.Severidad}</td>
           <td>
             <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
               <i class="bi bi-pencil-fill"></i>
@@ -86,9 +87,9 @@ function activarEdicionEnFila(id) {
       filaEnEdicion = fila;
       fila.innerHTML = `
         <td>${p.idPadecimiento}</td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.nombre}" id="edit-nombre-${id}"></td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.descripcion}" id="edit-descripcion-${id}"></td>
-        <td><input class="form-control form-control-sm" type="text" value="${p.areaMuscularAfectada}" id="edit-area-${id}"></td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.Nombre}" id="edit-nombre-${id}"></td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.Descripcion}" id="edit-descripcion-${id}"></td>
+        <td><input class="form-control form-control-sm" type="text" value="${p.AreaMuscularAfectada}" id="edit-area-${id}"></td>
         <td>
           <button class="btn btn-success btn-sm" onclick="guardarEdicion(${id})">
             <i class="bi bi-check-circle-fill"></i>
@@ -147,15 +148,16 @@ function actualizarFilaVisual(id) {
       const fila = document.querySelector(`button[data-id="${id}"]`)?.closest("tr");
       if (!fila) return;
       fila.innerHTML = `
-        <td>${p.idPadecimiento}</td>
-        <td>${p.nombre}</td>
-        <td>${p.descripcion}</td>
-        <td>${p.areaMuscularAfectada}</td>
+        <td>${p.IdPadecimiento}</td>
+        <td>${p.Nombre}</td>
+        <td>${p.Descripcion}</td>
+        <td>${p.AreaMuscularAfectada}</td>
+        <td>${p.Severidad}</td>
         <td>
-          <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
+          <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
             <i class="bi bi-pencil-fill"></i>
           </button>
-          <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.idPadecimiento})">
+          <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
             <i class="bi bi-trash-fill"></i>
           </button>
         </td>
@@ -184,7 +186,7 @@ function configurarFormularioAgregar() {
     e.preventDefault();
     const dto = obtenerDatosFormulario();
 
-    if (!dto.nombre || !dto.descripcion || !dto.areaMuscularAfectada) {
+    if (!dto.nombre || !dto.descripcion || !dto.areaMuscularAfectada ||!dto.Severidad) {
       alert("⚠️ Por favor completa todos los campos antes de registrar.");
       return;
     }
@@ -276,15 +278,16 @@ function buscarPorId() {
         const fila = document.createElement("tr");
         fila.classList.add("table-primary");
         fila.innerHTML = `
-          <td>${p.idPadecimiento}</td>
-          <td>${p.nombre}</td>
-          <td>${p.descripcion}</td>
-          <td>${p.areaMuscularAfectada}</td>
+          <td>${p.IdPadecimiento}</td>
+          <td>${p.Nombre}</td>
+          <td>${p.Descripcion}</td>
+          <td>${p.AreaMuscularAfectada}</td>
+          <td>${p.Severidad}</td>
           <td>
-            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
+            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
               <i class="bi bi-pencil-fill"></i>
             </button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.idPadecimiento})">
+            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
               <i class="bi bi-trash-fill"></i>
             </button>
           </td>
