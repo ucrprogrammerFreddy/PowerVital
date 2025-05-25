@@ -3,6 +3,9 @@ import { ClienteModel } from "../../Model/ClienteModel.js";
 // Definimos la base de la URL para las peticiones a la API
 const API_BASE = "https://localhost:7086/api";
 
+// Variable global para lista de padecimientos
+window.listaPadecimientos = [];
+
 /**
  * Carga la lista de entrenadores desde la API y los agrega al combobox.
  * @param {Function|null} callback - Función opcional a ejecutar después de cargar los entrenadores.
@@ -41,6 +44,8 @@ export function cargarPadecimientos(
   severidadesSeleccionadas = {}
 ) {
   $.get(`${API_BASE}/Padecimiento/listaPadecimientos`, function (data) {
+    window.listaPadecimientos = data; // Guarda la lista globalmente para usar en historial
+
     const $container = $("#padecimientosList");
     $container.empty();
 
@@ -121,7 +126,7 @@ export function registrarCliente() {
 
       // Si hay padecimientos seleccionados, los asigna al cliente
       if (padecimientos.length > 0) {
-        asignarPadecimientos(clienteId, padecimientos);
+        asignarPadecimientos(clienteId, padecimientos, cliente.Peso);
       } else {
         // Si no tiene padecimientos, solo avisa y redirige
         alert("✅ Cliente registrado sin padecimientos");
@@ -207,7 +212,11 @@ export function actualizarCliente(id) {
         url: `${API_BASE}/AsignarPadecimientos/eliminarPadecimiento/${id}`,
         type: "DELETE",
         complete: () =>
-          asignarPadecimientos(id, cliente.PadecimientosCompletos),
+          asignarPadecimientos(
+            id,
+            cliente.PadecimientosCompletos,
+            cliente.Peso
+          ),
       });
     },
     error: () => alert("Error al actualizar cliente"),
@@ -215,40 +224,80 @@ export function actualizarCliente(id) {
 }
 
 /**
- * Asigna los padecimientos seleccionados a un cliente.
+ * Registra un historial de padecimiento.
+ * @param {Object} datosHistorial
+ *   - IdCliente
+ *   - IdPadecimiento
+ *   - NombrePadecimiento
+ *   - Peso
+ *   - Severidad
+ */
+function registrarPadecimientoHistorial({
+  IdCliente,
+  IdPadecimiento,
+  NombrePadecimiento,
+  Peso,
+  Severidad,
+}) {
+  $.ajax({
+    url: `${API_BASE}/PadecimientoHistorial`,
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      IdCliente,
+      IdPadecimiento,
+      NombrePadecimiento,
+      Peso,
+      Severidad,
+      // Fecha la pone el backend
+    }),
+    error: () => alert("Error al registrar historial de padecimiento"),
+  });
+}
+
+/**
+ * Asigna los padecimientos seleccionados a un cliente y guarda el historial.
  * @param {number} idCliente
  * @param {Array} padecimientosCompletos - Array de objetos {IdPadecimiento, Severidad}
- *
- * El backend espera:
- * {
- *   "IdCliente": <id>,
- *   "IdsPadecimientos": [<idPadecimiento>],
- *   "Severidad": "<valor>"
- * }
- * Por cada combinación de idPadecimiento y severidad, se hace una petición.
+ * @param {number} peso - Peso actual del cliente
  */
-function asignarPadecimientos(idCliente, padecimientosCompletos) {
+function asignarPadecimientos(idCliente, padecimientosCompletos, peso) {
   if (!padecimientosCompletos || padecimientosCompletos.length === 0) return;
 
-  // Una petición por cada combinación de IdPadecimiento y Severidad,
-  // como requiere tu backend
   const peticiones = padecimientosCompletos.map((p) => {
+    // Busca el nombre del padecimiento en la lista global
+    const padecimientoObj = window.listaPadecimientos.find(
+      (x) => x.IdPadecimiento === p.IdPadecimiento
+    );
+    const nombrePadecimiento = padecimientoObj ? padecimientoObj.Nombre : "";
+
+    // 1. Asigna el padecimiento al cliente
     return $.ajax({
       url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
       method: "POST",
       contentType: "application/json",
       data: JSON.stringify({
         IdCliente: idCliente,
-        IdsPadecimientos: [p.IdPadecimiento], // Enviamos solo el ID de este padecimiento
-        Severidad: p.Severidad, // Severidad específica para este padecimiento
+        IdsPadecimientos: [p.IdPadecimiento],
+        Severidad: p.Severidad,
       }),
+      // 2. Al éxito, registra el historial
+      success: function () {
+        registrarPadecimientoHistorial({
+          IdCliente: idCliente,
+          IdPadecimiento: p.IdPadecimiento,
+          NombrePadecimiento: nombrePadecimiento,
+          Peso: peso,
+          Severidad: p.Severidad,
+        });
+      },
     });
   });
 
   // Espera que todas terminen antes de continuar
   $.when(...peticiones)
     .done(() => (location.href = "ListaClientes.html"))
-    .fail(() => alert("Error al asignar padecimientos"));
+    .fail(() => alert("Error al asignar padecimientos o registrar historial"));
 }
 
 /**
