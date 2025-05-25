@@ -27,16 +27,19 @@ export function cargarEntrenadores(callback = null) {
 
     if (callback) callback();
   }).fail(function (jqXHR, textStatus, errorThrown) {
-    console.error("Error AJAX:", textStatus, errorThrown, jqXHR.responseText);
     alert("Error al cargar entrenadores.");
   });
 }
 
 /**
- * Carga y muestra los padecimientos disponibles en forma de checkboxes.
+ * Carga y muestra los padecimientos disponibles en forma de checkboxes + select de severidad.
  * @param {Array} padecimientosSeleccionados - IDs de padecimientos que deben aparecer seleccionados.
+ * @param {Object} severidadesSeleccionadas - Diccionario idPadecimiento: severidad (opcional para edición)
  */
-export function cargarPadecimientos(padecimientosSeleccionados = []) {
+export function cargarPadecimientos(
+  padecimientosSeleccionados = [],
+  severidadesSeleccionadas = {}
+) {
   $.get(`${API_BASE}/Padecimiento/listaPadecimientos`, function (data) {
     const $container = $("#padecimientosList");
     $container.empty();
@@ -45,14 +48,44 @@ export function cargarPadecimientos(padecimientosSeleccionados = []) {
       const checked = padecimientosSeleccionados.includes(p.IdPadecimiento)
         ? "checked"
         : "";
+      const severidad = severidadesSeleccionadas[p.IdPadecimiento] || "";
 
       const checkbox = `
-        <div class="form-check">
-            <input class="form-check-input padecimiento-item" type="checkbox" value="${p.IdPadecimiento}" id="pad-${p.IdPadecimiento}" ${checked}>
-            <label class="form-check-label" for="pad-${p.IdPadecimiento}">${p.Nombre}</label>
+        <div class="d-flex align-items-center mb-2 gap-2">
+          <input class="form-check-input padecimiento-item" type="checkbox" value="${
+            p.IdPadecimiento
+          }" id="pad-${p.IdPadecimiento}" ${checked}>
+          <label class="form-check-label me-2" for="pad-${p.IdPadecimiento}">${
+        p.Nombre
+      }</label>
+          <select class="form-select form-select-sm severidad-padecimiento" data-padecimiento="${
+            p.IdPadecimiento
+          }" style="width: auto; display: ${
+        checked ? "inline-block" : "none"
+      };">
+            <option value="">Severidad</option>
+            <option value="Leve" ${
+              severidad === "Leve" ? "selected" : ""
+            }>Leve</option>
+            <option value="Moderado" ${
+              severidad === "Moderado" ? "selected" : ""
+            }>Moderado</option>
+            <option value="Grave" ${
+              severidad === "Grave" ? "selected" : ""
+            }>Grave</option>
+          </select>
         </div>`;
 
       $container.append(checkbox);
+    });
+
+    // Mostrar/ocultar el select de severidad solo si el checkbox está seleccionado
+    $container.find('input[type="checkbox"]').on("change", function () {
+      const $select = $(this)
+        .closest("div")
+        .find("select.severidad-padecimiento");
+      $select.toggle(this.checked);
+      if (!this.checked) $select.val(""); // Limpia si se desmarca
     });
   }).fail(function () {
     alert("Error al cargar padecimientos.");
@@ -67,7 +100,6 @@ export function registrarCliente() {
   try {
     cliente = obtenerClienteDesdeFormulario("Crear");
   } catch (err) {
-    console.error(err);
     return; // Ya se alertó el error
   }
 
@@ -85,32 +117,11 @@ export function registrarCliente() {
         return;
       }
 
-      const ids = cliente.Padecimientos || [];
+      const padecimientos = cliente.PadecimientosCompletos || [];
 
       // Si hay padecimientos seleccionados, los asigna al cliente
-      if (ids.length > 0) {
-        const payload = {
-          IdCliente: clienteId,
-          IdsPadecimientos: ids,
-        };
-
-        $.ajax({
-          url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(payload),
-          success: () => {
-            alert("✅ Cliente y padecimientos registrados correctamente");
-            location.href = "ListaClientes.html";
-          },
-          error: (xhr) => {
-            console.error(
-              "❌ Error al asignar padecimientos:",
-              xhr.responseText
-            );
-            alert("❌ Error al asignar padecimientos:\n" + xhr.responseText);
-          },
-        });
+      if (padecimientos.length > 0) {
+        asignarPadecimientos(clienteId, padecimientos);
       } else {
         // Si no tiene padecimientos, solo avisa y redirige
         alert("✅ Cliente registrado sin padecimientos");
@@ -118,7 +129,6 @@ export function registrarCliente() {
       }
     },
     error: (xhr) => {
-      console.error("❌ Error al registrar cliente:", xhr.responseText);
       alert("❌ Error al registrar cliente: " + xhr.responseText);
     },
   });
@@ -159,8 +169,13 @@ export function cargarClienteEditar() {
       (p) =>
         p.PadecimientoId || p.IdPadecimiento || p.Padecimiento?.IdPadecimiento
     );
-
-    cargarPadecimientos(ids);
+    const severidades = {};
+    cliente.PadecimientosClientes.forEach((p) => {
+      const id =
+        p.PadecimientoId || p.IdPadecimiento || p.Padecimiento?.IdPadecimiento;
+      severidades[id] = p.Severidad || "";
+    });
+    cargarPadecimientos(ids, severidades);
   }
 
   // Evento de guardado del formulario de edición
@@ -191,7 +206,8 @@ export function actualizarCliente(id) {
       $.ajax({
         url: `${API_BASE}/AsignarPadecimientos/eliminarPadecimiento/${id}`,
         type: "DELETE",
-        complete: () => asignarPadecimientos(id, cliente.Padecimientos),
+        complete: () =>
+          asignarPadecimientos(id, cliente.PadecimientosCompletos),
       });
     },
     error: () => alert("Error al actualizar cliente"),
@@ -201,22 +217,38 @@ export function actualizarCliente(id) {
 /**
  * Asigna los padecimientos seleccionados a un cliente.
  * @param {number} idCliente
- * @param {Array} ids - IDs de los padecimientos a asignar.
+ * @param {Array} padecimientosCompletos - Array de objetos {IdPadecimiento, Severidad}
+ *
+ * El backend espera:
+ * {
+ *   "IdCliente": <id>,
+ *   "IdsPadecimientos": [<idPadecimiento>],
+ *   "Severidad": "<valor>"
+ * }
+ * Por cada combinación de idPadecimiento y severidad, se hace una petición.
  */
-function asignarPadecimientos(idCliente, ids) {
-  if (!ids || ids.length === 0) return;
-  const payload = ids.map((id) => ({
-    IdCliente: idCliente,
-    IdPadecimiento: id,
-  }));
-  $.ajax({
-    url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
-    method: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(payload),
-    success: () => (location.href = "ListaClientes.html"),
-    error: () => alert("Error al asignar padecimientos"),
+function asignarPadecimientos(idCliente, padecimientosCompletos) {
+  if (!padecimientosCompletos || padecimientosCompletos.length === 0) return;
+
+  // Una petición por cada combinación de IdPadecimiento y Severidad,
+  // como requiere tu backend
+  const peticiones = padecimientosCompletos.map((p) => {
+    return $.ajax({
+      url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        IdCliente: idCliente,
+        IdsPadecimientos: [p.IdPadecimiento], // Enviamos solo el ID de este padecimiento
+        Severidad: p.Severidad, // Severidad específica para este padecimiento
+      }),
+    });
   });
+
+  // Espera que todas terminen antes de continuar
+  $.when(...peticiones)
+    .done(() => (location.href = "ListaClientes.html"))
+    .fail(() => alert("Error al asignar padecimientos"));
 }
 
 /**
@@ -225,56 +257,79 @@ function asignarPadecimientos(idCliente, ids) {
  * @returns {Object} Cliente estructurado para enviar al backend
  */
 function obtenerClienteDesdeFormulario(tipo) {
-  const pref = tipo === "Crear" ? "" : "Editar";
-  const padecimientos = [];
+  const padecimientosCompletos = [];
 
-  const entrenadorSelect = $("#entrenador");
-
-  // Verifica que exista el campo de entrenador
-  if (!entrenadorSelect.length) {
-    alert("❌ El campo de entrenador no existe en el DOM.");
-    throw new Error("Elemento #entrenador no encontrado.");
+  function getCampo(id, isNumber = false, isFloat = false) {
+    const val = $(`#${id}`).val();
+    if (isNumber) {
+      const num = isFloat ? parseFloat(val) : parseInt(val, 10);
+      return isNaN(num) ? null : num;
+    }
+    return val ? val.trim() : "";
   }
 
-  // Obtiene y valida el valor del entrenador seleccionado
-  const entrenadorValorCrudo = entrenadorSelect.val();
-  const entrenadorId = parseInt(entrenadorValorCrudo);
+  // Entrenador
+  const entrenadorId = getCampo("entrenador", true);
 
-  if (isNaN(entrenadorId) || entrenadorId <= 0) {
-    alert("❌ Debes seleccionar un entrenador válido.");
-    throw new Error("EntrenadorId inválido");
-  }
-
-  // Obtiene los padecimientos seleccionados
+  // Padecimientos y severidad
   $("#padecimientosList input:checked").each(function () {
-    padecimientos.push(parseInt($(this).val()));
+    const idPadecimiento = parseInt(this.value, 10);
+    const severidad = $(this)
+      .closest("div")
+      .find("select.severidad-padecimiento")
+      .val();
+    if (!isNaN(idPadecimiento) && severidad) {
+      padecimientosCompletos.push({
+        IdPadecimiento: idPadecimiento,
+        Severidad: severidad,
+      });
+    }
   });
 
-  // Valida que la fecha de nacimiento no sea en el futuro
-  const fechaNac = new Date($(`#fechaNacimiento${pref}`).val());
+  // Fecha de nacimiento y validación
+  let fechaNacStr = getCampo("fechaNacimiento").trim();
+  if (!fechaNacStr) {
+    alert("Debes ingresar la fecha de nacimiento.");
+    throw new Error("Fecha de nacimiento vacía");
+  }
+  let fechaNacISO = fechaNacStr;
+  const fechaNac = new Date(fechaNacISO);
   const hoy = new Date();
-  if (fechaNac > hoy) {
-    alert("❌ La fecha de nacimiento no puede ser en el futuro.");
+  if (isNaN(fechaNac.getTime()) || fechaNac > hoy) {
+    alert("❌ La fecha de nacimiento no puede ser en el futuro o inválida.");
     throw new Error("Fecha de nacimiento inválida");
   }
 
-  // Retorna el objeto cliente listo para enviar al backend
-  return {
-    IdUsuario: 0, // lo ignora el backend al crear
-    Nombre: $(`#nombre${pref}`).val(),
-    Clave: $(`#clave${pref}`).val(),
-    Email: $(`#correo${pref}`).val(),
-    Telefono: parseInt($(`#telefono${pref}`).val()),
-    FechaNacimiento: $(`#fechaNacimiento${pref}`).val(),
-    Genero: $(`#genero${pref}`).val(),
-    Altura: parseFloat($(`#altura${pref}`).val()),
-    Peso: parseFloat($(`#peso${pref}`).val()),
-    EstadoPago: true,
-    EntrenadorId: entrenadorId,
-    Padecimientos: padecimientos, // este campo no lo usa el backend al crear, pero útil luego
-  };
-}
+  // Validación extra para campos requeridos
+  const nombre = getCampo("nombre");
+  const clave = getCampo("clave");
+  const email = getCampo("correo");
+  const genero = getCampo("genero");
+  if (!nombre || !clave || !email || !genero) {
+    alert(
+      "Por favor, rellena todos los campos obligatorios (nombre, clave, correo, género)."
+    );
+    throw new Error("Campos requeridos vacíos");
+  }
 
+  const cliente = {
+    IdUsuario: tipo === "Crear" ? 0 : getCampo("idUsuario", true) || 0,
+    Nombre: nombre,
+    Clave: clave,
+    Email: email,
+    Telefono: getCampo("telefono"),
+    FechaNacimiento: fechaNacISO,
+    Genero: genero,
+    Altura: getCampo("altura", true, true) || 0,
+    Peso: getCampo("peso", true, true) || 0,
+    EstadoPago: true,
+    EntrenadorId: entrenadorId || 0,
+    Padecimientos: padecimientosCompletos.map((p) => p.IdPadecimiento),
+    PadecimientosCompletos: padecimientosCompletos, // para asignar con severidad
+  };
+
+  return cliente;
+}
 /**
  * Lista todos los clientes en la tabla HTML.
  */
@@ -284,11 +339,13 @@ export function listarClientes() {
     tbody.empty();
 
     data.forEach((c) => {
-      // Convierte los padecimientos a una cadena separada por comas
+      // Convierte los padecimientos a una cadena separada por comas (con severidad)
       const padecimientos =
-        c.PadecimientosClientes?.map((p) => p.Padecimiento?.Nombre).join(
-          ", "
-        ) || "-";
+        c.PadecimientosClientes?.map((p) => {
+          const nombre = p.Padecimiento?.Nombre || "";
+          const severidad = p.Severidad ? ` (${p.Severidad})` : "";
+          return nombre + severidad;
+        }).join(", ") || "-";
 
       // Construye la fila para la tabla
       const fila = `
