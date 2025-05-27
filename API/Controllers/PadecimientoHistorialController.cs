@@ -26,30 +26,29 @@ namespace PowerVital.Controllers
         /// </summary>
         /// <param name="idCliente">Identificador del cliente (usuario).</param>
         /// <returns>Lista de historiales de padecimientos asociados al cliente.</returns>
-        [HttpGet("cliente/{idCliente}")]
+
+        [HttpGet("historialPadecimientoPorId/{idCliente}")]
         public async Task<ActionResult<IEnumerable<PadecimientoHistorialDTO>>> GetByClienteId(int idCliente)
         {
             try
             {
-                // Busca todos los historiales asociados al IdCliente recibido
                 var historiales = await _context.PadecimientosHistorial
-                    .AsNoTracking()
-                    .Where(x => x.IdCliente == idCliente)
+                    .Include(ph => ph.HistorialSalud)
+                    .Include(ph => ph.Padecimiento)
+                    .Where(ph => ph.HistorialSalud.ClienteId == idCliente)
                     .ToListAsync();
 
-                // Si no existen historiales para ese cliente, retorna 404
                 if (historiales == null || historiales.Count == 0)
                     return NotFound();
 
-                // Mapea las entidades a DTOs para la respuesta
                 var dtos = historiales.Select(ph => new PadecimientoHistorialDTO
                 {
-                    IdHistorial = ph.IdHistorial,
-                    IdCliente = ph.IdCliente,
-                    IdPadecimiento = ph.IdPadecimiento,
-                    NombrePadecimiento = ph.NombrePadecimiento,
-                    Fecha = ph.Fecha,
-                    Peso = ph.Peso,
+                    IdHistorial = ph.Id,
+                    IdCliente = ph.HistorialSalud.ClienteId,
+                    IdPadecimiento = ph.PadecimientoId,
+                    NombrePadecimiento = ph.Padecimiento.Nombre,
+                    Fecha = ph.HistorialSalud.Fecha,
+                    Peso = ph.HistorialSalud.Peso,
                     Severidad = ph.Severidad
                 }).ToList();
 
@@ -57,96 +56,86 @@ namespace PowerVital.Controllers
             }
             catch (Exception ex)
             {
-                // Retorna error 500 si ocurre una excepción inesperada
                 return StatusCode(500, new { message = "Error al obtener los historiales de padecimiento del usuario.", details = ex.Message });
             }
         }
+
+
+
+
 
         /// <summary>
         /// Crea un nuevo registro de historial de padecimiento para un cliente.
         /// </summary>
         /// <param name="dto">DTO con los datos del historial a guardar</param>
         /// <returns>DTO del historial creado</returns>
-        [HttpPost]
+
+        [HttpPost("crearHistorialPadecimiento")]
         public async Task<ActionResult<PadecimientoHistorialDTO>> Create([FromBody] PadecimientoHistorialDTO dto)
         {
             try
             {
-                // Valida las anotaciones de datos del modelo recibido
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                // Verifica si existe el cliente en la base de datos (usando IdUsuario)
                 var existeCliente = await _context.Clientes.AnyAsync(c => c.IdUsuario == dto.IdCliente);
                 if (!existeCliente)
-                {
-                    ModelState.AddModelError("IdCliente", "El cliente especificado no existe.");
-                    return BadRequest(ModelState);
-                }
+                    return BadRequest(new { message = "El cliente especificado no existe." });
 
-                // Verifica si existe el padecimiento en la base de datos
                 var existePadecimiento = await _context.Padecimientos.AnyAsync(p => p.IdPadecimiento == dto.IdPadecimiento);
                 if (!existePadecimiento)
-                {
-                    ModelState.AddModelError("IdPadecimiento", "El padecimiento especificado no existe.");
-                    return BadRequest(ModelState);
-                }
+                    return BadRequest(new { message = "El padecimiento especificado no existe." });
 
-                // Valida que la severidad sea válida
                 var severidadesValidas = new[] { "Leve", "Moderado", "Grave" };
-                if (!string.IsNullOrEmpty(dto.Severidad) && !severidadesValidas.Contains(dto.Severidad))
-                {
-                    ModelState.AddModelError("Severidad", "La severidad debe ser Leve, Moderado o Grave.");
-                    return BadRequest(ModelState);
-                }
+                if (!severidadesValidas.Contains(dto.Severidad))
+                    return BadRequest(new { message = "La severidad debe ser Leve, Moderado o Grave." });
 
-                // Valida el rango de peso
-                if (dto.Peso.HasValue && (dto.Peso < 0 || dto.Peso > 500))
+                // 1. Crear el historial de salud (si aplica)
+                var historialSalud = new HistorialSalud
                 {
-                    ModelState.AddModelError("Peso", "El peso debe estar entre 0 y 500 kg.");
-                    return BadRequest(ModelState);
-                }
+                    ClienteId = dto.IdCliente,
+                    Fecha = dto.Fecha,
+                    Peso = dto.Peso ?? 0,
+                    IndiceMasaCorporal = 0 // ajustar según necesidad
+                };
 
-                // Crea una nueva entidad a partir del DTO
+                _context.HistorialesSalud.Add(historialSalud);
+                await _context.SaveChangesAsync();
+
+                // 2. Crear el historial de padecimiento
                 var entity = new PadecimientoHistorial
                 {
-                    IdCliente = dto.IdCliente,
-                    IdPadecimiento = dto.IdPadecimiento,
-                    NombrePadecimiento = dto.NombrePadecimiento,
-                    Fecha = dto.Fecha,
-                    Peso = dto.Peso,
+                    HistorialSaludId = historialSalud.IdHistorialSalud,
+                    PadecimientoId = dto.IdPadecimiento,
                     Severidad = dto.Severidad
                 };
 
-                // Agrega la entidad al contexto y guarda los cambios
                 _context.PadecimientosHistorial.Add(entity);
                 await _context.SaveChangesAsync();
 
-                // Prepara el DTO de respuesta con el Id generado
                 var resultDto = new PadecimientoHistorialDTO
                 {
-                    IdHistorial = entity.IdHistorial,
-                    IdCliente = entity.IdCliente,
-                    IdPadecimiento = entity.IdPadecimiento,
-                    NombrePadecimiento = entity.NombrePadecimiento,
-                    Fecha = entity.Fecha,
-                    Peso = entity.Peso,
-                    Severidad = entity.Severidad
+                    IdHistorial = entity.Id,
+                    IdCliente = dto.IdCliente,
+                    IdPadecimiento = dto.IdPadecimiento,
+                    NombrePadecimiento = (await _context.Padecimientos.FindAsync(dto.IdPadecimiento)).Nombre,
+                    Fecha = historialSalud.Fecha,
+                    Peso = historialSalud.Peso,
+                    Severidad = dto.Severidad
                 };
 
-                // Retorna 201 Created apuntando al endpoint de consulta por cliente
-                return CreatedAtAction(nameof(GetByClienteId), new { idCliente = entity.IdCliente }, resultDto);
-            }
-            catch (DbUpdateException ex)
-            {
-                // Error específico de base de datos
-                return StatusCode(500, new { message = "Error de base de datos al guardar el historial de padecimiento.", details = ex.InnerException?.Message ?? ex.Message });
+                return CreatedAtAction(nameof(GetByClienteId), new { idCliente = dto.IdCliente }, resultDto);
             }
             catch (Exception ex)
             {
-                // Error inesperado
                 return StatusCode(500, new { message = "Error inesperado al guardar el historial de padecimiento.", details = ex.Message });
             }
         }
+
+
+
+
+
+
     }
 }

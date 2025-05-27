@@ -14,6 +14,8 @@ namespace PowerVital.Models
         public Entrenador Entrenador { get; set; }
         public ICollection<Rutina> Rutinas { get; set; }//Aqui tendra las rutinas del cliente, sera una lista de rutinas
         public ICollection<PadecimientoCliente> PadecimientosClientes { get; set; }// la loista de padecimientos que tendra
+        public ICollection<HistorialSalud> HistorialesSalud { get; set; }
+
         //Estos se veran reflejados en la
     }
 }
