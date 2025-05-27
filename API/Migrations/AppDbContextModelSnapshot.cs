@@ -305,7 +305,7 @@ namespace PowerVital.Migrations
             modelBuilder.Entity("PowerVital.Models.EjercicioRutina", b =>
                 {
                     b.HasOne("PowerVital.Models.Ejercicio", "Ejercicio")
-                        .WithMany("EjerciciosRutina")
+                        .WithMany()
                         .HasForeignKey("EjercicioIdEjercicio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -397,11 +397,6 @@ namespace PowerVital.Migrations
                     b.Navigation("PadecimientosClientes");
 
                     b.Navigation("PadecimientosHistorial");
-                });
-
-            modelBuilder.Entity("PowerVital.Models.Ejercicio", b =>
-                {
-                    b.Navigation("EjerciciosRutina");
                 });
 
             modelBuilder.Entity("PowerVital.Models.HistorialSalud", b =>
