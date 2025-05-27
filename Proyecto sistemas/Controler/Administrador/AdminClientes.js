@@ -264,25 +264,30 @@ function registrarPadecimientoHistorial({
 function asignarPadecimientos(idCliente, padecimientosCompletos, peso) {
   if (!padecimientosCompletos || padecimientosCompletos.length === 0) return;
 
-  const peticiones = padecimientosCompletos.map((p) => {
-    // Busca el nombre del padecimiento en la lista global
-    const padecimientoObj = window.listaPadecimientos.find(
-      (x) => x.IdPadecimiento === p.IdPadecimiento
-    );
-    const nombrePadecimiento = padecimientoObj ? padecimientoObj.Nombre : "";
+  // Arma el objeto del nuevo DTO
+  const dto = {
+    idCliente: idCliente,
+    padecimientos: padecimientosCompletos.map((p) => ({
+      idPadecimiento: p.IdPadecimiento,
+      severidad: p.Severidad,
+    })),
+  };
 
-    // 1. Asigna el padecimiento al cliente
-    return $.ajax({
-      url: `${API_BASE}/AsignarPadecimientos/asignarPadecimiento`,
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({
-        IdCliente: idCliente,
-        IdsPadecimientos: [p.IdPadecimiento],
-        Severidad: p.Severidad,
-      }),
-      // 2. Al éxito, registra el historial
-      success: function () {
+  $.ajax({
+    url: `${API_BASE}/AsignarPadecimientos/asignarPadecimientos`,
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(dto),
+    success: function () {
+      // Registrar historial de cada padecimiento
+      padecimientosCompletos.forEach((p) => {
+        const padecimientoObj = window.listaPadecimientos.find(
+          (x) => x.IdPadecimiento === p.IdPadecimiento
+        );
+        const nombrePadecimiento = padecimientoObj
+          ? padecimientoObj.Nombre
+          : "";
+
         registrarPadecimientoHistorial({
           IdCliente: idCliente,
           IdPadecimiento: p.IdPadecimiento,
@@ -290,14 +295,14 @@ function asignarPadecimientos(idCliente, padecimientosCompletos, peso) {
           Peso: peso,
           Severidad: p.Severidad,
         });
-      },
-    });
-  });
+      });
 
-  // Espera que todas terminen antes de continuar
-  $.when(...peticiones)
-    .done(() => (location.href = "ListaClientes.html"))
-    .fail(() => alert("Error al asignar padecimientos o registrar historial"));
+      location.href = "ListaClientes.html";
+    },
+    error: function (xhr) {
+      alert("❌ Error al asignar padecimientos: " + xhr.responseText);
+    },
+  });
 }
 
 /**
