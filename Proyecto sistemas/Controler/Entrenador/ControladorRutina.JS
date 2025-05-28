@@ -94,8 +94,8 @@ function mostrarTablaRutina() {
   rutinaSugerida.forEach((ej, index) => {
     $tbody.append(`
       <tr>
-        <td>${ej.nombre}</td>
-        <td>${ej.areaMuscular}</td>
+        <td>${ej.Nombre}</td>
+        <td>${ej.AreaMuscular}</td>
         <td><input type="number" value="3" min="1" class="series-input" data-index="${index}"></td>
         <td><input type="number" value="12" min="1" class="reps-input" data-index="${index}"></td>
         <td><button onclick="eliminarEjercicio(${index})">Eliminar</button></td>
@@ -103,6 +103,7 @@ function mostrarTablaRutina() {
     `);
   });
 }
+
 
 function eliminarEjercicio(index) {
   rutinaSugerida.splice(index, 1);

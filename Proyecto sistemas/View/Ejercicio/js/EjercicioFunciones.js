@@ -55,6 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("edit-guiaEjercicio")
         .value.trim();
       const dificultad = document.getElementById("edit-dificultad").value;
+      const areaMuscularAfectada = document.getElementById("edit-areaMuscularAfectada").value.trim();
+
 
       // --- VALIDACIONES ---
       // Asegúrate que ningún campo esté vacío o inválido
@@ -91,13 +93,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Crea el objeto DTO para enviar a la API
       const ejercicioDTO = {
-        nombre,
-        descripcion,
-        areaMuscular,
-        repeticiones,
-        guiaEjercicio,
-        dificultad,
-      };
+  nombre,
+  descripcion,
+  areaMuscular,
+  areaMuscularAfectada, 
+  repeticiones,
+  guiaEjercicio,
+  dificultad
+};
+
 
       try {
         // Envía la petición PUT a la API para editar el ejercicio
@@ -132,145 +136,86 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // --- AGREGAR/EDITAR DESDE FORMULARIO SEPARADO ---
-  const form = document.querySelector("form:not(#formEditarEjercicio)");
-  if (form) {
-    // Si hay parámetro id en la URL, precarga datos para editar
-    const params = new URLSearchParams(window.location.search);
-    const idEditar = params.get("id");
-    if (idEditar) {
-      fetch(`${URL_API}/obtenerEjercicioPorId/${idEditar}`)
-        .then((resp) => {
-          if (!resp.ok) throw new Error("No se pudo obtener el ejercicio");
-          return resp.json();
-        })
-        .then((data) => precargarFormulario(data))
-        .catch(() =>
-          mostrarMensaje("Error al cargar ejercicio para editar", "danger")
-        );
-    }
+  // Agrega este código dentro del bloque DOMContentLoaded, justo antes de form.addEventListener
+const form = document.querySelector("form:not(#formEditarEjercicio)");
+if (form) {
+  const params = new URLSearchParams(window.location.search);
+  const idEditar = params.get("id");
 
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      // Recolectar y limpiar los datos del formulario
-      const nombre = document.getElementById("nombre").value.trim();
-      const descripcion = document.getElementById("descripcion").value.trim();
-      const areaMuscular = document.getElementById("areaMuscular").value;
-      const repeticiones = parseInt(
-        document.getElementById("repeticiones").value,
-        10
-      );
-      const guiaEjercicio = document
-        .getElementById("guiaEjercicio")
-        .value.trim();
-      const dificultad = document.getElementById("dificultad").value;
-
-      // --- VALIDACIONES ---
-      if (
-        !nombre ||
-        !descripcion ||
-        !areaMuscular ||
-        !guiaEjercicio ||
-        !dificultad
-      ) {
-        mostrarMensaje(
-          "Por favor complete todos los campos obligatorios.",
-          "danger"
-        );
-        return;
-      }
-      if (isNaN(repeticiones) || repeticiones <= 0) {
-        mostrarMensaje(
-          "Las repeticiones deben ser un número positivo.",
-          "danger"
-        );
-        return;
-      }
-      if (!/^https?:\/\/.+\..+/.test(guiaEjercicio)) {
-        mostrarMensaje(
-          "Ingrese una URL válida para la guía del ejercicio.",
-          "danger"
-        );
-        return;
-      }
-
-      // Construye el objeto usando el modelo
-      const ejercicio = new EjercicioModel(
-        idEditar ? parseInt(idEditar) : null,
-        nombre,
-        descripcion,
-        areaMuscular,
-        repeticiones,
-        guiaEjercicio,
-        dificultad
-      );
-
-      // Crea el DTO para la API
-      const ejercicioDTO = {
-        nombre: ejercicio.nombre,
-        descripcion: ejercicio.descripcion,
-        areaMuscular: ejercicio.areaMuscular,
-        repeticiones: ejercicio.repeticiones,
-        guiaEjercicio: ejercicio.guiaEjercicio,
-        dificultad: ejercicio.dificultad,
-      };
-
-      try {
-        let response;
-        if (idEditar) {
-          // Editar ejercicio existente
-          response = await fetch(`${URL_API}/editarEjercicio/${idEditar}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(ejercicioDTO),
-          });
-        } else {
-          // Crear ejercicio nuevo
-          response = await fetch(`${URL_API}/crearEjercicio`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(ejercicioDTO),
-          });
-        }
-
-        if (response.ok) {
-          mostrarMensaje(
-            idEditar
-              ? "¡Ejercicio editado exitosamente!"
-              : "¡Ejercicio guardado exitosamente!",
-            "success"
-          );
-          form.reset();
-          // Si se editó, redirige a la lista después de 1 segundo
-          if (idEditar)
-            setTimeout(
-              () => (window.location.href = "indexEjercicio.html"),
-              1000
-            );
-        } else {
-          let errorMsg = "Error al guardar el ejercicio.";
-          try {
-            const error = await response.json();
-            if (error && error.mensaje) errorMsg += "<br>" + error.mensaje;
-          } catch (jsonErr) {}
-          mostrarMensaje(errorMsg, "danger");
-        }
-      } catch (err) {
-        mostrarMensaje(
-          "Error al conectar con la API: " + err.message,
-          "danger"
-        );
-      }
-    });
-
-    // Botón Salir: regresa a la página anterior
-    const btnSalir = document.querySelector(".btn-custom[type='button']");
-    if (btnSalir) {
-      btnSalir.addEventListener("click", () => {
-        window.history.back();
-      });
-    }
+  // --- NUEVO CÓDIGO PARA OBTENER LOS IMPEDIMENTOS MARCADOS ---
+  function obtenerImpedimentosSeleccionados() {
+    const checkboxes = document.querySelectorAll("input[name='impedimentos[]']:checked");
+    return Array.from(checkboxes).map(cb => cb.value).join(", ");
   }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const areaMuscular = document.getElementById("areaMuscular").value;
+    const repeticiones = parseInt(document.getElementById("repeticiones").value, 10);
+    const guiaEjercicio = document.getElementById("guiaEjercicio").value.trim();
+    const dificultad = document.getElementById("dificultad").value;
+    const areaMuscularAfectada = obtenerImpedimentosSeleccionados();
+
+    if (!nombre || !descripcion || !areaMuscular || !guiaEjercicio || !dificultad) {
+      mostrarMensaje("Por favor complete todos los campos obligatorios.", "danger");
+      return;
+    }
+    if (isNaN(repeticiones) || repeticiones <= 0) {
+      mostrarMensaje("Las repeticiones deben ser un número positivo.", "danger");
+      return;
+    }
+    if (!/^https?:\/\/.+\..+/.test(guiaEjercicio)) {
+      mostrarMensaje("Ingrese una URL válida para la guía del ejercicio.", "danger");
+      return;
+    }
+
+    const ejercicioDTO = {
+      nombre,
+      descripcion,
+      areaMuscular,
+      areaMuscularAfectada,
+      repeticiones,
+      guiaEjercicio,
+      dificultad
+    };
+
+    try {
+      let response;
+      if (idEditar) {
+        response = await fetch(`${URL_API}/editarEjercicio/${idEditar}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(ejercicioDTO),
+        });
+      } else {
+        response = await fetch(`${URL_API}/crearEjercicio`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(ejercicioDTO),
+        });
+      }
+
+      if (response.ok) {
+        mostrarMensaje(idEditar ? "¡Ejercicio editado exitosamente!" : "¡Ejercicio guardado exitosamente!", "success");
+        form.reset();
+        if (idEditar) setTimeout(() => (window.location.href = "indexEjercicio.html"), 1000);
+      } else {
+        let errorMsg = "Error al guardar el ejercicio.";
+        try {
+          const error = await response.json();
+          if (error && error.mensaje) errorMsg += "<br>" + error.mensaje;
+        } catch (jsonErr) {}
+        mostrarMensaje(errorMsg, "danger");
+      }
+    } catch (err) {
+      mostrarMensaje("Error al conectar con la API: " + err.message, "danger");
+    }
+  });
+}
+
 
   // --- FUNCIONES AUXILIARES ---
 
