@@ -29,7 +29,7 @@ export function cargarEntrenadores(callback = null) {
     });
 
     if (callback) callback();
-  }).fail(function (jqXHR, textStatus, errorThrown) {
+  }).fail(function () {
     alert("Error al cargar entrenadores.");
   });
 }
@@ -98,17 +98,61 @@ export function cargarPadecimientos(
 }
 
 /**
- * Registra un nuevo cliente. Si tiene padecimientos los asigna.
+ * Registra un historial de padecimiento para cada padecimiento seleccionado del cliente.
+ * Llama al endpoint '/PadecimientoHistorial/crearHistorialPadecimiento' por cada padecimiento.
+ * @param {number} idCliente - ID del cliente.
+ * @param {decimal} peso - Peso del cliente al momento de registro.
+ * @param {Array} listaPadecimientos - Lista de objetos {IdPadecimiento, Severidad}.
+ */
+function registrarHistorialPadecimientosParaCliente(
+  idCliente,
+  peso,
+  listaPadecimientos
+) {
+  if (!listaPadecimientos || listaPadecimientos.length === 0) return;
+
+  listaPadecimientos.forEach((p) => {
+    const nombrePadecimiento =
+      window.listaPadecimientos.find(
+        (x) => x.IdPadecimiento === p.IdPadecimiento
+      )?.Nombre || "";
+
+    $.ajax({
+      url: `${API_BASE}/PadecimientoHistorial/crearHistorialPadecimiento`,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        IdCliente: idCliente,
+        IdPadecimiento: p.IdPadecimiento,
+        NombrePadecimiento: nombrePadecimiento,
+        Peso: peso,
+        Severidad: p.Severidad,
+      }),
+      success: function () {
+        // Opcional: mostrar "Historial registrado" o sumar a una lista de éxitos
+      },
+      error: function (xhr) {
+        alert(
+          "Error al registrar historial de padecimiento: " + xhr.responseText
+        );
+      },
+    });
+  });
+}
+
+/**
+ * Registra un nuevo cliente. Si tiene padecimientos los asigna y guarda historial de padecimientos.
  */
 export function registrarCliente() {
   let cliente;
   try {
     cliente = obtenerClienteDesdeFormulario("Crear");
   } catch (err) {
-    return; // Ya se alertó el error
+    // Ya se alertó el error
+    return;
   }
 
-  // Envia el cliente a la API para crearlo
+  // Envía el cliente a la API para crearlo
   $.ajax({
     url: `${API_BASE}/Cliente/CrearCliente`,
     method: "POST",
@@ -122,16 +166,34 @@ export function registrarCliente() {
         return;
       }
 
+      const peso = cliente.Peso || 0;
+      const imc =
+        cliente.Altura && cliente.Altura > 0
+          ? (peso / (cliente.Altura * cliente.Altura)).toFixed(2)
+          : 0;
       const padecimientos = cliente.PadecimientosCompletos || [];
 
-      // Si hay padecimientos seleccionados, los asigna al cliente
-      if (padecimientos.length > 0) {
-        asignarPadecimientos(clienteId, padecimientos, cliente.Peso);
-      } else {
-        // Si no tiene padecimientos, solo avisa y redirige
-        alert("✅ Cliente registrado sin padecimientos");
-        location.href = "ListaClientes.html";
-      }
+      // Registrar historial de salud
+      registrarHistorialSaludCompleto(
+        clienteId,
+        peso,
+        imc,
+        new Date().toISOString(),
+        () => {
+          // Solo después del historial, asigna los padecimientos y registra historial de padecimientos
+          if (padecimientos.length > 0) {
+            asignarPadecimientos(clienteId, padecimientos);
+            registrarHistorialPadecimientosParaCliente(
+              clienteId,
+              peso,
+              padecimientos
+            );
+          } else {
+            alert("✅ Cliente registrado sin padecimientos");
+            location.href = "ListaClientes.html";
+          }
+        }
+      );
     },
     error: (xhr) => {
       alert("❌ Error al registrar cliente: " + xhr.responseText);
@@ -147,7 +209,6 @@ export function cargarClienteEditar() {
   const cliente = JSON.parse(localStorage.getItem("clienteEditar"));
   if (!cliente) return;
 
-  // Carga entrenadores y selecciona el correspondiente
   cargarEntrenadores(() => {
     $("#entrenador").val(
       cliente.Entrenador?.idIdUsuario ||
@@ -156,7 +217,6 @@ export function cargarClienteEditar() {
     );
   });
 
-  // Llena los campos del formulario con los datos del cliente
   $("#nombre").val(cliente.Nombre);
   $("#clave").val(cliente.Clave);
   $("#correo").val(cliente.Email);
@@ -166,7 +226,6 @@ export function cargarClienteEditar() {
   $("#altura").val(cliente.Altura);
   $("#peso").val(cliente.Peso);
 
-  // Si el cliente tiene padecimientos, los muestra y selecciona
   if (cliente.PadecimientosClientes?.length > 0) {
     $("#padecimiento").prop("checked", true);
     $("#contenedorPadecimientos").show();
@@ -183,7 +242,6 @@ export function cargarClienteEditar() {
     cargarPadecimientos(ids, severidades);
   }
 
-  // Evento de guardado del formulario de edición
   $("#formularioEditar")
     .off("submit")
     .submit(function (e) {
@@ -194,6 +252,7 @@ export function cargarClienteEditar() {
 
 /**
  * Actualiza la información de un cliente existente y sus padecimientos.
+ * También guarda historial de padecimientos por cada padecimiento asignado.
  * @param {number} id - ID del cliente a actualizar.
  */
 export function actualizarCliente(id) {
@@ -207,16 +266,31 @@ export function actualizarCliente(id) {
     contentType: "application/json",
     data: JSON.stringify(cliente),
     success: () => {
-      // Elimina los padecimientos previos y asigna los nuevos
+      // Elimina los padecimientos previos y luego asigna los nuevos (o muestra éxito si ya no hay)
       $.ajax({
         url: `${API_BASE}/AsignarPadecimientos/eliminarPadecimiento/${id}`,
         type: "DELETE",
-        complete: () =>
-          asignarPadecimientos(
-            id,
-            cliente.PadecimientosCompletos,
-            cliente.Peso
-          ),
+        complete: () => {
+          if (
+            cliente.PadecimientosCompletos &&
+            cliente.PadecimientosCompletos.length > 0
+          ) {
+            asignarPadecimientos(id, cliente.PadecimientosCompletos);
+            registrarHistorialPadecimientosParaCliente(
+              id,
+              cliente.Peso,
+              cliente.PadecimientosCompletos
+            );
+          } else {
+            alert("✅ Cliente actualizado sin padecimientos");
+            location.href = "ListaClientes.html";
+          }
+        },
+        error: (xhr) => {
+          alert(
+            "❌ Error al eliminar padecimientos previos: " + xhr.responseText
+          );
+        },
       });
     },
     error: () => alert("Error al actualizar cliente"),
@@ -224,52 +298,60 @@ export function actualizarCliente(id) {
 }
 
 /**
- * Registra un historial de padecimiento.
- * @param {Object} datosHistorial
- *   - IdCliente
- *   - IdPadecimiento
- *   - NombrePadecimiento
- *   - Peso
- *   - Severidad
+ * Registra el historial de salud de un cliente.
+ * IMPORTANTE: Usa el endpoint correcto '/HistorialSalud/crearHistorialSalud'
+ * @param {number} idCliente
+ * @param {number} peso
+ * @param {number} imc
+ * @param {string} fecha - Fecha en formato ISO
+ * @param {function} callback - Se llama al finalizar exitosamente la petición
  */
-function registrarPadecimientoHistorial({
-  IdCliente,
-  IdPadecimiento,
-  NombrePadecimiento,
-  Peso,
-  Severidad,
-}) {
+function registrarHistorialSaludCompleto(
+  idCliente,
+  peso,
+  imc,
+  fecha = new Date().toISOString(),
+  callback
+) {
   $.ajax({
-    url: `${API_BASE}/PadecimientoHistorial`,
+    url: `${API_BASE}/HistorialSalud/crearHistorialSalud`,
     method: "POST",
     contentType: "application/json",
     data: JSON.stringify({
-      IdCliente,
-      IdPadecimiento,
-      NombrePadecimiento,
-      Peso,
-      Severidad,
-      // Fecha la pone el backend
+      ClienteId: idCliente,
+      Fecha: fecha,
+      Peso: peso,
+      IndiceMasaCorporal: imc || 0, // coincide con el modelo backend
     }),
-    error: () => alert("Error al registrar historial de padecimiento"),
+    success: (res) => {
+      if (callback) callback(res.IdHistorialSalud || res.idHistorialSalud);
+    },
+    error: (xhr, status, error) => {
+      console.error(
+        "Error al registrar historial de salud:",
+        xhr.responseText || error
+      );
+      alert(
+        "❌ No se pudo guardar el historial de salud. Detalle: " +
+          (xhr.responseText || error)
+      );
+    },
   });
 }
 
 /**
- * Asigna los padecimientos seleccionados a un cliente y guarda el historial.
+ * Asigna los padecimientos seleccionados a un cliente usando el endpoint correcto.
  * @param {number} idCliente
  * @param {Array} padecimientosCompletos - Array de objetos {IdPadecimiento, Severidad}
- * @param {number} peso - Peso actual del cliente
  */
-function asignarPadecimientos(idCliente, padecimientosCompletos, peso) {
+function asignarPadecimientos(idCliente, padecimientosCompletos) {
   if (!padecimientosCompletos || padecimientosCompletos.length === 0) return;
 
-  // Arma el objeto del nuevo DTO
   const dto = {
-    idCliente: idCliente,
-    padecimientos: padecimientosCompletos.map((p) => ({
-      idPadecimiento: p.IdPadecimiento,
-      severidad: p.Severidad,
+    IdCliente: idCliente,
+    Padecimientos: padecimientosCompletos.map((p) => ({
+      IdPadecimiento: p.IdPadecimiento,
+      Severidad: p.Severidad,
     })),
   };
 
@@ -279,24 +361,7 @@ function asignarPadecimientos(idCliente, padecimientosCompletos, peso) {
     contentType: "application/json",
     data: JSON.stringify(dto),
     success: function () {
-      // Registrar historial de cada padecimiento
-      padecimientosCompletos.forEach((p) => {
-        const padecimientoObj = window.listaPadecimientos.find(
-          (x) => x.IdPadecimiento === p.IdPadecimiento
-        );
-        const nombrePadecimiento = padecimientoObj
-          ? padecimientoObj.Nombre
-          : "";
-
-        registrarPadecimientoHistorial({
-          IdCliente: idCliente,
-          IdPadecimiento: p.IdPadecimiento,
-          NombrePadecimiento: nombrePadecimiento,
-          Peso: peso,
-          Severidad: p.Severidad,
-        });
-      });
-
+      alert("✅ Cliente y padecimientos asignados correctamente");
       location.href = "ListaClientes.html";
     },
     error: function (xhr) {
@@ -322,7 +387,6 @@ function obtenerClienteDesdeFormulario(tipo) {
     return val ? val.trim() : "";
   }
 
-  // Entrenador
   const entrenadorId = getCampo("entrenador", true);
 
   // Padecimientos y severidad
@@ -384,6 +448,7 @@ function obtenerClienteDesdeFormulario(tipo) {
 
   return cliente;
 }
+
 /**
  * Lista todos los clientes en la tabla HTML.
  */

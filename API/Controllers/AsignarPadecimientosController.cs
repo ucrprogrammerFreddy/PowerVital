@@ -18,7 +18,7 @@ namespace PowerVital.Controllers
             _context = context;
         }
 
-        // POST: api/asignarPadecimiento
+        // POST: api/asignarPadecimientos/asignarPadecimientos
         [HttpPost("asignarPadecimientos")]
         public async Task<IActionResult> AsignarPadecimientos([FromBody] AsignarPadecimientos dto)
         {
@@ -54,8 +54,7 @@ namespace PowerVital.Controllers
             return Ok(new { mensaje = "Padecimientos asignados correctamente" });
         }
 
-
-        // GET: api/asignarPadecimiento/obtenerPadecimiento/5
+        // GET: api/asignarPadecimientos/obtenerPadecimientos/5
         [HttpGet("obtenerPadecimientos/{idCliente}")]
         public async Task<ActionResult<List<PadecimientoConSeveridad>>> ObtenerPadecimientosDeCliente(int idCliente)
         {
@@ -75,8 +74,7 @@ namespace PowerVital.Controllers
             return Ok(lista);
         }
 
-
-        // DELETE: api/asignarPadecimiento/eliminarPadecimiento/5
+        // DELETE: api/asignarPadecimientos/eliminarPadecimiento/5/2
         [HttpDelete("eliminarPadecimiento/{idCliente}/{idPadecimiento}")]
         public async Task<IActionResult> EliminarPadecimiento(int idCliente, int idPadecimiento)
         {
@@ -92,5 +90,25 @@ namespace PowerVital.Controllers
             return Ok(new { mensaje = "Padecimiento eliminado correctamente" });
         }
 
+        // CORREGIDO: DELETE: api/asignarPadecimientos/eliminarPadecimiento/5
+        [HttpDelete("eliminarPadecimiento/{idCliente}")]
+        public async Task<IActionResult> EliminarTodosLosPadecimientos(int idCliente)
+        {
+            var padecimientos = await _context.PadecimientoCliente
+                .Where(pc => pc.IdCliente == idCliente)
+                .ToListAsync();
+
+            if (padecimientos.Any())
+            {
+                _context.PadecimientoCliente.RemoveRange(padecimientos);
+                await _context.SaveChangesAsync();
+                return Ok(new { mensaje = "Todos los padecimientos del cliente fueron eliminados correctamente" });
+            }
+            else
+            {
+                // Siempre responde 200 OK aunque no haya nada que eliminar
+                return Ok(new { mensaje = "El cliente no tenía padecimientos que eliminar" });
+            }
+        }
     }
 }
