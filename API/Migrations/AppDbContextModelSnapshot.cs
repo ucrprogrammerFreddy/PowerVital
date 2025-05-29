@@ -172,7 +172,7 @@ namespace PowerVital.Migrations
                     b.Property<int>("HistorialSaludId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PadecimientoId")
+                    b.Property<int?>("PadecimientoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Severidad")
@@ -362,8 +362,7 @@ namespace PowerVital.Migrations
                     b.HasOne("Padecimiento", "Padecimiento")
                         .WithMany("PadecimientosHistorial")
                         .HasForeignKey("PadecimientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("HistorialSalud");
 
