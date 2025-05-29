@@ -166,5 +166,34 @@ namespace PowerVital.Controllers
 
             return Ok(new { mensaje = "Cliente eliminado correctamente" });
         }
+
+
+        //Este metodo se encarga de mostrar la rutina actual del cliente, con el fin de mostrarla en el modulo del entrenador
+        // GET: api/cliente/{id}/rutinaActual
+        [HttpGet("{id}/rutinaActual")]
+        public async Task<IActionResult> ObtenerRutinaActual(int id)
+        {
+            var rutina = await _context.Rutinas
+                .Where(r => r.IdCliente == id && r.FechaFin >= DateTime.Now)
+                .OrderByDescending(r => r.FechaInicio)
+                .Select(r => new
+                {
+                    r.IdRutina,
+                    r.FechaInicio,
+                    r.FechaFin,
+                    Ejercicios = r.EjerciciosRutina.Select(er => new
+                    {
+                        er.Ejercicio.Nombre,
+                        er.Ejercicio.Descripcion,
+                        er.Comentario
+                    })
+                })
+                .FirstOrDefaultAsync();
+
+            if (rutina == null)
+                return NotFound(new { mensaje = "No se encontró una rutina actual para este cliente." });
+
+            return Ok(rutina);
+        }
     }
 }

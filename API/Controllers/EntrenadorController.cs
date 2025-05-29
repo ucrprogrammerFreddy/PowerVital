@@ -154,5 +154,28 @@ namespace PowerVital.Controllers
         {
             return _context.Entrenadores.Any(e => e.IdUsuario == id);
         }
+
+
+
+        // GET: api/entrenador/{id}/clientes
+        [HttpGet("{id}/clientes")]
+        public async Task<IActionResult> ObtenerClientes(int id)
+        {
+            var clientes = await _context.Clientes
+                .Where(c => c.EntrenadorId == id)
+                .Select(c => new
+                {
+                    c.IdUsuario,              // ID del cliente
+                    c.Nombre,          // Heredado de Usuario       
+                    c.EstadoPago,
+                    c.Altura,
+                    c.Peso
+                })
+                .ToListAsync();
+
+            return Ok(clientes);
+        }
+
+
     }
 }
