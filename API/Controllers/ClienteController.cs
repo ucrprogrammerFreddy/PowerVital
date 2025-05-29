@@ -19,16 +19,43 @@ namespace PowerVital.Controllers
 
         // ✅ GET: api/cliente
         // ✅ GET: api/cliente
+        //[HttpGet("listaClientes")]
+        //public async Task<ActionResult<IEnumerable<EditarClienteDto>>> GetClientes()
+        //{
+        //    var clientes = await _context.Clientes
+        //        .Include(c => c.Entrenador)
+        //        .Include(c => c.PadecimientosClientes)
+        //                     .ThenInclude(pc => pc.Padecimiento)
+        //        .ToListAsync();
+
+        //    // Mapear a DTO
+        //    var clientesDto = clientes.Select(c => new EditarClienteDto
+        //    {
+        //        IdUsuario = c.IdUsuario,
+        //        Nombre = c.Nombre,
+        //        Clave = c.Clave,
+        //        Email = c.Email,
+        //        Telefono = c.Telefono,
+        //        FechaNacimiento = c.FechaNacimiento,
+        //        Genero = c.Genero,
+        //        Altura = c.Altura,
+        //        Peso = c.Peso,
+        //        EstadoPago = c.EstadoPago,
+        //        EntrenadorId = c.EntrenadorId
+        //    }).ToList();
+
+        //    return Ok(clientesDto);
+        //}
+
         [HttpGet("listaClientes")]
         public async Task<ActionResult<IEnumerable<EditarClienteDto>>> GetClientes()
         {
             var clientes = await _context.Clientes
                 .Include(c => c.Entrenador)
                 .Include(c => c.PadecimientosClientes)
-                             .ThenInclude(pc => pc.Padecimiento)
+                    .ThenInclude(pc => pc.Padecimiento)
                 .ToListAsync();
 
-            // Mapear a DTO
             var clientesDto = clientes.Select(c => new EditarClienteDto
             {
                 IdUsuario = c.IdUsuario,
@@ -41,11 +68,16 @@ namespace PowerVital.Controllers
                 Altura = c.Altura,
                 Peso = c.Peso,
                 EstadoPago = c.EstadoPago,
-                EntrenadorId = c.EntrenadorId
+                EntrenadorId = c.EntrenadorId,
+                Entrenador = c.Entrenador, // ¡¡AQUÍ!!
+                PadecimientosClientes = c.PadecimientosClientes.ToList()
             }).ToList();
 
             return Ok(clientesDto);
         }
+
+
+
         // ✅ GET: api/cliente/5
         [HttpGet("obtenerClientePorId/{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
