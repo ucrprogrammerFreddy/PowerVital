@@ -273,3 +273,10 @@ main.contenido {
       gap: 1rem;
       flex-wrap: wrap;
     }
+
+    #pdfCanvas {
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+}

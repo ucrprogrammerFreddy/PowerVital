@@ -97,7 +97,7 @@ namespace PowerVital.Controllers
                             "Admin" => ((Administrador)datosRol).IdUsuario,
                             "Cliente" => ((Cliente)datosRol).IdUsuario,
                             "Entrenador" => ((Entrenador)datosRol).IdUsuario,
-                            _ => 0
+                            _ => usuario.IdUsuario
                         }
                     }
                 });

@@ -84,11 +84,15 @@ namespace PowerVital.Controllers
                     .ThenInclude(ph => ph.Padecimiento)
                 .ToListAsync();
 
-            // 🔄 Obtener los padecimientos actuales (para el último historial)
             var padecimientosActuales = await _context.PadecimientoCliente
                 .Where(pc => pc.IdCliente == clienteId)
                 .Include(pc => pc.Padecimiento)
                 .ToListAsync();
+
+            var historialAgrupado = historialCompleto
+                .GroupBy(h => h.Fecha.Date)
+                .OrderBy(g => g.Key)
+                .ToList();
 
             var document = Document.Create(container =>
             {
@@ -112,20 +116,23 @@ namespace PowerVital.Controllers
 
                     page.Content().Column(content =>
                     {
-                        foreach (var hist in historialCompleto)
+                        foreach (var grupo in historialAgrupado)
                         {
-                            bool esUltimo = hist == historialCompleto.Last();
+                            var fecha = grupo.Key;
+                            var historial = grupo.Last(); // Tomamos el último historial del día
+
+                            // Si es el último historial del cliente, usamos los padecimientos actuales
+                            var esUltimo = historial == historialCompleto.Last();
                             var padecimientos = esUltimo
                                 ? padecimientosActuales
-                                : hist.Padecimientos.Select(ph => new PadecimientoCliente
+                                : grupo.SelectMany(h => h.Padecimientos.Select(ph => new PadecimientoCliente
                                 {
                                     IdPadecimiento = ph.PadecimientoId ?? 0,
                                     Padecimiento = ph.Padecimiento,
                                     Severidad = ph.Severidad
-                                }).ToList();
+                                })).ToList();
 
-                            content.Item().Element(x => x.PaddingBottom(5))
-                                  .Text($"📅 Fecha: {hist.Fecha:dd/MM/yyyy}").Bold().FontSize(13);
+                            content.Item().Text($"📅 Fecha: {fecha:dd/MM/yyyy}").Bold().FontSize(13);
 
                             content.Item().Table(table =>
                             {
@@ -152,21 +159,21 @@ namespace PowerVital.Controllers
 
                                 if (padecimientos == null || !padecimientos.Any())
                                 {
-                                    table.Cell().Text(hist.Fecha.ToShortDateString());
+                                    table.Cell().Text(fecha.ToShortDateString());
                                     table.Cell().Text("Sin padecimientos registrados");
                                     table.Cell().Text("-");
-                                    table.Cell().Text(hist.Peso.ToString("0.##"));
-                                    table.Cell().Text(hist.IndiceMasaCorporal.ToString("0.##"));
+                                    table.Cell().Text(historial.Peso.ToString("0.##"));
+                                    table.Cell().Text(historial.IndiceMasaCorporal.ToString("0.##"));
                                 }
                                 else
                                 {
                                     foreach (var p in padecimientos)
                                     {
-                                        table.Cell().Text(hist.Fecha.ToShortDateString());
+                                        table.Cell().Text(fecha.ToShortDateString());
                                         table.Cell().Text(p.Padecimiento?.Nombre ?? "N/D");
                                         table.Cell().Text(p.Severidad ?? "-");
-                                        table.Cell().Text(hist.Peso.ToString("0.##"));
-                                        table.Cell().Text(hist.IndiceMasaCorporal.ToString("0.##"));
+                                        table.Cell().Text(historial.Peso.ToString("0.##"));
+                                        table.Cell().Text(historial.IndiceMasaCorporal.ToString("0.##"));
                                     }
                                 }
                             });
@@ -185,6 +192,7 @@ namespace PowerVital.Controllers
 
             return File(stream, "application/pdf", "historial_paciente.pdf");
         }
+
 
 
 

@@ -30,7 +30,8 @@ function iniciarSesion() {
     })
     .then((data) => {
       const usuario = data.usuario;
-
+      console.log("🔎 Respuesta del backend:", data);
+      
       // Guardar información base
       sessionStorage.setItem("usuario", JSON.stringify(usuario));
       sessionStorage.setItem("rol", usuario.Rol.trim().toLowerCase());
@@ -49,7 +50,8 @@ function iniciarSesion() {
           break;
 
         case "entrenador":
-          sessionStorage.setItem("idEntrenador", usuario.IdRol);
+          
+          sessionStorage.setItem("idEntrenador", usuario.IdUsuario);
           sessionStorage.setItem("nombreEntrenador", usuario.Nombre);
           window.location.href = "../../View/Entrenador/Index.html";
           break;

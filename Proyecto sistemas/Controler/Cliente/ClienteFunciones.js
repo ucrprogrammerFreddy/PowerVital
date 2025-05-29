@@ -77,39 +77,75 @@ function cargarPDF(clienteId) {
     .then(blob => {
       const fileURL = URL.createObjectURL(blob);
 
-      // ✅ Mostrar el PDF con pdf.js
       const canvas = document.getElementById("pdfCanvas");
       const context = canvas.getContext("2d");
 
       const loadingTask = pdfjsLib.getDocument(fileURL);
       loadingTask.promise.then(pdf => {
         pdf.getPage(1).then(page => {
-          const viewport = page.getViewport({ scale: 1.5 });
+          // ✔ Escala ideal y DPI mejorado
+          const scale = 1.2;
+          const viewport = page.getViewport({ scale });
 
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
+          // Mejora de resolución: duplicamos dimensiones físicas y reducimos CSS
+          canvas.width = viewport.width * 2;
+          canvas.height = viewport.height * 2;
+
+          canvas.style.width = viewport.width + "px";
+          canvas.style.height = viewport.height + "px";
 
           const renderContext = {
             canvasContext: context,
-            viewport: viewport
+            viewport: viewport,
+            transform: [2, 0, 0, 2, 0, 0]  // 2x resolución para claridad
           };
 
           page.render(renderContext);
         });
       });
-
-      // ✅ Asignar el blob al botón de descarga
-      const btn = document.getElementById("btnDescargarPDF");
-      if (btn) {
-        btn.href = fileURL;
-        btn.download = "historial_paciente.pdf";
-      }
     })
     .catch(error => {
       console.error("❌ Error al mostrar PDF con pdf.js:", error);
     });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const vista = document.body.id;
+  const clienteId = sessionStorage.getItem("clienteId");
+
+  if (!clienteId) {
+    alert("Cliente no identificado.");
+    return;
+  }
+
+  // Agregar comportamiento al botón de descarga
+  const btnDescargar = document.getElementById("btnDescargarPDF");
+  if (btnDescargar) {
+    btnDescargar.addEventListener("click", () => {
+      const url = `${API_BASE}/HistorialSalud/pdf/${clienteId}`;
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "historial_paciente.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    });
+  }
+
+  // ⚙️ Ejecutar lógica según vista
+  switch (vista) {
+    case "vista-pdf":
+      cargarPDF(clienteId);
+      break;
+
+    case "vista-principal":
+      cargarDatosCliente(clienteId);
+      break;
+
+    default:
+      console.warn("⚠️ Vista desconocida. No se ejecutó ningún comportamiento.");
+  }
+});
 
 
 //Función común para formatear fecha
@@ -121,3 +157,5 @@ function formatearFecha(fechaISO) {
     day: '2-digit'
   });
 }
+
+
