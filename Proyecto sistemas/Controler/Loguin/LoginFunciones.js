@@ -20,47 +20,49 @@ function iniciarSesion() {
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(loginModel),
   })
     .then((response) => {
       if (!response.ok) {
-         console.log("ROL:", usuario.rol, "| Tipo:", typeof usuario.rol);
-
         throw new Error("❌ Credenciales inválidas");
       }
       return response.json();
     })
-   .then((data) => {
-  const usuario = data.usuario;
+    .then((data) => {
+      const usuario = data.usuario;
 
-  // Guardar datos base
-  sessionStorage.setItem("usuario", JSON.stringify(usuario));
-  sessionStorage.setItem("nombreEntrenador", usuario.Nombre);
+      // Guardar información base
+      sessionStorage.setItem("usuario", JSON.stringify(usuario));
+      sessionStorage.setItem("rol", usuario.Rol.trim().toLowerCase());
 
-  // ✅ Guardar ID del entrenador si aplica
-  const rol = usuario.Rol ? usuario.Rol.trim().toLowerCase() : "";
-  sessionStorage.setItem("rol", rol);
+      // Guardar datos específicos según el rol
+      const rol = usuario.Rol.trim().toLowerCase();
 
-  if (rol === "entrenador") {
-    sessionStorage.setItem("idEntrenador", usuario.IdRol);
-  }
+      switch (rol) {
+        case "admin":
+          window.location.href = "../../View/Administrador/Index.html";
+          break;
 
-  console.log("🟢 Usuario guardado en sesión:", usuario);
+        case "cliente":
+          sessionStorage.setItem("clienteId", usuario.IdUsuario); // ✅ Agregado
+          window.location.href = "../../View/Cliente/Index.html";
+          break;
 
-  // Redirigir según rol
-  switch (rol) {
-    case "admin":
-      window.location.href = "../../View/Administrador/Index.html";
-      break;
-    case "cliente":
-      window.location.href = "../../View/Cliente/Index.html";
-      break;
-    case "entrenador":
-      window.location.href = "../../View/Entrenador/Index.html";
-      break;
-    default:
-      alert("⚠️ Rol no reconocido. Contacte al administrador.");
-  }
-})
+        case "entrenador":
+          sessionStorage.setItem("idEntrenador", usuario.IdRol);
+          sessionStorage.setItem("nombreEntrenador", usuario.Nombre);
+          window.location.href = "../../View/Entrenador/Index.html";
+          break;
+
+        default:
+          alert("⚠️ Rol no reconocido. Contacte al administrador.");
+          break;
+      }
+
+      console.log("🟢 Usuario guardado en sesión:", usuario);
+    })
+    .catch((error) => {
+      console.error("Error al iniciar sesión:", error);
+      alert("❌ Credenciales inválidas o error en el servidor.");
+    });
 }
