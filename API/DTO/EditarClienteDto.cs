@@ -1,4 +1,6 @@
-﻿namespace PowerVital.DTO
+﻿using PowerVital.Models;
+
+namespace PowerVital.DTO
 {
     public class EditarClienteDto
     {
@@ -14,5 +16,9 @@
         public decimal Peso { get; set; }
         public bool EstadoPago { get; set; }
         public int EntrenadorId { get; set; }
+        public Entrenador? Entrenador { get; set; } // <-- AGREGADO
+        public List<PadecimientoCliente>? PadecimientosClientes { get; set; }
+
+
     }
 }
