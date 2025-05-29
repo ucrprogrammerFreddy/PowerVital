@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vista Entrenador - Clientes</title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css" />
+
   <style>
     body.sidebar-active #openSidebar {
       display: none;
@@ -14,6 +17,7 @@
   </style>
 </head>
 <body>
+  <!-- Botón de menú -->
   <button class="btn btn-outline-dark position-absolute m-3" id="openSidebar">
     <i class="fas fa-bars"></i>
   </button>
@@ -27,50 +31,56 @@
     </nav>
   </header>
 
+  <!-- Contenido principal -->
   <main class="container-fluid my-4">
     <div class="d-flex flex-wrap gap-2 justify-content-center mb-3">
       <input type="text" class="form-control form-control-lg w-50" placeholder="Buscar cliente..." />
       <button class="btn btn-custom px-4">Buscar</button>
     </div>
+
     <div class="table-responsive px-4">
       <table class="table table-bordered bg-white w-100 mx-auto" style="max-width: 1100px;">
-        <thead class="table-light">
-          <tr>
-            <th scope="col"><input type="checkbox" checked disabled></th>
-            <th scope="col">Nombre Usuario</th>
-            <th scope="col">Rutina</th>
-            <th scope="col">Historial Médico</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox" checked></td>
-            <td>Carmen Vargas Chavarria</td>
-            <td><a href="#">Ver</a> | <a href="#">Nueva Rutina</a></td>
-            <td><a href="#">Ver</a></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" checked></td>
-            <td>Carmen Carrillo Carbajal</td>
-            <td><a href="#">Ver</a> | <a href="#">Nueva Rutina</a></td>
-            <td><a href="#">Ver</a></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" checked></td>
-            <td>Carmen Iobo Rodríguez</td>
-            <td><a href="#">Nueva Rutina</a></td>
-            <td><a href="#">Ver</a></td>
-          </tr>
+          <thead class="table-light text-center">
+            <tr>
+
+              <th scope="col">Nombre</th>
+              <th scope="col">Rutina</th>
+              <th scope="col">Nueva Rutina</th>
+              <th scope="col">Perfil</th>
+            </tr>
+          </thead>
+        <tbody id="tablaClientes">
+          <!-- Contenido dinámico desde ControladorEntrenador.js -->
         </tbody>
       </table>
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <img src="../../Complementos/img/facebook.png" alt="Facebook" class="footer-logo" />
     <img src="../../Complementos/img/instagram.png" alt="Instagram" class="footer-logo" />
   </footer>
 
+  <!-- Modal Rutina -->
+  <div class="modal fade" id="modalRutina" tabindex="-1" aria-labelledby="modalRutinaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRutinaLabel">Rutina del Cliente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" id="contenidoRutina">
+          <!-- Contenido de la rutina se inyecta aquí -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuEntren.js"></script>
   <script type="module" src="/Proyecto sistemas/Controler/Entrenador/ControladorEntrenador.js"></script>
 </body>

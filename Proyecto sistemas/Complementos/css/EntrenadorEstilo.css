@@ -434,3 +434,14 @@ main.container-fluid {
   padding-left: 2rem;
   font-size: 0.9rem;
 }
+
+.btn-salud {
+  background-color: #e88a9e; /* tono rosado-rojo */
+  color: white;
+  border: none;
+}
+
+.btn-salud:hover {
+  background-color: #d56d84;
+}
+

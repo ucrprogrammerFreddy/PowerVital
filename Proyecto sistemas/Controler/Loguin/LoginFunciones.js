@@ -31,14 +31,24 @@ function iniciarSesion() {
       }
       return response.json();
     })
-    .then((data) => {
+   .then((data) => {
   const usuario = data.usuario;
+
+  // Guardar datos base
   sessionStorage.setItem("usuario", JSON.stringify(usuario));
+  sessionStorage.setItem("nombreEntrenador", usuario.Nombre);
+
+  // ✅ Guardar ID del entrenador si aplica
+  const rol = usuario.Rol ? usuario.Rol.trim().toLowerCase() : "";
+  sessionStorage.setItem("rol", rol);
+
+  if (rol === "entrenador") {
+    sessionStorage.setItem("idEntrenador", usuario.IdRol);
+  }
+
   console.log("🟢 Usuario guardado en sesión:", usuario);
 
-  // ✅ Definir rol correctamente
-  const rol = usuario.Rol ? usuario.Rol.trim().toLowerCase() : "";
-
+  // Redirigir según rol
   switch (rol) {
     case "admin":
       window.location.href = "../../View/Administrador/Index.html";
@@ -53,5 +63,4 @@ function iniciarSesion() {
       alert("⚠️ Rol no reconocido. Contacte al administrador.");
   }
 })
-
 }

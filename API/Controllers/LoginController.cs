@@ -90,7 +90,15 @@ namespace PowerVital.Controllers
                         usuario.IdUsuario,
                         usuario.Nombre,
                         usuario.Email,
-                        Rol = usuario.Rol.ToLower()
+                        Rol = usuario.Rol.ToLower(),
+
+                        IdRol = usuario.Rol switch
+                        {
+                            "Admin" => ((Administrador)datosRol).IdUsuario,
+                            "Cliente" => ((Cliente)datosRol).IdUsuario,
+                            "Entrenador" => ((Entrenador)datosRol).IdUsuario,
+                            _ => 0
+                        }
                     }
                 });
             }
