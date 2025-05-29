@@ -118,11 +118,16 @@ namespace PowerVital.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var correoExistente = await _context.Usuarios.AnyAsync(u => u.Email == dto.Email);
+            string emailNormalizado = dto.Email.ToLower();
+
+            // Buscar si ya existe el email en Usuarios o Administradores (por si acaso hay desincronización)
+            var correoExistente = await _context.Usuarios.AnyAsync(u => u.Email.ToLower() == emailNormalizado)
+                || await _context.Administradores.AnyAsync(a => a.Email.ToLower() == emailNormalizado);
+
             if (correoExistente)
                 return Conflict(new { message = "⚠️ El correo electrónico ya está registrado." });
 
-            // 👇 Crear instancia del Administrador (hereda de Usuario)
+            // Crear instancia del Administrador (hereda de Usuario)
             var admin = new Administrador
             {
                 Nombre = dto.Nombre,
@@ -133,7 +138,6 @@ namespace PowerVital.Controllers
                 titulacion = dto.FormacionAcademica
             };
 
-            // 👇 Solo se agrega UNA VEZ como Administrador
             _context.Administradores.Add(admin);
             await _context.SaveChangesAsync();
 
@@ -143,8 +147,6 @@ namespace PowerVital.Controllers
                 id = admin.IdUsuario
             });
         }
-
-
 
 
 

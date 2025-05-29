@@ -152,7 +152,7 @@ export function registrarCliente() {
     return;
   }
 
-  // Envía el cliente a la API para crearlo
+  // Validación de email en backend
   $.ajax({
     url: `${API_BASE}/Cliente/CrearCliente`,
     method: "POST",
@@ -196,7 +196,13 @@ export function registrarCliente() {
       );
     },
     error: (xhr) => {
-      alert("❌ Error al registrar cliente: " + xhr.responseText);
+      if (xhr.status === 409) {
+        alert(
+          "❌ " + (xhr.responseJSON?.mensaje || "El correo ya está registrado.")
+        );
+      } else {
+        alert("❌ Error al registrar cliente: " + xhr.responseText);
+      }
     },
   });
 }
@@ -259,14 +265,12 @@ export function actualizarCliente(id) {
   const cliente = obtenerClienteDesdeFormulario("Editar");
   cliente.IdUsuario = id;
 
-  // Actualiza el cliente en la API
   $.ajax({
     url: `${API_BASE}/Cliente/editarCliente`,
     method: "PUT",
     contentType: "application/json",
     data: JSON.stringify(cliente),
     success: () => {
-      // Elimina los padecimientos previos y luego asigna los nuevos (o muestra éxito si ya no hay)
       $.ajax({
         url: `${API_BASE}/AsignarPadecimientos/eliminarPadecimiento/${id}`,
         type: "DELETE",
@@ -282,8 +286,29 @@ export function actualizarCliente(id) {
               cliente.PadecimientosCompletos
             );
           } else {
-            alert("✅ Cliente actualizado sin padecimientos");
-            location.href = "ListaClientes.html";
+            // Registrar historial "sin padecimientos" cuando se eliminan todos
+            $.ajax({
+              url: `${API_BASE}/PadecimientoHistorial/crearHistorialPadecimiento`,
+              method: "POST",
+              contentType: "application/json",
+              data: JSON.stringify({
+                IdCliente: id,
+                IdPadecimiento: null,
+                NombrePadecimiento: "Sin padecimientos",
+                Peso: cliente.Peso || 0,
+                Severidad: "",
+              }),
+              complete: function () {
+                alert("✅ Cliente actualizado sin padecimientos");
+                location.href = "ListaClientes.html";
+              },
+              error: function (xhr) {
+                alert(
+                  "❌ Error al registrar historial de padecimiento: " +
+                    xhr.responseText
+                );
+              },
+            });
           }
         },
         error: (xhr) => {
@@ -293,7 +318,15 @@ export function actualizarCliente(id) {
         },
       });
     },
-    error: () => alert("Error al actualizar cliente"),
+    error: (xhr) => {
+      if (xhr.status === 409) {
+        alert(
+          "❌ " + (xhr.responseJSON?.mensaje || "El correo ya está registrado.")
+        );
+      } else {
+        alert("❌ Error al actualizar cliente: " + xhr.responseText);
+      }
+    },
   });
 }
 

@@ -95,6 +95,8 @@ namespace PowerVital.Controllers
             padecimiento.Descripcion = dto.Descripcion;
             padecimiento.AreaMuscularAfectada = dto.AreaMuscularAfectada;
 
+        
+
             _context.Entry(padecimiento).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 

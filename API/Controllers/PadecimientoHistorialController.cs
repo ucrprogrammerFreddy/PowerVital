@@ -24,9 +24,6 @@ namespace PowerVital.Controllers
         /// <summary>
         /// Obtiene todos los historiales de padecimiento de un cliente por su IdCliente.
         /// </summary>
-        /// <param name="idCliente">Identificador del cliente (usuario).</param>
-        /// <returns>Lista de historiales de padecimientos asociados al cliente.</returns>
-
         [HttpGet("historialPadecimientoPorId/{idCliente}")]
         public async Task<ActionResult<IEnumerable<PadecimientoHistorialDTO>>> GetByClienteId(int idCliente)
         {
@@ -46,7 +43,9 @@ namespace PowerVital.Controllers
                     IdHistorial = ph.Id,
                     IdCliente = ph.HistorialSalud.ClienteId,
                     IdPadecimiento = ph.PadecimientoId,
-                    NombrePadecimiento = ph.Padecimiento.Nombre,
+                    NombrePadecimiento = ph.PadecimientoId == null
+                        ? "Sin padecimientos"
+                        : ph.Padecimiento?.Nombre ?? "",
                     Fecha = ph.HistorialSalud.Fecha,
                     Peso = ph.HistorialSalud.Peso,
                     Severidad = ph.Severidad
@@ -60,16 +59,10 @@ namespace PowerVital.Controllers
             }
         }
 
-
-
-
-
         /// <summary>
         /// Crea un nuevo registro de historial de padecimiento para un cliente.
+        /// Permite guardar también el caso "sin padecimientos".
         /// </summary>
-        /// <param name="dto">DTO con los datos del historial a guardar</param>
-        /// <returns>DTO del historial creado</returns>
-
         [HttpPost("crearHistorialPadecimiento")]
         public async Task<ActionResult<PadecimientoHistorialDTO>> Create([FromBody] PadecimientoHistorialDTO dto)
         {
@@ -82,46 +75,64 @@ namespace PowerVital.Controllers
                 if (!existeCliente)
                     return BadRequest(new { message = "El cliente especificado no existe." });
 
-                var existePadecimiento = await _context.Padecimientos.AnyAsync(p => p.IdPadecimiento == dto.IdPadecimiento);
-                if (!existePadecimiento)
-                    return BadRequest(new { message = "El padecimiento especificado no existe." });
+                // Cambia aquí: ahora IdPadecimiento es int? (nullable)
+                bool sinPadecimientos = !dto.IdPadecimiento.HasValue || dto.IdPadecimiento == 0;
 
-                var severidadesValidas = new[] { "Leve", "Moderado", "Grave" };
-                if (!severidadesValidas.Contains(dto.Severidad))
-                    return BadRequest(new { message = "La severidad debe ser Leve, Moderado o Grave." });
+                if (!sinPadecimientos)
+                {
+                    var existePadecimiento = await _context.Padecimientos.AnyAsync(p => p.IdPadecimiento == dto.IdPadecimiento);
+                    if (!existePadecimiento)
+                        return BadRequest(new { message = "El padecimiento especificado no existe." });
 
-                // 1. Crear el historial de salud (si aplica)
+                    var severidadesValidas = new[] { "Leve", "Moderado", "Grave" };
+                    if (!string.IsNullOrEmpty(dto.Severidad) && !severidadesValidas.Contains(dto.Severidad))
+                        return BadRequest(new { message = "La severidad debe ser Leve, Moderado o Grave." });
+                }
+
+                // Crear el historial de salud
                 var historialSalud = new HistorialSalud
                 {
                     ClienteId = dto.IdCliente,
                     Fecha = dto.Fecha,
                     Peso = dto.Peso ?? 0,
-                    IndiceMasaCorporal = 0 // ajustar según necesidad
+                    IndiceMasaCorporal = 0 // ajustar si se requiere
                 };
 
                 _context.HistorialesSalud.Add(historialSalud);
                 await _context.SaveChangesAsync();
 
-                // 2. Crear el historial de padecimiento
+                // Crear el historial de padecimiento (puede ser null para "sin padecimientos")
                 var entity = new PadecimientoHistorial
                 {
                     HistorialSaludId = historialSalud.IdHistorialSalud,
-                    PadecimientoId = dto.IdPadecimiento,
-                    Severidad = dto.Severidad
+                    PadecimientoId = sinPadecimientos ? null : dto.IdPadecimiento,
+                    Severidad = sinPadecimientos ? "" : dto.Severidad
                 };
 
                 _context.PadecimientosHistorial.Add(entity);
                 await _context.SaveChangesAsync();
 
+                // Al crear el DTO de respuesta, valida que IdPadecimiento no sea null antes de buscar el nombre
+                string nombrePadecimiento;
+                if (sinPadecimientos)
+                {
+                    nombrePadecimiento = "Sin padecimientos";
+                }
+                else
+                {
+                    var padecimiento = await _context.Padecimientos.FindAsync(dto.IdPadecimiento);
+                    nombrePadecimiento = padecimiento?.Nombre ?? "";
+                }
+
                 var resultDto = new PadecimientoHistorialDTO
                 {
                     IdHistorial = entity.Id,
                     IdCliente = dto.IdCliente,
-                    IdPadecimiento = dto.IdPadecimiento,
-                    NombrePadecimiento = (await _context.Padecimientos.FindAsync(dto.IdPadecimiento)).Nombre,
+                    IdPadecimiento = entity.PadecimientoId,
+                    NombrePadecimiento = nombrePadecimiento,
                     Fecha = historialSalud.Fecha,
                     Peso = historialSalud.Peso,
-                    Severidad = dto.Severidad
+                    Severidad = entity.Severidad
                 };
 
                 return CreatedAtAction(nameof(GetByClienteId), new { idCliente = dto.IdCliente }, resultDto);
@@ -131,11 +142,5 @@ namespace PowerVital.Controllers
                 return StatusCode(500, new { message = "Error inesperado al guardar el historial de padecimiento.", details = ex.Message });
             }
         }
-
-
-
-
-
-
     }
 }

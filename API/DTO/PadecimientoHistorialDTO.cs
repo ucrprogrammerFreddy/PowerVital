@@ -9,18 +9,18 @@ namespace PowerVital.DTO
         [Required]
         public int IdCliente { get; set; }
 
-        [Required]
-        public int IdPadecimiento { get; set; }
+        // Cambia a nullable
+        public int? IdPadecimiento { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string NombrePadecimiento { get; set; } // Copia textual del nombre
+        public string NombrePadecimiento { get; set; }
 
         public DateTime Fecha { get; set; } = DateTime.Now;
 
-        public decimal? Peso { get; set; } // Peso del cliente al momento
+        public decimal? Peso { get; set; }
 
         [StringLength(20)]
-        public string Severidad { get; set; } // Leve, Moderado, Grave
+        public string Severidad { get; set; }
     }
 }

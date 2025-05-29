@@ -10,10 +10,10 @@ namespace PowerVital.Models
         public string Descripcion { get; set; }
         public string AreaMuscular { get; set; }
         public string AreaMuscularAfectada { get; set; }
-        public int Repeticiones { get; set; }
-        public String GuiaEjercicio { get; set; }
+        public int Repeticiones { get; set; } 
+        public string GuiaEjercicio { get; set; }  
 
-        public String Dificultad { get; set; }
+        public string Dificultad { get; set; }
 
     }
 }

@@ -5,25 +5,21 @@ namespace PowerVital.Models
 {
     public class PadecimientoHistorial
     {
-         [Key]
-    public int Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    public int HistorialSaludId { get; set; }
+        [Required]
+        public int HistorialSaludId { get; set; }
 
-    [ForeignKey("HistorialSaludId")]
-    public HistorialSalud HistorialSalud { get; set; }
+        [ForeignKey("HistorialSaludId")]
+        public HistorialSalud HistorialSalud { get; set; }
 
-    [Required]
-    public int PadecimientoId { get; set; }
+        public int? PadecimientoId { get; set; } // <-- Cambiado a nullable
 
-    [ForeignKey("PadecimientoId")]
-    public Padecimiento Padecimiento { get; set; }
+        [ForeignKey("PadecimientoId")]
+        public Padecimiento Padecimiento { get; set; }
 
-    [Required]
-    [StringLength(20)]
-    public string Severidad { get; set; } // Ejemplo: Leve, Moderado, Grave
-    
-
+        [StringLength(20)]
+        public string Severidad { get; set; } // Ejemplo: Leve, Moderado, Grave
     }
 }

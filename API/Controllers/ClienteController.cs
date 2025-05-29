@@ -18,8 +18,9 @@ namespace PowerVital.Controllers
         }
 
         // ✅ GET: api/cliente
+        // ✅ GET: api/cliente
         [HttpGet("listaClientes")]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<EditarClienteDto>>> GetClientes()
         {
             var clientes = await _context.Clientes
                 .Include(c => c.Entrenador)
@@ -27,10 +28,24 @@ namespace PowerVital.Controllers
                              .ThenInclude(pc => pc.Padecimiento)
                 .ToListAsync();
 
-            return Ok(clientes);
-        }
-        
+            // Mapear a DTO
+            var clientesDto = clientes.Select(c => new EditarClienteDto
+            {
+                IdUsuario = c.IdUsuario,
+                Nombre = c.Nombre,
+                Clave = c.Clave,
+                Email = c.Email,
+                Telefono = c.Telefono,
+                FechaNacimiento = c.FechaNacimiento,
+                Genero = c.Genero,
+                Altura = c.Altura,
+                Peso = c.Peso,
+                EstadoPago = c.EstadoPago,
+                EntrenadorId = c.EntrenadorId
+            }).ToList();
 
+            return Ok(clientesDto);
+        }
         // ✅ GET: api/cliente/5
         [HttpGet("obtenerClientePorId/{id}")]
         public async Task<ActionResult<Cliente>> GetCliente(int id)
@@ -65,6 +80,11 @@ namespace PowerVital.Controllers
             var entrenador = await _context.Entrenadores.FirstOrDefaultAsync(e => e.IdUsuario == dto.EntrenadorId);
             if (entrenador == null)
                 return BadRequest(new { mensaje = "El entrenador especificado no existe" });
+
+            // *** VALIDA QUE EL EMAIL NO ESTÉ YA REGISTRADO ***
+            var emailExiste = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
+            if (emailExiste)
+                return Conflict(new { mensaje = "El correo electrónico ya está registrado." });
 
             var nuevoCliente = new Cliente
             {
@@ -109,6 +129,11 @@ namespace PowerVital.Controllers
 
             if (dto.FechaNacimiento > DateTime.Now)
                 return BadRequest(new { mensaje = "La fecha de nacimiento no puede ser en el futuro" });
+
+            // *** VALIDA QUE EL EMAIL NO ESTÉ YA REGISTRADO POR OTRO CLIENTE ***
+            var emailExiste = await _context.Clientes.AnyAsync(c => c.Email == dto.Email && c.IdUsuario != dto.IdUsuario);
+            if (emailExiste)
+                return Conflict(new { mensaje = "El correo electrónico ya está registrado por otro usuario." });
 
             cliente.Nombre = dto.Nombre;
             cliente.Clave = dto.Clave;
