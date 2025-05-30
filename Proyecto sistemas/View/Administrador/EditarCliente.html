@@ -123,6 +123,7 @@
 
 
 
+
   <script type="module">
     import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
     renderAdminLayout();
@@ -153,7 +154,30 @@
       });
     });
   </script> -->
+  <script type="module">
+    import {
+      cargarClienteEditar,
+      cargarEntrenadores,
+      cargarPadecimientos
+    } from "../../Controler/Administrador/AdminClientes.js";
 
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
+
+    $(document).ready(() => {
+      cargarEntrenadores(); // ← ¡Agrega esta línea!
+      cargarClienteEditar();
+
+      $("#padecimiento").on("change", function () {
+        if (this.checked) {
+          $("#contenedorPadecimientos").show();
+          cargarPadecimientos();
+        } else {
+          $("#contenedorPadecimientos").hide().find("input[type='checkbox']").prop("checked", false);
+        }
+      });
+    });
+  </script>
 
 
 
