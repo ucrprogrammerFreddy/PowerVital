@@ -11,126 +11,64 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body class="">
-
-  <!-- Sidebar -->
-  <aside id="sidebar" class="text-white p-3">
-    <nav class="navbar container-fluid">
-      <div class="container-fluid">
-        <div class="row mb-3 container-fluid">
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas"
-              data-bs-target="#menuLateral" aria-controls="menuLateral">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="menuLateralLabel">Menú</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                  aria-label="Cerrar"></button>
-              </div>
-              <div class="offcanvas-body">
-                <form class="d-flex mb-3" role="search">
-                  <input class="form-control form-control-sm me-2" type="search" placeholder="Buscar"
-                    aria-label="Buscar">
-                </form>
-                <ul class="navbar-nav">
-                  <li class="nav-item"><a class="nav-link fw-semibold" href="#">Inicio</a></li>
-                  <li class="nav-item"><a class="nav-link fw-semibold" href="#">Pagos</a></li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle align-items-center gap-2" href="#" id="usuariosDropdown"
-                      role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-person-circle fs-5"></i>
-                      <span class="fw-semibold">Usuarios</span>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="usuariosDropdown">
-                      <li><a class="dropdown-item" href="#">Clientes</a></li>
-                      <li><a class="dropdown-item" href="AdminListaEmpleados.html">Empleados</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item"><a class="nav-link fw-semibold" href="#">Ejercicios</a></li>
-                  <li class="nav-item"><a class="nav-link fw-semibold" href="#">Padecimientos</a></li>
-                  <li class="nav-item"><a class="nav-link fw-semibold" href="#">Cerrar Sesión</a></li>
-                </ul>
-              </div>
+<body class="container-fluid">
+  <main>
+    <div class="container-main mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow">
+            <div class="card-header bg-primary text-white text-center">
+              <h5 class="mb-0">Formulario de Administrador</h5>
             </div>
-          </div>
+            <div class="card-body">
+              <form id="formEditarAdministrador">
+                <input type="hidden" id="idadmin" />
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" required />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo:</label>
+                  <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+                <div class="mb-3">
+                  <label for="clave" class="form-label">Clave:</label>
+                  <input type="password" class="form-control" id="clave" name="clave" required />
+                </div>
+                <div class="mb-3">
+                  <label for="telefono" class="form-label">Teléfono:</label>
+                  <input type="number" class="form-control" id="telefono" name="telefono" required />
+                </div>
 
-          <div class="col-md-4 col-sm-6 col-xs-12 text-center">
-            <a class="navbar-brand mx-auto" href="#">
-              <img src="../../Complementos/img/logoof.png" alt="Logo PowerVital" class="me-2" />
-            </a>
-          </div>
-
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <form action="/logout" method="POST" class="m-0 d-flex justify-content-end">
-              <button type="submit" class="btn btn-cerrar btn-sm">
-                Cerrar Sesión
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </aside>
-
-  <header class="container-fluid">
-    <nav class="navbar container-fluid">
-      <!-- Puedes duplicar el menú aquí si deseas mantenerlo en el header -->
-    </nav>
-  </header>
-
-  <!-- Formulario Principal -->
-  <div class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-header bg-primary text-white text-center">
-            <h5 class="mb-0">Formulario de Administrador</h5>
-          </div>
-          <div class="card-body">
-            <form id="formEditarAdministrador">
-              <input type="hidden" id="idadmin" />
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required />
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Correo:</label>
-                <input type="email" class="form-control" id="email" name="email" required />
-              </div>
-              <div class="mb-3">
-                <label for="clave" class="form-label">Clave:</label>
-                <input type="password" class="form-control" id="clave" name="clave" required />
-              </div>
-              <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="number" class="form-control" id="telefono" name="telefono" required />
-              </div>
-
-              <div class="mb-3">
-                <label for="titulacion" class="form-label">Formacion Academica:</label>
-                <input type="text" class="form-control" id="formacionAcademica" name="formacionAcademica" />
-              </div>
-              <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Aceptar</button>
-                <button type="button" class="btn btn-secondary" id="btnVolver">Volver</button>
-              </div>
-            </form>
+                <div class="mb-3">
+                  <label for="titulacion" class="form-label">Formacion Academica:</label>
+                  <input type="text" class="form-control" id="formacionAcademica" name="formacionAcademica" />
+                </div>
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn btn-success">Aceptar</button>
+                  <button type="button" class="btn btn-secondary" id="btnVolver">Volver</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </main>
+  <!-- Sidebar -->
 
-  <!-- Footer -->
+
+
+  <!-- Formulario Principal -->
+
+
+  <!-- Footer 
   <footer class="mt-4 text-center">
     <img src="../../Complementos/img/facebook.png" alt="Facebook">
     <img src="../../Complementos/img/instagram.png" alt="Instagram">
-  </footer>
+  </footer>-->
 
-  <!-- Scripts -->
+  <!-- Scripts 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const toggleUsuarios = document.getElementById("toggleUsuarios");
@@ -144,6 +82,10 @@
         });
       }
     });
+  </script>-->
+  <script type="module">
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
   </script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

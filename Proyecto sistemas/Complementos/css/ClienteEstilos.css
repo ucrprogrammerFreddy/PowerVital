@@ -170,7 +170,6 @@ body {
   background-color: #f7c7db;
   color: #6b304f;
 }
-
 /* ========================
    FOOTER FIJO
 ========================= */
@@ -178,9 +177,10 @@ footer.pie {
   position: fixed;
   bottom: 0;
   left: 0;
-  height: 60px;
+  height: 100px;
   width: 100%;
   background-color: #022227;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,17 +188,16 @@ footer.pie {
   z-index: 1000;
 }
 
-footer.pie a i {
-  background-color: white;
-  color: #316163;
-  border-radius: 50%;
-  padding: 8px;
-  font-size: 18px;
-  transition: background 0.3s ease;
+.icono-social {
+  width: 50px;
+  height: 50px;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+  margin: 0 10px;
 }
 
-footer.pie a i:hover {
-  background-color: #f0f0f0;
+.icono-social:hover {
+  filter: grayscale(0%);
 }
 
 /* ========================

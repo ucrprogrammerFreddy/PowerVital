@@ -1,8 +1,16 @@
 export function FooterCliente() {
   return `
-  <footer class="pie">
-    <img src="../../Complementos/img/facebook.png" alt="Imagen del footer" class="footer-logo" />
-    <img src="../../Complementos/img/instagram.png" alt="Imagen del footer" class="footer-logo" />
+  <footer class="pie container-fluid">
+    <div class="row">
+      <div class="col-6">
+ <p>PowerVital Todos los derechos Reservados</p>
+      </div>
+       <div class="col-6">
+  <img src="../../Complementos/img/facebook.png" alt="Facebook" class="icono-social" />
+      <img src="../../Complementos/img/instagram.png" alt="Instagram" class="icono-social" />
+      </div>
+
+    </div>
   </footer>
   `;
 }

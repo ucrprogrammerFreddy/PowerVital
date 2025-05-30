@@ -116,13 +116,13 @@ footer img {
 }
 
 footer {
-  background-color: #316163;
+  background-color: #022227;
   color: #ffffff;
   padding: 1rem 0;
   /*position: absolute;
   bottom: 0;
-  width: 100%;*/
-  border-radius: 8px;
+  width: 100%;
+  border-radius: 8px;*/
 }
 
   footer img {
@@ -216,7 +216,7 @@ header {
   }
 
 footer {
-  background-color: #316163;
+  background-color: #022227;
   color: #ffffff;
   padding: 1rem 0;
 }
