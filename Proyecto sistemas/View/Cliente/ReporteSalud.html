@@ -19,8 +19,8 @@
       flex-wrap: wrap;
     }
   </style>
-</head>
-<body>
+</head> 
+<body id="vista-pdf">
 
   <!-- Header -->
   <header class="encabezado">
@@ -41,7 +41,11 @@
 
           <!-- Visor de PDF -->
           <div class="mb-4">
-            <iframe src="/Proyecto sistemas/docs/historial_paciente.pdf" class="pdf-viewer" frameborder="0"></iframe>
+            <!-- Contenedor donde dibujarás el PDF -->
+            <canvas id="pdfCanvas" style="width: 100%; height: auto; max-width: 900px; margin: auto; display: block;"></canvas>
+
+
+          
           </div>
 
           <!-- Botones -->
@@ -50,7 +54,7 @@
               <i class="fas fa-arrow-left me-2"></i>Volver
             </a>
 
-            <a href="/Proyecto sistemas/docs/historial_paciente.pdf" download class="btn btn-success">
+            <a id="btnDescargarPDF" class="btn btn-success">
               <i class="fas fa-download me-2"></i>Descargar PDF
             </a>
 
@@ -63,9 +67,13 @@
     </div>
   </div>
 
+  <!-- Incluye pdf.js desde CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+
   <!-- Componentes -->
   <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuCliente.js"></script>
   <script type="module" src="/Proyecto sistemas/Complementos/Components/FooterCliente.js"></script>
-  <script type="module" src="/Proyecto sistemas/Complementos/Controllers/EnviarPDFController.js"></script>
+  <script type="module" src="/Proyecto sistemas/Controler/Cliente/ClienteFunciones.js"></script>
 </body>
 </html>
