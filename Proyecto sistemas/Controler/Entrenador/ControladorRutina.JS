@@ -71,21 +71,36 @@ function generarRutina(clienteId) {
     $.get(`${API_PADECIMIENTO_CLIENTE}/obtenerPadecimientos/${clienteId}`),
     $.get(`${API_EJERCICIOS}/listaEjercicios`)
   ]).then(([padecimientos, ejercicios]) => {
-    const zonasAfectadas = padecimientos.map(p => ({
-      zona: (p.areaMuscularAfectada || "").toLowerCase(),
-      severidad: (p.severidad || "").toLowerCase()
-    }));
 
-    rutinaSugerida = ejercicios.filter(e => {
-      const area = (e.areaMuscular || "").toLowerCase();
-      return zonasAfectadas.some(z =>
-        area.includes(z.zona) && z.severidad !== "grave"
-      );
+    // Procesamos las zonas afectadas del cliente
+    const zonasAfectadas = [];
+    padecimientos.forEach(p => {
+      const zonas = (p.areaMuscularAfectada || "").split(",").map(z => z.trim().toLowerCase());
+      zonas.forEach(z => zonasAfectadas.push({ zona: z, severidad: p.severidad.toLowerCase() }));
     });
 
-    mostrarTablaRutina();
+    // Filtramos ejercicios que NO afectan zonas con padecimientos graves
+    rutinaSugerida = ejercicios.filter(e => {
+      const zonasEjercicio = (e.areaMuscularAfectada || "")
+        .split(",")
+        .map(z => z.trim().toLowerCase());
+
+      // Si el ejercicio afecta alguna zona con severidad "grave", se descarta
+      const afectaZonaGrave = zonasEjercicio.some(zona =>
+        zonasAfectadas.some(p => p.zona === zona && p.severidad === "grave")
+      );
+
+      // Si no afecta zona grave, lo dejamos pasar
+      return !afectaZonaGrave;
+    });
+
+    mostrarTablaRutina(); // Mostrar en pantalla
+  }).catch(err => {
+    console.error("Error generando rutina:", err);
+    alert("Ocurrió un error al generar la rutina.");
   });
 }
+
 
 function mostrarTablaRutina() {
   const $tbody = $("#tablaRutina tbody");

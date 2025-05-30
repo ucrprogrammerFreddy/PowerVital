@@ -47,16 +47,15 @@ function listarPadecimientos() {
         const fila = document.createElement("tr");
         fila.classList.add("table-primary");
         fila.innerHTML = `
-          <td>${p.dIPadecimiento}</td>
+          <td>${p.IdPadecimiento}</td>
           <td>${p.Nombre}</td>
           <td>${p.Descripcion}</td>
           <td>${p.AreaMuscularAfectada}</td>
-          <td>${p.Severidad}</td>
           <td>
-            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.idPadecimiento}">
+            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
               <i class="bi bi-pencil-fill"></i>
             </button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.idPadecimiento})">
+            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
               <i class="bi bi-trash-fill"></i>
             </button>
           </td>
@@ -66,6 +65,7 @@ function listarPadecimientos() {
     })
     .catch(err => console.error("❌ Error al listar:", err.message));
 }
+
 
 document.addEventListener("click", function (e) {
   if (e.target.closest(".btn-editar")) {
@@ -152,7 +152,6 @@ function actualizarFilaVisual(id) {
         <td>${p.Nombre}</td>
         <td>${p.Descripcion}</td>
         <td>${p.AreaMuscularAfectada}</td>
-        <td>${p.Severidad}</td>
         <td>
           <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
             <i class="bi bi-pencil-fill"></i>
@@ -168,7 +167,9 @@ function actualizarFilaVisual(id) {
 function eliminarPadecimiento(id) {
   if (!confirm("¿Seguro que deseas eliminar este padecimiento?")) return;
 
-  fetch(`${API_URL}/eliminarPadecimiento/${id}`, { method: "DELETE" })
+  console.log("ID a eliminar:", id); // Agrega esto para ver el valor del ID
+
+  fetch(`${API_URL}/Padecimiento/eliminarPadecimiento/${id}`, { method: "DELETE" })
     .then(res => {
       if (!res.ok) throw new Error("No se pudo eliminar.");
       mostrarToast("✅ Padecimiento eliminado correctamente.", "success");
@@ -179,6 +180,7 @@ function eliminarPadecimiento(id) {
     });
 }
 
+
 function configurarFormularioAgregar() {
   const form = document.querySelector(".formulario");
 
@@ -186,7 +188,7 @@ function configurarFormularioAgregar() {
     e.preventDefault();
     const dto = obtenerDatosFormulario();
 
-    if (!dto.nombre || !dto.descripcion || !dto.areaMuscularAfectada ||!dto.Severidad) {
+    if (!dto.nombre || !dto.descripcion || !dto.areaMuscularAfectada) {
       alert("⚠️ Por favor completa todos los campos antes de registrar.");
       return;
     }
@@ -282,7 +284,6 @@ function buscarPorId() {
           <td>${p.Nombre}</td>
           <td>${p.Descripcion}</td>
           <td>${p.AreaMuscularAfectada}</td>
-          <td>${p.Severidad}</td>
           <td>
             <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
               <i class="bi bi-pencil-fill"></i>
