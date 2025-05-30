@@ -92,11 +92,48 @@ body {
     color: #fff;
     border: none;
 }
+
+.btn-agregar {
+    background-color: #A68768;
+    color: #fff;
+    border: none;
+}
+
+.btn-regresar {
+    background-color: #b66447;
+    color: #fff;
+    border: none;
+}
+
 .btn-aceptar:hover,
 .btn-aceptar:focus {
     background-color: #9f5639;
     color: #fff;
 }
+
+.btn-warning {
+    background-color: #A68768;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger {
+    background-color: #b66447;
+    color: #fff;
+    border: none;
+}
+
+.table-success {
+  background-color: #316163 !important; /* tu color personalizado */
+  color: #fff !important;
+}
+
+.table-success th {
+  background-color: #316163 !important; /* asegura que también los <th> tengan el color */
+  color: #fff !important;
+}
+
+
 .slide ul li a {
   display: flex;
   align-items: center;
@@ -173,6 +210,7 @@ height: 80px;
   width: 100%;
   bottom: 0;
   z-index: 10;
+
 }
 
 .footer-logo {

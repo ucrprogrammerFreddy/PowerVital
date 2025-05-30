@@ -16,6 +16,7 @@
 
 </head>
 <body data-accion="listar">
+<main class="contenedor-main" id="mainContent">
 
   <div class="contenedor-main px-3">
     <div class="main-container container-fluid mt-2">
@@ -30,9 +31,9 @@
 
       <div class="table-responsive container-fluid fw-semibold">
         <h2>Lista de Padecimientos</h2>
-        <table class="table table-striped table-hover table-borderless table-primary align-middle mt-3">
-          <thead class="table-light">
-            <tr>
+        <table class="table table-striped table-hover table-borderless  align-middle mt-3">
+          <thead class="table-success">
+            <tr >
               <th>ID</th>
               <th>Nombre</th>
               <th>Descripción</th>
@@ -53,7 +54,8 @@
   </div>
 
 
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+
+ <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
     <div id="liveToast" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body" id="toastMensaje">Mensaje aquí</div>
@@ -61,6 +63,13 @@
       </div>
     </div>
   </div>
+
+  
+</main>
+
+
+
+ 
 
   <script type="module">
   import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";

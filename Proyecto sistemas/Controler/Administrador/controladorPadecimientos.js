@@ -45,7 +45,7 @@ function listarPadecimientos() {
 
       lista.forEach(p => {
         const fila = document.createElement("tr");
-        fila.classList.add("table-primary");
+        fila.classList.add();
         fila.innerHTML = `
           <td>${p.IdPadecimiento}</td>
           <td>${p.Nombre}</td>
