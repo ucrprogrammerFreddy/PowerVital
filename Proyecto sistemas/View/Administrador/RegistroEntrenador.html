@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,7 +9,7 @@
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css"> -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../../Complementos/css/indexadmin.css" />
   <link rel="stylesheet" href="../../Complementos/css/styles.css" />
 
@@ -131,6 +132,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="menu-toggle" id="openMenu">
     <i class="fas fa-bars"></i>
@@ -143,7 +145,8 @@
   </header>
   <main class="contenedor-main" id="mainContent">
     <div class="text-center mb-4">
-      <span style="background-color: #0d5c5d; color: white; padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold;">
+      <span
+        style="background-color: #0d5c5d; color: white; padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold;">
         Gestión Usuarios
       </span>
     </div>
@@ -171,7 +174,8 @@
           <input type="text" class="form-control" id="formacion" placeholder="Agregar texto" />
         </div>
         <div class="d-flex justify-content-center gap-3">
-          <button type="button" class="btn btn-volver" onclick="window.location.href='/Proyecto sistemas/View/Administrador/ListaEntrenadores.html'">Volver</button>
+          <button type="button" class="btn btn-volver"
+            onclick="window.location.href='../../View/Administrador/ListaEntrenadores.html'">Volver</button>
           <button type="submit" class="btn btn-aceptar">Aceptar</button>
         </div>
       </form>
@@ -179,13 +183,10 @@
   </main>
 
 
-<script type="module">
-  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
-  renderAdminLayout();
-</script> 
-
-
-
+  <script type="module">
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
+  </script>
   <script>
     function MenuHambAdmin() {
       return `
@@ -247,4 +248,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -5,105 +5,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel</title>
-  <!-- <link rel="stylesheet" href="../../Complementos/css/estilosAdmin.css">
-  <link rel="stylesheet" href="../../Complementos/css/estilos.css"> -->
-
-
-
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
- 
-<!-- <link rel="stylesheet" href="../../Complementos/css/estilosAdmin.css">
-  <link rel="stylesheet" href="../../Complementos/css/estilos.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css" /> -->
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="../../Complementos/css/indexadmin.css" />
   <link rel="stylesheet" href="../../Complementos/css/styles.css" />
+  <style>
+    .bg-verde-panel {
+      background-color: #316163 !important;
+    }
 
+    body {
+      background-color: #f8f9fa;
+    }
+  </style>
 </head>
 
-<body >
+<body>
   <main class="contenedor-main" id="mainContent">
-    <!-- AQUÍ TU CONTENIDO INTERNO DE LA VISTA -->
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card shadow">
+            <div class="card-header bg-verde-panel text-white text-center">
+              <h5 class="mb-0">Formulario de Administrador</h5>
+            </div>
+            <div class="card-body">
+              <form id="formAdministrador">
+                <input type="hidden" id="idadmin" />
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" required />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo:</label>
+                  <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+                <div class="mb-3">
+                  <label for="clave" class="form-label">Clave:</label>
+                  <input type="password" class="form-control" id="clave" name="clave" required />
+                </div>
+                <div class="mb-3">
+                  <label for="telefono" class="form-label">Teléfono:</label>
+                  <input type="number" class="form-control" id="telefono" name="telefono" required />
+                </div>
+                <div class="mb-3">
+                  <label for="titulacion" class="form-label">Formación Académica:</label>
+                  <input type="text" class="form-control" id="formacionAcademica" name="formacionAcademica" />
+                </div>
+                <div class="d-flex justify-content-between">
 
- 
-  <!-- Formulario Principal -->
- 
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-header bg-primary text-white text-center">
-            <h5 class="mb-0">Formulario de Administrador</h5>
-          </div>
-          <div class="card-body">
-            <form id="formAdministrador">
-              <input type="hidden" id="idadmin" />
-              <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required />
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Correo:</label>
-                <input type="email" class="form-control" id="email" name="email" required />
-              </div>
-              <div class="mb-3">
-                <label for="clave" class="form-label">Clave:</label>
-                <input type="password" class="form-control" id="clave" name="clave" required />
-              </div>
-            <div class="mb-3">
-            <label for="telefono" class="form-label">Teléfono:</label>
-            <input type="number" class="form-control" id="telefono" name="telefono" required />
-          </div>
-             
-          
-
-
-              <div class="mb-3">
-                <label for="titulacion" class="form-label">Formacion Academica:</label>
-                <input type="text" class="form-control" id="formacionAcademica" name="formacionAcademica" />
-              </div>
-              <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Aceptar</button>
-                <button type="button" class="btn btn-secondary" id="btnVolver">Volver</button>
-              </div>
-            </form>
+                  <button type="button" class="btn btn-secondary" id="btnVolver">Volver</button>
+                  <button type="submit" class="btn btn-aceptar">Aceptar</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
   </main>
-  <!-- Footer -->
-
-
   <script type="module">
-  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
-  renderAdminLayout();
-</script> 
-
-
-
-  <!-- Scripts -->
-  <!-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggleUsuarios = document.getElementById("toggleUsuarios");
-      const submenuUsuarios = document.getElementById("submenuUsuarios");
-
-      if (toggleUsuarios && submenuUsuarios) {
-        toggleUsuarios.addEventListener("click", () => {
-          const isVisible = submenuUsuarios.style.display === "block";
-          submenuUsuarios.style.display = isVisible ? "none" : "block";
-          toggleUsuarios.classList.toggle("active", !isVisible);
-        });
-      }
-    });
-  </script> -->
-
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="module" src="../../Controler/Administrador/AdministradorFunciones.js"></script>
-
 </body>
 
 </html>

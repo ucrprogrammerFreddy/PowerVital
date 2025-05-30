@@ -11,7 +11,7 @@ function MenuHambAdmin() {
           <li class="has-submenu">
             <a href="#" id="toggleSubmenu"><i class="fas fa-users"></i> Usuarios <i class="fas fa-chevron-down caret"></i></a>
             <ul class="submenu" id="submenuUsuarios">
-               <li><a href="../View/Administrador/FormRegistroAdministrador.html"> Administradores Registro</a></li>
+               <li><a href="../View/Administrador/Index.html"> Administradores Registro</a></li>
                <li><a href="../Administrador/ListaEntrenadores.html"> Entrenadores</a></li>
               <li><a href="../Cliente/Index.html"> Clientes</a></li>
             </ul>

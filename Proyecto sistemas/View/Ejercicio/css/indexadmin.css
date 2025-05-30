@@ -152,39 +152,32 @@ body {
 }
 
 /* -------------------- FOOTER -------------------- */
-  footer img {
-    width: 30px; /* tamaño opcional */
-    height: auto;
-    justify-content: center;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease;
-    margin: 0 10px;
-    
-}
-
-footer {
-    background-color: #316163;
+ footer {
+    background-color: #022227;
     color: #ffffff;
-    padding: 1rem 0;
+    padding: 0.5rem;
     text-align: center;
-   margin-right: 10px;
-    /*position: absolute;
-    bottom: 0;
-    width: 100%;*/
-    border-radius: 5px;
+    width: 100%;
+    /* Si quieres el footer fijo abajo, descomenta las siguientes líneas: */
+    /* position: absolute;
+    bottom: 0; */
 }
 
 footer img {
-    width: 50px;
+    width: 50px;        /* El tamaño de los íconos */
+    height: auto;
     margin: 0 10px;
+    justify-content: center;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
 }
-
 
 footer img:hover {
     filter: grayscale(0%);
 }
-footer p{
-   color: rgb(255, 255, 255);
+
+footer p {
+    color: #ffffff;
 }
 /* -------------------- TARJETAS -------------------- */
 .card-grid {

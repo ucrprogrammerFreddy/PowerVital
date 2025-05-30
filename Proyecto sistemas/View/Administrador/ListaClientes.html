@@ -58,7 +58,8 @@
         </tbody>
       </table>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-volver">Regresar al Menú</button>
+        <button class="btn btn-volver" onclick="window.location.href='../../View/Administrador/Index.html'">Regresar al
+          Menú</button>
       </div>
 
     </div>
@@ -161,9 +162,9 @@
 
 
   <script type="module">
-  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
-  renderAdminLayout();
-</script> 
+    import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+    renderAdminLayout();
+  </script>
 
   <script type="module">
     import { listarClientes } from "../../Controler/Administrador/AdminClientes.js";
