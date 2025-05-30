@@ -108,7 +108,7 @@ export function renderAdminLayout() {
               <i class="fas fa-users"></i> Usuarios <span class="caret"><i class="fas fa-caret-down"></i></span>
             </a>
             <ul class="submenu" id="clientesSubmenu">
-              <li><a href="RegistroAdministrador.html">Administrador Registro</a></li>
+              <li><a href="Empleados.html">Administrador Registro</a></li>
               <li><a href="ListaEntrenadores.html">Entrenadores</a></li>
               <li><a href="ListaClientes.html">Clientes</a></li>
             </ul>

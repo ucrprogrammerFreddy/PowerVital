@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Entrenador - Resumen</title>
+
+  <!-- Bootstrap y FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css" />
 
+  <!-- Hoja de estilos del administrador (compartida para tarjetas unificadas) -->
+  <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/AdministradorEstilos.css" />
 </head>
 
 <body>
-  <button class="btn btn-outline-dark position-absolute m-3" id="openSidebar">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <header>
-    <nav class="d-flex justify-content-between align-items-center px-4 py-3 bg-white">
-      <div></div>
-      <img src="../../Complementos/img/logoof.png" alt="Logo" height="60" />
-      <div></div>
-    </nav>
+  <!-- Header con logo centrado -->
+  <header class="header">
+    <div class="header-content">
+      <img src="../../Complementos/img/logoof.png" alt="Logo" class="header-logo" />
+    </div>
   </header>
 
-  <main class="container-fluid">
+  <!-- Contenido principal -->
+  <main class="contenedor-main" id="mainContent">
     <div class="card-grid">
-      <div class="custom-card">
+      
+      <a href="../../View/Ejercicio/editarEjercicio.html" class="custom-card">
         <div class="icon-section bg-light-brown icon-brown">
           <i class="fas fa-dumbbell"></i>
         </div>
         <strong>Ejercicios</strong>
-        <p>30</p>
-      </div>
+        <p>Ver ejercicios</p>
+      </a>
 
-      <div class="custom-card">
+      <a href="../../View/Entrenador/VerCliente.html" class="custom-card">
         <div class="icon-section bg-light-yellow icon-olive">
           <i class="fas fa-users"></i>
         </div>
         <strong>Clientes</strong>
-        <p>1000</p>
-      </div>
+        <p>Gestión de clientes</p>
+      </a>
 
-      <div class="custom-card">
-        <div class="icon-section bg-light-red icon-red">
+      <a href="../../View/Entrenador/VerRutinas.html" class="custom-card">
+        <div class="icon-section bg-light-pink icon-red">
           <i class="fas fa-clipboard-list"></i>
         </div>
         <strong>Rutinas</strong>
         <p>Asignar / Consultar</p>
-      </div>
+      </a>
+
     </div>
   </main>
 
-  <footer class="footer">
-    <img src="../../Complementos/img/facebook.png" alt="Facebook" class="footer-logo" />
-    <img src="../../Complementos/img/instagram.png" alt="Instagram" class="footer-logo" />
-  </footer>
-  <source src="/Proyecto sistemas/View/Entrenador/Index.html">
-  <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuEntren.js"></script>
+  <!-- Script del menú lateral -->
+  <script type="module">
+    import { renderTrainerLayout } from "/Proyecto sistemas/Complementos/Components/MenuEntren.js";
+    renderTrainerLayout();
+  </script>
 </body>
-
 </html>

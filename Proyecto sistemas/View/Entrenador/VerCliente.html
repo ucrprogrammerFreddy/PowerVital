@@ -10,17 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css" />
 
-  <style>
-    body.sidebar-active #openSidebar {
-      display: none;
-    }
-  </style>
+  
 </head>
 <body>
-  <!-- Botón de menú -->
-  <button class="btn btn-outline-dark position-absolute m-3" id="openSidebar">
-    <i class="fas fa-bars"></i>
-  </button>
 
   <!-- Header -->
   <header>
@@ -56,11 +48,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <img src="../../Complementos/img/facebook.png" alt="Facebook" class="footer-logo" />
-    <img src="../../Complementos/img/instagram.png" alt="Instagram" class="footer-logo" />
-  </footer>
 
   <!-- Modal Rutina -->
   <div class="modal fade" id="modalRutina" tabindex="-1" aria-labelledby="modalRutinaLabel" aria-hidden="true">
@@ -80,8 +67,11 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script type="module" src="/Proyecto sistemas/Complementos/Components/MenuEntren.js"></script>
+  <!-- Script del menú (inserta menú lateral y eventos) -->
+  <script type="module">
+    import { renderTrainerLayout } from "/Proyecto sistemas/Complementos/Components/MenuEntren.js";
+    renderTrainerLayout();
+  </script>
   <script type="module" src="/Proyecto sistemas/Controler/Entrenador/ControladorEntrenador.js"></script>
 </body>
 </html>
