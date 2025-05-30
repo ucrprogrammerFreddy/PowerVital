@@ -13,10 +13,13 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-  <!-- Estilos -->
+  <!-- Estilos --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
   <link rel="stylesheet" href="../../Complementos/css/indexadmin.css" />
   <link rel="stylesheet" href="../../Complementos/css/styles.css" />
-  <link rel="stylesheet" href="../../Complementos/css/clienteEstilo.css" />
+
+
 
   <!-- Scripts del sistema -->
 
@@ -36,7 +39,10 @@
 <body>
   <main class="contenedor-main" id="mainContent">
     <div class="text-center mb-4">
-      <span class="badge bg-success fs-5 px-4 py-2">Editar Cliente</span>
+   <span
+        style="background-color: #0d5c5d; color: white; padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold;">
+        Editar Cliente
+      </span>
     </div>
     <div class="form-wrapper">
       <form id="formularioEditar">
@@ -101,8 +107,16 @@
   </main>
 
 
-  <script type="module">
-    import {
+
+
+<script type="module">
+  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+  renderAdminLayout();
+</script> 
+
+
+
+    <!-- import {
       cargarClienteEditar,
       cargarEntrenadores,
       cargarPadecimientos
@@ -124,7 +138,11 @@
         }
       });
     });
-  </script>
+  </script> -->
+
+
+
+
 
 </body>
 

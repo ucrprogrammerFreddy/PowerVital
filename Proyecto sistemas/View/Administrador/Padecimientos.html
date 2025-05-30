@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registrar Padecimiento</title>
   <link rel="stylesheet" href="../../Complementos/css/padecimientos.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- <link rel="stylesheet" href="/Proyecto sistemas/Complementos/css/EntrenadorEstilo.css" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../Complementos/css/indexadmin.css" />
+  <link rel="stylesheet" href="../../Complementos/css/styles.css" />
+
 </head>
 <body data-accion="agregar">
   <div class="formulario-container">
@@ -56,6 +61,14 @@
       </div>
     </form>
   </div>
+
+  <script type="module">
+  import { renderAdminLayout } from "../../Controler/Administrador/AdminLayout.js";
+  renderAdminLayout();
+</script> 
+
+
+
   <script src="../../Controler/Administrador/controladorPadecimientos.js"></script>
 </body>
 </html>
