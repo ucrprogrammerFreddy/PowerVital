@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 await agregarEntrenador();
                 alert("✅ Entrenador agregado correctamente");
                 formularioCrear.reset();
+                obtenerTodosLosEntrenadores().then(renderizarEntrenadores);
+                window.location.href = "../../View/Administrador/ListaEntrenadores.html";
+                
             } catch (error) {
                 alert("❌ Error al registrar entrenador:\n" + error.message);
             }
@@ -37,7 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 await editarEntrenador(id);
                 alert("✅ Entrenador editado correctamente");
                 bootstrap.Modal.getInstance(document.getElementById("modalEditarEntrenador")).hide();
-                obtenerTodosLosEntrenadores().then(data => renderizarEntrenadores(data.$values));
+                obtenerTodosLosEntrenadores().then(renderizarEntrenadores);
+                
             } catch (error) {
                 alert("❌ Error al editar:\n" + error.message);
             }
@@ -59,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 await eliminarEntrenador(id);
                 alert("🗑️ Entrenador eliminado");
                 bootstrap.Modal.getInstance(document.getElementById("modalEliminarEntrenador")).hide();
-                obtenerTodosLosEntrenadores().then(data => renderizarEntrenadores(data.$values));
+                obtenerTodosLosEntrenadores().then(renderizarEntrenadores);
             } catch (error) {
                 alert("❌ Error al eliminar:\n" + error.message);
             }
@@ -134,7 +138,9 @@ export async function agregarEntrenador() {
     });
 
     if (!response.ok) throw new Error("Error al crear el entrenador");
+    
     return response.json();
+    
 }
 
 // Obtener todos los entrenadores
@@ -170,6 +176,7 @@ export async function editarEntrenador(id) {
     });
 
     if (!response.ok) throw new Error("Error al editar el entrenador");
+    
     return response;
 }
 
@@ -180,6 +187,7 @@ export async function eliminarEntrenador(id) {
     });
 
     if (!response.ok) throw new Error("Error al eliminar el entrenador");
+    
     return response;
 }
 

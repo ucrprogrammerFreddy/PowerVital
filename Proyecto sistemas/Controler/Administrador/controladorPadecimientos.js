@@ -49,14 +49,14 @@ function listarPadecimientos() {
         fila.innerHTML = `
           <td>${p.IdPadecimiento}</td>
           <td>${p.Nombre}</td>
-          <td>${p.Descripcion}</td>
+          <td style="max-width:500px;">${p.Descripcion}</td>
           <td>${p.AreaMuscularAfectada}</td>
           <td>
-            <button class="btn btn-warning btn-sm btn-editar" data-id="${p.IdPadecimiento}">
-              <i class="bi bi-pencil-fill"></i>
+            <button class="btn btn-warning  btn-editar" data-id="${p.IdPadecimiento}">
+              <i class="fas fa-pen-to-square"></i>
             </button>
-            <button class="btn btn-danger btn-sm" onclick="eliminarPadecimiento(${p.IdPadecimiento})">
-              <i class="bi bi-trash-fill"></i>
+            <button class="btn btn-danger " onclick="eliminarPadecimiento(${p.IdPadecimiento})">
+              <i class="fas fa-trash"></i>
             </button>
           </td>
         `;
@@ -169,7 +169,7 @@ function eliminarPadecimiento(id) {
 
   console.log("ID a eliminar:", id); // Agrega esto para ver el valor del ID
 
-  fetch(`${API_URL}/Padecimiento/eliminarPadecimiento/${id}`, { method: "DELETE" })
+  fetch(`${API_URL}/eliminarPadecimiento/${id}`, { method: "DELETE" })
     .then(res => {
       if (!res.ok) throw new Error("No se pudo eliminar.");
       mostrarToast("✅ Padecimiento eliminado correctamente.", "success");
@@ -203,6 +203,7 @@ function configurarFormularioAgregar() {
       if (!res.ok) throw new Error("No se pudo registrar.");
       alert("✅ Padecimiento agregado.");
       form.reset();
+      window.location.href = "../../View/Administrador/ListaPadecimientos.html";
     } catch (err) {
       alert("❌ Error al registrar: " + err.message);
     }
