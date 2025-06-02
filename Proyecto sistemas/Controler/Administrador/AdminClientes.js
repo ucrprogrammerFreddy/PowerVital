@@ -491,15 +491,12 @@ export function listarClientes() {
     tbody.empty();
 
     data.forEach((c) => {
-      // Convierte los padecimientos a una cadena separada por comas (con severidad)
-      const padecimientos =
-        c.PadecimientosClientes?.map((p) => {
-          const nombre = p.Padecimiento?.Nombre || "";
-          const severidad = p.Severidad ? ` (${p.Severidad})` : "";
-          return nombre + severidad;
-        }).join(", ") || "-";
+      // Padecimientos es ya un array de nombres
+      const padecimientos = c.Padecimientos && c.Padecimientos.length > 0
+        ? c.Padecimientos.join(", ")
+        : "-";
 
-      // Construye la fila para la tabla
+      // Construir la fila
       const fila = `
         <tr>
             <td>${c.Nombre}</td>
@@ -507,22 +504,21 @@ export function listarClientes() {
             <td>${c.Telefono}</td>
             <td>${c.Altura}</td>
             <td>${c.Peso}</td>
-            <td>${c.Entrenador?.Nombre || "-"}</td>
+            <td>${c.NombreEntrenador}</td>
             <td>${c.EstadoPago}</td>
             <td>${padecimientos}</td>
             <td>
                 <button class='btn btn-sm btn-primary' onclick='editarCliente(${JSON.stringify(
                   c
                 ).replace(/"/g, "&quot;")})'>Editar</button>
-                <button class='btn btn-sm btn-danger' onclick='eliminarCliente(${
-                  c.IdUsuario
-                })'>Eliminar</button>
+                <button class='btn btn-sm btn-danger' onclick='eliminarCliente(${c.IdUsuario})'>Eliminar</button>
             </td>
         </tr>`;
       tbody.append(fila);
     });
   });
 }
+
 
 /**
  * Función global para editar un cliente.

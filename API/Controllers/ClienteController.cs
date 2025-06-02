@@ -71,7 +71,7 @@ namespace PowerVital.Controllers
                 EntrenadorId = c.EntrenadorId,
                 NombreEntrenador = c.Entrenador != null ? c.Entrenador.Nombre : "-",
                 Padecimientos = c.PadecimientosClientes != null
-                    ? c.PadecimientosClientes.Select(pc => pc.Padecimiento.Nombre).ToList()
+                    ? c.PadecimientosClientes.Select(pc => $"{pc.Padecimiento.Nombre} ({pc.Severidad})").ToList()
                     : new List<string>()
             }).ToList();
 
@@ -80,19 +80,42 @@ namespace PowerVital.Controllers
 
 
 
+
         // ✅ GET: api/cliente/5
         [HttpGet("obtenerClientePorId/{id}")]
-        public async Task<ActionResult<Cliente>> GetCliente(int id)
+        public async Task<ActionResult<EditarClienteDto>> GetCliente(int id)
         {
             var cliente = await _context.Clientes
                 .Include(c => c.Entrenador)
+                .Include(c => c.PadecimientosClientes)
+                    .ThenInclude(pc => pc.Padecimiento)
                 .FirstOrDefaultAsync(c => c.IdUsuario == id);
 
             if (cliente == null)
                 return NotFound(new { mensaje = "Cliente no encontrado" });
 
-            return Ok(cliente);
+            var dto = new EditarClienteDto
+            {
+                IdUsuario = cliente.IdUsuario,
+                Nombre = cliente.Nombre,
+                Clave = cliente.Clave,
+                Email = cliente.Email,
+                Telefono = cliente.Telefono,
+                FechaNacimiento = cliente.FechaNacimiento,
+                Genero = cliente.Genero,
+                Altura = cliente.Altura,
+                Peso = cliente.Peso,
+                EstadoPago = cliente.EstadoPago,
+                EntrenadorId = cliente.EntrenadorId,
+                NombreEntrenador = cliente.Entrenador != null ? cliente.Entrenador.Nombre : "-",
+                Padecimientos = cliente.PadecimientosClientes != null
+                    ? cliente.PadecimientosClientes.Select(pc => $"{pc.Padecimiento.Nombre} ({pc.Severidad})").ToList()
+                    : new List<string>()
+            };
+
+            return Ok(dto);
         }
+
 
         // ✅ POST: api/cliente
         [HttpPost("CrearCliente")]

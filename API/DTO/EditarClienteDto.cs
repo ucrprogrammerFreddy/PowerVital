@@ -16,9 +16,10 @@ namespace PowerVital.DTO
         public bool EstadoPago { get; set; }
         public int EntrenadorId { get; set; }
 
-        // Solo los datos planos:
         public string? NombreEntrenador { get; set; }
+
+        // Este es el que se muestra en la tabla → Nombre (Severidad)
         public List<string>? Padecimientos { get; set; }
     }
-
 }
+

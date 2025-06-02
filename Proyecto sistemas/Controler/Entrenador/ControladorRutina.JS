@@ -85,42 +85,49 @@ function generarRutina(clienteId) {
       const severidad = (p.Severidad || "").toLowerCase();
 
       zonas.forEach(z => {
-        if (z !== "") { // 🔥 No metemos zonas vacías
-          zonasAfectadas.push({ zona: z, severidad: severidad });
+        if (z !== "") {
+          zonasAfectadas.push({ zona: normalizarZona(z), severidad: severidad });
         }
       });
     });
 
     console.log("Zonas afectadas + severidad:", zonasAfectadas);
 
-    // Filtramos ejercicios que NO afectan zonas con padecimientos graves
-   rutinaSugerida = ejercicios.filter(e => {
-  const zonasEjercicio = (e.areaMuscularAfectada || "")
-    .split(",")
-    .map(z => normalizarZona(z))
-    .filter(z => z !== "");
+    // Crear un Set para evitar duplicados
+    const ejerciciosUnicos = new Set();
+    rutinaSugerida = ejercicios.filter(e => {
+      const zonasEjercicio = (e.areaMuscularAfectada || "")
+        .split(",")
+        .map(z => normalizarZona(z))
+        .filter(z => z !== "");
 
-  console.log(`Ejercicio: ${e.Nombre}, ZonasEjercicio normalizadas:`, zonasEjercicio);
+      console.log(`Ejercicio: ${e.Nombre}, ZonasEjercicio normalizadas:`, zonasEjercicio);
 
-  const afectaZonaGrave = zonasEjercicio.some(zonaEj =>
-    zonasAfectadas.some(p => normalizarZona(p.zona) === zonaEj && p.severidad === "grave")
-  );
+      const afectaZonaGrave = zonasEjercicio.some(zonaEj =>
+        zonasAfectadas.some(p => p.zona === zonaEj && p.severidad === "grave")
+      );
 
-  console.log(`→ Afecta zona grave?`, afectaZonaGrave);
+      console.log(`→ Afecta zona grave?`, afectaZonaGrave);
 
-  return !afectaZonaGrave;
-});
+      // ✅ Si el ejercicio NO afecta zona grave Y NO está repetido → lo agregamos
+      if (!afectaZonaGrave && !ejerciciosUnicos.has(e.idEjercicio)) {
+        ejerciciosUnicos.add(e.idEjercicio);
+        return true;
+      }
 
+      return false;
+    });
 
-    console.log("Rutina sugerida:", rutinaSugerida);
+    console.log("Rutina sugerida FINAL:", rutinaSugerida);
 
-    mostrarTablaRutina(); // Mostrar en pantalla
+    mostrarTablaRutina();
   })
   .catch(err => {
     console.error("Error generando rutina:", err);
     alert("Ocurrió un error al generar la rutina.");
   });
 }
+
 
 
 function mostrarTablaRutina() {
@@ -192,9 +199,39 @@ function normalizarZona(zona) {
     "pierna": "pierna",
     "pectoral": "pectoral",
     "pectorales": "pectoral",
-    // Puedes agregar aquí todas las que quieras
+    "abdomen": "abdomen",
+    "abdominales": "abdomen",
+    "espalda": "espalda",
+    "columna": "columna",
+    "columna vertebral": "columna",
+    "columna lumbar": "columna",
+    "hernia": "hernia",
+    "hernia inguinal": "hernia",
+    "cadera": "cadera",
+    "cuello": "cuello",
+    "muñecas": "muñeca",
+    "muñeca": "muñeca",
+    "brazos": "brazo",
+    "brazo": "brazo",
+    "pantorrillas": "pantorrilla",
+    "pantorrilla": "pantorrilla",
+    "glúteos": "glúteo",
+    "glúteo": "glúteo",
+    "tobillos": "tobillo",
+    "tobillo": "tobillo",
+    "corazon": "corazon",
+    "cardiaco": "corazon",
+    "pulmones": "pulmones",
+    "respiratorio": "pulmones",
+    "fuerza": "debilidad muscular",
+    "debilidad muscular": "debilidad muscular",
+    "visual": "visual",
+    "auditivo": "auditivo",
+    "neurologico": "neurologico",
+    "neurológico": "neurologico",
+    "otro": "otro"
   };
 
   const zonaNormalizada = zona.trim().toLowerCase();
-  return mapa[zonaNormalizada] || zonaNormalizada; // Si no está en mapa, deja lo que venga
+  return mapa[zonaNormalizada] || zonaNormalizada;
 }
