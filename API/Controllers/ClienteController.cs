@@ -69,8 +69,10 @@ namespace PowerVital.Controllers
                 Peso = c.Peso,
                 EstadoPago = c.EstadoPago,
                 EntrenadorId = c.EntrenadorId,
-                Entrenador = c.Entrenador, // ¡¡AQUÍ!!
-                PadecimientosClientes = c.PadecimientosClientes.ToList()
+                NombreEntrenador = c.Entrenador != null ? c.Entrenador.Nombre : "-",
+                Padecimientos = c.PadecimientosClientes != null
+                    ? c.PadecimientosClientes.Select(pc => pc.Padecimiento.Nombre).ToList()
+                    : new List<string>()
             }).ToList();
 
             return Ok(clientesDto);

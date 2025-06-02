@@ -67,35 +67,56 @@ function cargarInfoCliente(clienteId) {
 }
 
 function generarRutina(clienteId) {
+  console.log("Generando rutina para clienteId:", clienteId);
+
   Promise.all([
     $.get(`${API_PADECIMIENTO_CLIENTE}/obtenerPadecimientos/${clienteId}`),
     $.get(`${API_EJERCICIOS}/listaEjercicios`)
-  ]).then(([padecimientos, ejercicios]) => {
+  ])
+  .then(([padecimientos, ejercicios]) => {
+    console.log("Padecimientos recibidos:", padecimientos);
+    console.log("Ejercicios recibidos:", ejercicios);
 
     // Procesamos las zonas afectadas del cliente
     const zonasAfectadas = [];
+
     padecimientos.forEach(p => {
       const zonas = (p.areaMuscularAfectada || "").split(",").map(z => z.trim().toLowerCase());
-      zonas.forEach(z => zonasAfectadas.push({ zona: z, severidad: p.severidad.toLowerCase() }));
+      const severidad = (p.Severidad || "").toLowerCase();
+
+      zonas.forEach(z => {
+        if (z !== "") { // 🔥 No metemos zonas vacías
+          zonasAfectadas.push({ zona: z, severidad: severidad });
+        }
+      });
     });
+
+    console.log("Zonas afectadas + severidad:", zonasAfectadas);
 
     // Filtramos ejercicios que NO afectan zonas con padecimientos graves
-    rutinaSugerida = ejercicios.filter(e => {
-      const zonasEjercicio = (e.areaMuscularAfectada || "")
-        .split(",")
-        .map(z => z.trim().toLowerCase());
+   rutinaSugerida = ejercicios.filter(e => {
+  const zonasEjercicio = (e.areaMuscularAfectada || "")
+    .split(",")
+    .map(z => normalizarZona(z))
+    .filter(z => z !== "");
 
-      // Si el ejercicio afecta alguna zona con severidad "grave", se descarta
-      const afectaZonaGrave = zonasEjercicio.some(zona =>
-        zonasAfectadas.some(p => p.zona === zona && p.severidad === "grave")
-      );
+  console.log(`Ejercicio: ${e.Nombre}, ZonasEjercicio normalizadas:`, zonasEjercicio);
 
-      // Si no afecta zona grave, lo dejamos pasar
-      return !afectaZonaGrave;
-    });
+  const afectaZonaGrave = zonasEjercicio.some(zonaEj =>
+    zonasAfectadas.some(p => normalizarZona(p.zona) === zonaEj && p.severidad === "grave")
+  );
+
+  console.log(`→ Afecta zona grave?`, afectaZonaGrave);
+
+  return !afectaZonaGrave;
+});
+
+
+    console.log("Rutina sugerida:", rutinaSugerida);
 
     mostrarTablaRutina(); // Mostrar en pantalla
-  }).catch(err => {
+  })
+  .catch(err => {
     console.error("Error generando rutina:", err);
     alert("Ocurrió un error al generar la rutina.");
   });
@@ -159,3 +180,21 @@ $("#guardarRutina").on("click", function () {
     error: () => alert("❌ Error al guardar rutina")
   });
 });
+
+// Diccionario de sinónimos / normalización
+function normalizarZona(zona) {
+  const mapa = {
+    "hombros": "hombro",
+    "hombro": "hombro",
+    "rodillas": "rodilla",
+    "rodilla": "rodilla",
+    "piernas": "pierna",
+    "pierna": "pierna",
+    "pectoral": "pectoral",
+    "pectorales": "pectoral",
+    // Puedes agregar aquí todas las que quieras
+  };
+
+  const zonaNormalizada = zona.trim().toLowerCase();
+  return mapa[zonaNormalizada] || zonaNormalizada; // Si no está en mapa, deja lo que venga
+}

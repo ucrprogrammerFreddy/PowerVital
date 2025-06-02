@@ -8,7 +8,6 @@ namespace PowerVital.DTO
         public string Nombre { get; set; }
         public string Clave { get; set; }
         public string Email { get; set; }
-
         public int Telefono { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Genero { get; set; }
@@ -16,9 +15,10 @@ namespace PowerVital.DTO
         public decimal Peso { get; set; }
         public bool EstadoPago { get; set; }
         public int EntrenadorId { get; set; }
-        public Entrenador? Entrenador { get; set; } // <-- AGREGADO
-        public List<PadecimientoCliente>? PadecimientosClientes { get; set; }
 
-
+        // Solo los datos planos:
+        public string? NombreEntrenador { get; set; }
+        public List<string>? Padecimientos { get; set; }
     }
+
 }
