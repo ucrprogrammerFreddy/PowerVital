@@ -17,36 +17,7 @@ namespace PowerVital.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/cliente
-        // ✅ GET: api/cliente
-        //[HttpGet("listaClientes")]
-        //public async Task<ActionResult<IEnumerable<EditarClienteDto>>> GetClientes()
-        //{
-        //    var clientes = await _context.Clientes
-        //        .Include(c => c.Entrenador)
-        //        .Include(c => c.PadecimientosClientes)
-        //                     .ThenInclude(pc => pc.Padecimiento)
-        //        .ToListAsync();
-
-        //    // Mapear a DTO
-        //    var clientesDto = clientes.Select(c => new EditarClienteDto
-        //    {
-        //        IdUsuario = c.IdUsuario,
-        //        Nombre = c.Nombre,
-        //        Clave = c.Clave,
-        //        Email = c.Email,
-        //        Telefono = c.Telefono,
-        //        FechaNacimiento = c.FechaNacimiento,
-        //        Genero = c.Genero,
-        //        Altura = c.Altura,
-        //        Peso = c.Peso,
-        //        EstadoPago = c.EstadoPago,
-        //        EntrenadorId = c.EntrenadorId
-        //    }).ToList();
-
-        //    return Ok(clientesDto);
-        //}
-
+        // ✅ GET: api/cliente/listaClientes
         [HttpGet("listaClientes")]
         public async Task<ActionResult<IEnumerable<EditarClienteDto>>> GetClientes()
         {
@@ -78,10 +49,7 @@ namespace PowerVital.Controllers
             return Ok(clientesDto);
         }
 
-
-
-
-        // ✅ GET: api/cliente/5
+        // ✅ GET: api/cliente/obtenerClientePorId/{id}
         [HttpGet("obtenerClientePorId/{id}")]
         public async Task<ActionResult<EditarClienteDto>> GetCliente(int id)
         {
@@ -116,15 +84,13 @@ namespace PowerVital.Controllers
             return Ok(dto);
         }
 
-
-        // ✅ POST: api/cliente
+        // ✅ POST: api/cliente/CrearCliente
         [HttpPost("CrearCliente")]
-        public async Task<ActionResult> CrearCliente([FromBody] EditarClienteDto dto)
+        public async Task<ActionResult> CrearCliente([FromBody] GuardarClienteDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Validaciones básicas
             if (string.IsNullOrWhiteSpace(dto.Nombre) || string.IsNullOrWhiteSpace(dto.Clave) || string.IsNullOrWhiteSpace(dto.Email))
                 return BadRequest(new { mensaje = "Nombre, Clave y Email son obligatorios" });
 
@@ -138,7 +104,6 @@ namespace PowerVital.Controllers
             if (entrenador == null)
                 return BadRequest(new { mensaje = "El entrenador especificado no existe" });
 
-            // *** VALIDA QUE EL EMAIL NO ESTÉ YA REGISTRADO ***
             var emailExiste = await _context.Clientes.AnyAsync(c => c.Email == dto.Email);
             if (emailExiste)
                 return Conflict(new { mensaje = "El correo electrónico ya está registrado." });
@@ -161,19 +126,37 @@ namespace PowerVital.Controllers
             _context.Clientes.Add(nuevoCliente);
             await _context.SaveChangesAsync();
 
-            // ✅ Retornar solo el ID para que JavaScript lo capture fácilmente
+            if (dto.PadecimientosCompletos != null && dto.PadecimientosCompletos.Count > 0)
+            {
+                foreach (var p in dto.PadecimientosCompletos)
+                {
+                    var padecimientoCliente = new PadecimientoCliente
+                    {
+                        IdCliente = nuevoCliente.IdUsuario,
+                        IdPadecimiento = p.IdPadecimiento,
+                        Severidad = p.Severidad
+                    };
+
+                    _context.PadecimientoCliente.Add(padecimientoCliente);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
             return Ok(new { IdUsuario = nuevoCliente.IdUsuario });
         }
 
-
-        // ✅ PUT: api/cliente/editar
+        // ✅ PUT: api/cliente/editarCliente
         [HttpPut("editarCliente")]
-        public async Task<IActionResult> EditarCliente([FromBody] EditarClienteDto dto)
+        public async Task<IActionResult> EditarCliente([FromBody] GuardarClienteDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.IdUsuario == dto.IdUsuario);
+            var cliente = await _context.Clientes
+                .Include(c => c.PadecimientosClientes)
+                .FirstOrDefaultAsync(c => c.IdUsuario == dto.IdUsuario);
+
             if (cliente == null)
                 return NotFound(new { mensaje = "Cliente no encontrado" });
 
@@ -187,7 +170,6 @@ namespace PowerVital.Controllers
             if (dto.FechaNacimiento > DateTime.Now)
                 return BadRequest(new { mensaje = "La fecha de nacimiento no puede ser en el futuro" });
 
-            // *** VALIDA QUE EL EMAIL NO ESTÉ YA REGISTRADO POR OTRO CLIENTE ***
             var emailExiste = await _context.Clientes.AnyAsync(c => c.Email == dto.Email && c.IdUsuario != dto.IdUsuario);
             if (emailExiste)
                 return Conflict(new { mensaje = "El correo electrónico ya está registrado por otro usuario." });
@@ -206,10 +188,34 @@ namespace PowerVital.Controllers
             _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
 
+            var padecimientosExistentes = await _context.PadecimientoCliente
+                .Where(pc => pc.IdCliente == cliente.IdUsuario)
+                .ToListAsync();
+
+            _context.PadecimientoCliente.RemoveRange(padecimientosExistentes);
+            await _context.SaveChangesAsync();
+
+            if (dto.PadecimientosCompletos != null && dto.PadecimientosCompletos.Count > 0)
+            {
+                foreach (var p in dto.PadecimientosCompletos)
+                {
+                    var padecimientoCliente = new PadecimientoCliente
+                    {
+                        IdCliente = cliente.IdUsuario,
+                        IdPadecimiento = p.IdPadecimiento,
+                        Severidad = p.Severidad
+                    };
+
+                    _context.PadecimientoCliente.Add(padecimientoCliente);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
             return Ok(new { mensaje = "Cliente actualizado correctamente" });
         }
 
-        // ✅ DELETE: api/cliente/5
+        // ✅ DELETE: api/cliente/eliminarCliente/{id}
         [HttpDelete("eliminarCliente/{id}")]
         public async Task<IActionResult> EliminarCliente(int id)
         {
@@ -217,16 +223,13 @@ namespace PowerVital.Controllers
             if (cliente == null)
                 return NotFound(new { mensaje = "Cliente no encontrado" });
 
-            // ⚠️ Asegúrate de manejar relaciones con rutinas o padecimientos si aplican
             _context.Clientes.Remove(cliente);
             await _context.SaveChangesAsync();
 
             return Ok(new { mensaje = "Cliente eliminado correctamente" });
         }
 
-
-        //Este metodo se encarga de mostrar la rutina actual del cliente, con el fin de mostrarla en el modulo del entrenador
-        // GET: api/cliente/{id}/rutinaActual
+        // ✅ GET: api/cliente/{id}/rutinaActual
         [HttpGet("{id}/rutinaActual")]
         public async Task<IActionResult> ObtenerRutinaActual(int id)
         {
