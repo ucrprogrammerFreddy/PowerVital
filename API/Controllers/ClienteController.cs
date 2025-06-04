@@ -50,6 +50,7 @@ namespace PowerVital.Controllers
         }
 
         // ✅ GET: api/cliente/obtenerClientePorId/{id}
+        // ✅ GET: api/cliente/obtenerClientePorId/{id}
         [HttpGet("obtenerClientePorId/{id}")]
         public async Task<ActionResult<EditarClienteDto>> GetCliente(int id)
         {
@@ -78,7 +79,14 @@ namespace PowerVital.Controllers
                 NombreEntrenador = cliente.Entrenador != null ? cliente.Entrenador.Nombre : "-",
                 Padecimientos = cliente.PadecimientosClientes != null
                     ? cliente.PadecimientosClientes.Select(pc => $"{pc.Padecimiento.Nombre} ({pc.Severidad})").ToList()
-                    : new List<string>()
+                    : new List<string>(),
+                PadecimientosClientes = cliente.PadecimientosClientes != null
+                    ? cliente.PadecimientosClientes.Select(pc => new PadecimientoClienteDto
+                    {
+                        IdPadecimiento = pc.IdPadecimiento,
+                        Severidad = pc.Severidad
+                    }).ToList()
+                    : new List<PadecimientoClienteDto>()
             };
 
             return Ok(dto);

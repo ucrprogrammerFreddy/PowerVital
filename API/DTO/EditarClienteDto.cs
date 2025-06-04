@@ -20,6 +20,12 @@ namespace PowerVital.DTO
 
         // Este es el que se muestra en la tabla → Nombre (Severidad)
         public List<string>? Padecimientos { get; set; }
+
+        // 🔥 AGREGADO → este sí sirve para marcar los checkboxes en Editar
+        public List<PadecimientoClienteDto>? PadecimientosClientes { get; set; }
     }
+
+    // 🔥 NUEVO DTO que debes agregar también en la carpeta DTO
+
 }
 

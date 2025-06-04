@@ -492,9 +492,10 @@ export function listarClientes() {
 
     data.forEach((c) => {
       // Padecimientos es ya un array de nombres
-      const padecimientos = c.Padecimientos && c.Padecimientos.length > 0
-        ? c.Padecimientos.join(", ")
-        : "-";
+      const padecimientos =
+        c.Padecimientos && c.Padecimientos.length > 0
+          ? c.Padecimientos.join(", ")
+          : "-";
 
       // Construir la fila
       const fila = `
@@ -508,9 +509,7 @@ export function listarClientes() {
             <td>${c.EstadoPago}</td>
             <td>${padecimientos}</td>
             <td>
-                <button class='btn btn-sm btn-primary' onclick='editarCliente(${JSON.stringify(
-                  c
-                ).replace(/"/g, "&quot;")})'>Editar</button>
+                <button class='btn btn-sm btn-primary' onclick='editarCliente(${c.IdUsuario})'>Editar</button>
                 <button class='btn btn-sm btn-danger' onclick='eliminarCliente(${c.IdUsuario})'>Eliminar</button>
             </td>
         </tr>`;
@@ -519,14 +518,20 @@ export function listarClientes() {
   });
 }
 
-
 /**
  * Función global para editar un cliente.
  * Almacena el cliente en localStorage y redirige a la página de edición.
  */
-window.editarCliente = function (cliente) {
-  localStorage.setItem("clienteEditar", JSON.stringify(cliente));
-  window.location.href = "EditarCliente.html";
+window.editarCliente = function (idUsuario) {
+  $.get(
+    `${API_BASE}/Cliente/obtenerClientePorId/${idUsuario}`,
+    function (clienteCompleto) {
+      localStorage.setItem("clienteEditar", JSON.stringify(clienteCompleto));
+      window.location.href = "EditarCliente.html";
+    }
+  ).fail(function () {
+    alert("❌ Error al obtener los datos completos del cliente.");
+  });
 };
 
 /**
